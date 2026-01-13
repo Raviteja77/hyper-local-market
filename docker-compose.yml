@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  # Django Backend
+  api:
+    build: ./services/api
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./services/api:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=dev_secret_key
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,[::1]
+      - SQL_ENGINE=django.db.backends.postgresql
+      - SQL_DATABASE=market_db
+      - SQL_USER=market_user
+      - SQL_PASSWORD=market_pass
+      - SQL_HOST=db
+      - SQL_PORT=5432
+
+  # Next.js Frontend
+  web:
+    build: ./apps/web
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./apps/web:/app
+      - /app/node_modules
+    environment:
+      - WATCHPACK_POLLING=true
+    depends_on:
+      - api
+
+  # PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=market_user
+      - POSTGRES_PASSWORD=market_pass
+      - POSTGRES_DB=market_db
+
+volumes:
+  postgres_data:
