@@ -1,0 +1,63 @@
+# docker-compose.yml
+version: '3.9'
+
+services:
+  frontend:
+    build:
+      context: ./services/web
+      dockerfile: Dockerfile
+    container_name: hyper-local-frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./services/web:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api
+    command: npm run dev
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./services/api
+      dockerfile: Dockerfile
+    container_name: hyper-local-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./services/api:/app
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings.development
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/hyper_local_db
+      - REDIS_URL=redis://redis:6379/0
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgis/postgis:16-3.4
+    container_name: hyper-local-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=hyper_local_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: hyper-local-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  postgres_data:
+  redis_data:
