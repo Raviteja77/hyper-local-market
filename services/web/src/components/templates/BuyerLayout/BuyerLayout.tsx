@@ -1,3 +1,5 @@
+'use client';
+
 // services/web/src/components/templates/BuyerLayout/BuyerLayout.tsx
 import React, { useState } from 'react';
 import { CartSidebar, CartItem, Footer, Navbar } from '../../organisms';
