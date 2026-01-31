@@ -56,6 +56,7 @@ export default function ProductDetailsPage() {
       <div className="bg-white min-h-screen pb-24">
         {/* Full-bleed Product Image */}
         <div className="relative w-full h-[40vh] bg-gray-100">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={product.image}
             alt={product.name}

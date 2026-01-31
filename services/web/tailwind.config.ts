@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      height: {
+        '18': '4.5rem', // 72px
+      },
       colors: {
         primary: {
           DEFAULT: '#E8142B',

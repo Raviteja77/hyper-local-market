@@ -101,6 +101,7 @@ function ProductCard({ product, onAddToCart, cartQuantity }: ProductCardProps) {
     <div className="bg-white border border-gray-200 rounded-lg p-3 w-40 flex-shrink-0 hover:shadow-md transition-shadow">
       {/* Product Image */}
       <div className="relative mb-2">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={product.image}
           alt={product.name}
