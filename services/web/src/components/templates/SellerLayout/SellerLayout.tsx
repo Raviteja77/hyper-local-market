@@ -1,7 +1,19 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Avatar, Badge, Icon, IconName, Typography } from '../../atoms';
+import { Avatar, Badge, IconName, Typography } from '../../atoms';
+import { 
+  Menu, 
+  X, 
+  AlertCircle, 
+  HelpCircle, 
+  LogOut,
+  LayoutDashboard,
+  ShoppingBag,
+  Package,
+  DollarSign,
+  Settings
+} from 'lucide-react';
 
 export interface MenuItem {
   id: string;
@@ -32,6 +44,17 @@ const defaultMenuItems: MenuItem[] = [
   { id: 'settings', label: 'Settings', icon: 'Settings', href: '/seller/settings' },
 ];
 
+const getIconComponent = (iconName: IconName) => {
+  const iconMap: Record<string, any> = {
+    LayoutDashboard,
+    ShoppingBag,
+    Package,
+    DollarSign,
+    Settings,
+  };
+  return iconMap[iconName] || LayoutDashboard;
+};
+
 export const SellerLayout: React.FC<SellerLayoutProps> = ({
   children,
   storeName = 'My Store',
@@ -61,7 +84,7 @@ export const SellerLayout: React.FC<SellerLayoutProps> = ({
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
           >
-            <Icon name={isSidebarOpen ? 'X' : 'Menu'} size={24} />
+            {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
 
           {/* Store Info */}
@@ -110,7 +133,7 @@ export const SellerLayout: React.FC<SellerLayoutProps> = ({
             {pendingOrders > 0 && (
               <div className="mx-4 mb-4 p-3 bg-warning bg-opacity-10 border border-warning rounded-lg">
                 <div className="flex items-center gap-2">
-                  <Icon name="AlertCircle" size={20} color="#F59E0B" />
+                  <AlertCircle size={20} color="#F59E0B" />
                   <Typography variant="small" weight="medium" color="default">
                     {pendingOrders} pending order{pendingOrders !== 1 ? 's' : ''}
                   </Typography>
@@ -122,6 +145,7 @@ export const SellerLayout: React.FC<SellerLayoutProps> = ({
             <nav className="flex-1 px-2 space-y-1">
               {menuItems.map((item) => {
                 const isActive = item.id === activeMenuItem;
+                const IconComponent = getIconComponent(item.icon);
                 return (
                   <button
                     key={item.id}
@@ -132,8 +156,7 @@ export const SellerLayout: React.FC<SellerLayoutProps> = ({
                         : 'text-gray-700 hover:bg-gray-100'
                     }`}
                   >
-                    <Icon
-                      name={item.icon}
+                    <IconComponent
                       size={20}
                       color={isActive ? 'white' : '#374151'}
                     />
@@ -162,13 +185,13 @@ export const SellerLayout: React.FC<SellerLayoutProps> = ({
             {/* Help & Logout */}
             <div className="p-4 border-t border-gray-200">
               <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
-                <Icon name="HelpCircle" size={20} color="#374151" />
+                <HelpCircle size={20} color="#374151" />
                 <Typography variant="body" weight="medium">
                   Help & Support
                 </Typography>
               </button>
               <button className="w-full flex items-center gap-3 px-4 py-3 text-danger hover:bg-red-50 rounded-lg transition-colors mt-1">
-                <Icon name="LogOut" size={20} color="#EF4444" />
+                <LogOut size={20} color="#EF4444" />
                 <Typography variant="body" weight="medium" color="error">
                   Logout
                 </Typography>

@@ -1,7 +1,22 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Avatar, Badge, Icon, IconName, Input, Typography } from '../../atoms';
+import { Avatar, Badge, IconName, Input, Typography } from '../../atoms';
+import { 
+  Menu, 
+  X, 
+  ShoppingBag, 
+  Search, 
+  Bell, 
+  LayoutDashboard, 
+  Users, 
+  Store, 
+  Bike, 
+  Package, 
+  BarChart3, 
+  Settings, 
+  LogOut 
+} from 'lucide-react';
 
 export interface AdminMenuItem {
   id: string;
@@ -34,6 +49,20 @@ const defaultMenuItems: AdminMenuItem[] = [
   { id: 'analytics', label: 'Analytics', icon: 'BarChart3', href: '/admin/analytics' },
   { id: 'settings', label: 'Settings', icon: 'Settings', href: '/admin/settings' },
 ];
+
+const getIconComponent = (iconName: IconName) => {
+  const iconMap: Record<string, any> = {
+    LayoutDashboard,
+    ShoppingBag,
+    Users,
+    Store,
+    Bike,
+    Package,
+    BarChart3,
+    Settings,
+  };
+  return iconMap[iconName] || LayoutDashboard;
+};
 
 export const AdminLayout: React.FC<AdminLayoutProps> = ({
   children,
@@ -71,10 +100,10 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
             >
-              <Icon name={isSidebarOpen ? 'X' : 'Menu'} size={24} />
+              {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
             <div className="flex items-center gap-2">
-              <Icon name="ShoppingBag" size={28} color="#10B981" />
+              <ShoppingBag size={28} color="#10B981" />
               <Typography variant="h4" weight="bold" color="primary" className="hidden sm:block">
                 HyperLocal Admin
               </Typography>
@@ -85,7 +114,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
           <div className="hidden md:flex flex-1 max-w-xl mx-8">
             <div className="relative w-full">
               <div className="absolute left-3 top-1/2 -translate-y-1/2">
-                <Icon name="Search" size={20} color="#6B7280" />
+                <Search size={20} color="#6B7280" />
               </div>
               <Input
                 type="search"
@@ -103,7 +132,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
             {/* Notifications */}
             {showNotifications && (
               <button className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                <Icon name="Bell" size={24} color="#374151" />
+                <Bell size={24} color="#374151" />
                 {notificationCount > 0 && (
                   <div className="absolute top-1 right-1">
                     <Badge variant="danger" size="sm" rounded>
@@ -128,7 +157,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
         <div className="md:hidden px-4 pb-3">
           <div className="relative">
             <div className="absolute left-3 top-1/2 -translate-y-1/2">
-              <Icon name="Search" size={18} color="#6B7280" />
+              <Search size={18} color="#6B7280" />
             </div>
             <Input
               type="search"
@@ -155,6 +184,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
             <nav className="flex-1 px-2 space-y-1 overflow-y-auto">
               {menuItems.map((item) => {
                 const isActive = item.id === activeMenuItem;
+                const IconComponent = getIconComponent(item.icon);
                 return (
                   <button
                     key={item.id}
@@ -165,8 +195,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
                         : 'text-gray-700 hover:bg-gray-100'
                     }`}
                   >
-                    <Icon
-                      name={item.icon}
+                    <IconComponent
                       size={20}
                       color={isActive ? 'white' : '#374151'}
                     />
@@ -195,7 +224,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
             {/* Logout */}
             <div className="px-2 pt-4 border-t border-gray-200">
               <button className="w-full flex items-center gap-3 px-4 py-3 text-danger hover:bg-red-50 rounded-lg transition-colors">
-                <Icon name="LogOut" size={20} color="#EF4444" />
+                <LogOut size={20} color="#EF4444" />
                 <Typography variant="body" weight="medium" color="error">
                   Logout
                 </Typography>

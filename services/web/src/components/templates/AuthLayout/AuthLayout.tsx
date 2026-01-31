@@ -1,5 +1,6 @@
 import React from 'react';
-import { Icon, Typography } from '../../atoms';
+import { Typography } from '../../atoms';
+import { ShoppingBag, Zap, Shield, Heart } from 'lucide-react';
 
 export interface AuthLayoutProps {
   children: React.ReactNode;
@@ -43,7 +44,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({
 
           <div className="relative z-10 text-white max-w-md">
             <div className="flex items-center gap-3 mb-6">
-              <Icon name="ShoppingBag" size={48} color="white" />
+              <ShoppingBag size={48} color="white" />
               <Typography variant="h2" weight="bold" className="text-white">
                 {title}
               </Typography>
@@ -59,7 +60,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({
             <div className="mt-8 space-y-4">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
-                  <Icon name="Zap" size={20} color="white" />
+                  <Zap size={20} color="white" />
                 </div>
                 <Typography variant="body" className="text-white">
                   10-minute delivery from nearby stores
@@ -67,7 +68,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
-                  <Icon name="Shield" size={20} color="white" />
+                  <Shield size={20} color="white" />
                 </div>
                 <Typography variant="body" className="text-white">
                   Fresh products, quality guaranteed
@@ -75,7 +76,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
-                  <Icon name="Heart" size={20} color="white" />
+                  <Heart size={20} color="white" />
                 </div>
                 <Typography variant="body" className="text-white">
                   Support local businesses in your area
