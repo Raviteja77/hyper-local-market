@@ -1,4 +1,5 @@
 export * from './CartSidebar/CartSidebar';
+export * from './CategoryBar/CategoryBar';
 export * from './Footer/Footer';
 export * from './InventoryManager/InventoryManager';
 export * from './LoginForm/LoginForm';
