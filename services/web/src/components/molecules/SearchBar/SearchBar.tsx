@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Icon, Input } from '../../atoms';
+import { Search } from 'lucide-react';
+import { Button, Input } from '../../atoms';
 
 export interface SearchBarProps {
   placeholder?: string;
@@ -34,7 +35,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     <div className={`flex items-center gap-2 ${className}`}>
       <div className="relative flex-1">
         <div className="absolute left-3 top-1/2 -translate-y-1/2">
-          <Icon name="Search" size={size === 'sm' ? 16 : size === 'lg' ? 24 : 20} color="#6B7280" />
+          <Search size={size === 'sm' ? 16 : size === 'lg' ? 24 : 20} color="#6B7280" />
         </div>
         <Input
           type="search"

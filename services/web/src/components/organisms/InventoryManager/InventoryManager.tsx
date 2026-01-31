@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Badge, Button, Icon, Input, Typography } from '../../atoms';
+import { Badge, Button, Input, Typography } from '../../atoms';
+import { Search, Package, Edit } from 'lucide-react';
 
 export interface InventoryItem {
   id: string;
@@ -70,7 +71,7 @@ export const InventoryManager: React.FC<InventoryManagerProps> = ({
         {/* Search */}
         <div className="relative">
           <div className="absolute left-3 top-1/2 -translate-y-1/2">
-            <Icon name="Search" size={20} color="#6B7280" />
+            <Search size={20} color="#6B7280" />
           </div>
           <Input
             type="search"
@@ -104,7 +105,7 @@ export const InventoryManager: React.FC<InventoryManagerProps> = ({
       <div className="divide-y divide-gray-200">
         {filteredItems.length === 0 ? (
           <div className="p-12 text-center">
-            <Icon name="Package" size={64} color="#D1D5DB" className="mx-auto mb-4" />
+            <Package size={64} color="#D1D5DB" className="mx-auto mb-4" />
             <Typography variant="body" color="muted">
               No products found
             </Typography>
@@ -126,7 +127,7 @@ export const InventoryManager: React.FC<InventoryManagerProps> = ({
                     />
                   ) : (
                     <div className="w-16 h-16 bg-gray-100 rounded flex items-center justify-center">
-                      <Icon name="Package" size={24} color="#D1D5DB" />
+                      <Package size={24} color="#D1D5DB" />
                     </div>
                   )}
 
@@ -166,7 +167,7 @@ export const InventoryManager: React.FC<InventoryManagerProps> = ({
                             className="p-2 hover:bg-gray-100 rounded"
                             disabled={!item.inStock}
                           >
-                            <Icon name="Edit" size={18} color="#6B7280" />
+                            <Edit size={18} color="#6B7280" />
                           </button>
                         )}
                       </>

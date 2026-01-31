@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button, Icon, Typography } from '../../atoms';
+import { Button, Typography } from '../../atoms';
 import { PriceDisplay } from '../../molecules';
+import { X, ShoppingCart, Package, Minus, Plus, Trash2 } from 'lucide-react';
 
 export interface CartItem {
   id: string;
@@ -63,7 +64,7 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
               onClick={onClose}
               className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
             >
-              <Icon name="X" size={24} />
+              <X size={24} />
             </button>
           </div>
 
@@ -71,7 +72,7 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
           <div className="flex-1 overflow-y-auto p-4">
             {items.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full">
-                <Icon name="ShoppingCart" size={64} color="#D1D5DB" />
+                <ShoppingCart size={64} color="#D1D5DB" />
                 <Typography variant="body" color="muted" className="mt-4">
                   Your cart is empty
                 </Typography>
@@ -91,7 +92,7 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
                       />
                     ) : (
                       <div className="w-20 h-20 bg-gray-100 rounded flex items-center justify-center">
-                        <Icon name="Package" size={32} color="#D1D5DB" />
+                        <Package size={32} color="#D1D5DB" />
                       </div>
                     )}
 
@@ -107,7 +108,7 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
                           disabled={item.quantity <= 1}
                           className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                          <Icon name="Minus" size={16} />
+                          <Minus size={16} />
                         </button>
                         <Typography variant="body" weight="medium" className="w-8 text-center">
                           {item.quantity}
@@ -116,13 +117,13 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
                           onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
                           className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-50"
                         >
-                          <Icon name="Plus" size={16} />
+                          <Plus size={16} />
                         </button>
                         <button
                           onClick={() => onRemoveItem(item.id)}
                           className="ml-auto p-2 text-danger hover:bg-red-50 rounded"
                         >
-                          <Icon name="Trash2" size={18} color="#EF4444" />
+                          <Trash2 size={18} color="#EF4444" />
                         </button>
                       </div>
                     </div>

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Icon, Typography } from '../../atoms';
+import { Typography } from '../../atoms';
 import { OrderStatus, OrderStatusBadge } from '../../molecules';
+import { Bike, Phone, Check, XCircle } from 'lucide-react';
 
 export interface OrderStep {
   status: OrderStatus;
@@ -79,7 +80,7 @@ export const OrderTracker: React.FC<OrderTrackerProps> = ({
       {riderName && !isCancelled && (
         <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg mb-6">
           <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-            <Icon name="Bike" size={20} color="white" />
+            <Bike size={20} color="white" />
           </div>
           <div className="flex-1">
             <Typography variant="small" color="muted">
@@ -92,7 +93,7 @@ export const OrderTracker: React.FC<OrderTrackerProps> = ({
           {riderPhone && (
             <a href={`tel:${riderPhone}`}>
               <button className="p-2 hover:bg-gray-200 rounded-lg transition-colors">
-                <Icon name="Phone" size={20} color="#10B981" />
+                <Phone size={20} color="#10B981" />
               </button>
             </a>
           )}
@@ -119,7 +120,7 @@ export const OrderTracker: React.FC<OrderTrackerProps> = ({
                     }`}
                   >
                     {isCompleted ? (
-                      <Icon name="Check" size={20} color="white" />
+                      <Check size={20} color="white" />
                     ) : (
                       <div className="w-3 h-3 bg-gray-400 rounded-full" />
                     )}
@@ -159,7 +160,7 @@ export const OrderTracker: React.FC<OrderTrackerProps> = ({
         </div>
       ) : (
         <div className="text-center py-8">
-          <Icon name="XCircle" size={64} color="#EF4444" className="mx-auto mb-4" />
+          <XCircle size={64} color="#EF4444" className="mx-auto mb-4" />
           <Typography variant="h4" color="error" className="mb-2">
             Order Cancelled
           </Typography>

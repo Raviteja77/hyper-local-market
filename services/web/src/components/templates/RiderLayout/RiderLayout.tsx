@@ -1,5 +1,6 @@
 import React from 'react';
-import { Avatar, Badge, Icon, Typography } from '../../atoms';
+import { Avatar, Badge, Typography } from '../../atoms';
+import { Bike, DollarSign, LayoutDashboard, Package } from 'lucide-react';
 
 export interface RiderLayoutProps {
   children: React.ReactNode;
@@ -50,7 +51,7 @@ export const RiderLayout: React.FC<RiderLayoutProps> = ({
               {/* Active Deliveries */}
               {activeDeliveries > 0 && (
                 <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-primary bg-opacity-10 rounded-lg">
-                  <Icon name="Bike" size={18} color="#10B981" />
+                  <Bike size={18} color="#10B981" />
                   <Typography variant="small" weight="medium" color="primary">
                     {activeDeliveries} Active
                   </Typography>
@@ -59,7 +60,7 @@ export const RiderLayout: React.FC<RiderLayoutProps> = ({
 
               {/* Today's Earnings */}
               <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-lg">
-                <Icon name="DollarSign" size={18} color="#374151" />
+                <DollarSign size={18} color="#374151" />
                 <Typography variant="small" weight="medium">
                   ₹{todayEarnings.toFixed(0)}
                 </Typography>
@@ -90,14 +91,14 @@ export const RiderLayout: React.FC<RiderLayoutProps> = ({
           <div className="sm:hidden border-t border-gray-200 px-4 py-2 flex items-center justify-between">
             {activeDeliveries > 0 && (
               <div className="flex items-center gap-2">
-                <Icon name="Bike" size={16} color="#10B981" />
+                <Bike size={16} color="#10B981" />
                 <Typography variant="small" weight="medium" color="primary">
                   {activeDeliveries} Active
                 </Typography>
               </div>
             )}
             <div className="flex items-center gap-2">
-              <Icon name="DollarSign" size={16} color="#374151" />
+              <DollarSign size={16} color="#374151" />
               <Typography variant="small" weight="medium">
                 ₹{todayEarnings.toFixed(0)} Today
               </Typography>
@@ -118,7 +119,7 @@ export const RiderLayout: React.FC<RiderLayoutProps> = ({
             onClick={() => onNavigationClick?.('dashboard')}
             className="flex flex-col items-center justify-center gap-1 hover:bg-gray-50 transition-colors"
           >
-            <Icon name="LayoutDashboard" size={20} color="#374151" />
+            <LayoutDashboard size={20} color="#374151" />
             <Typography variant="caption" color="muted">
               Dashboard
             </Typography>
@@ -127,7 +128,7 @@ export const RiderLayout: React.FC<RiderLayoutProps> = ({
             onClick={() => onNavigationClick?.('orders')}
             className="flex flex-col items-center justify-center gap-1 hover:bg-gray-50 transition-colors relative"
           >
-            <Icon name="Package" size={20} color="#374151" />
+            <Package size={20} color="#374151" />
             {activeDeliveries > 0 && (
               <div className="absolute top-2 right-1/2 translate-x-6">
                 <Badge variant="danger" size="sm" rounded>
@@ -143,7 +144,7 @@ export const RiderLayout: React.FC<RiderLayoutProps> = ({
             onClick={() => onNavigationClick?.('earnings')}
             className="flex flex-col items-center justify-center gap-1 hover:bg-gray-50 transition-colors"
           >
-            <Icon name="DollarSign" size={20} color="#374151" />
+            <DollarSign size={20} color="#374151" />
             <Typography variant="caption" color="muted">
               Earnings
             </Typography>

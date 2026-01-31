@@ -1,5 +1,6 @@
 import React from 'react';
-import { Icon, Typography } from '../../atoms';
+import { Typography } from '../../atoms';
+import { ShoppingBag, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 
 export interface FooterLink {
   label: string;
@@ -66,7 +67,7 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Brand Section */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <Icon name="ShoppingBag" size={32} color="#10B981" />
+              <ShoppingBag size={32} color="#10B981" />
               <Typography variant="h3" weight="bold" className="text-white">
                 {brandName}
               </Typography>
@@ -114,7 +115,7 @@ export const Footer: React.FC<FooterProps> = ({
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-white transition-colors"
                   >
-                    <Icon name="Facebook" size={20} />
+                    <Facebook size={20} />
                   </a>
                 )}
                 {socialLinks.twitter && (
@@ -124,7 +125,7 @@ export const Footer: React.FC<FooterProps> = ({
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-white transition-colors"
                   >
-                    <Icon name="Twitter" size={20} />
+                    <Twitter size={20} />
                   </a>
                 )}
                 {socialLinks.instagram && (
@@ -134,7 +135,7 @@ export const Footer: React.FC<FooterProps> = ({
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-white transition-colors"
                   >
-                    <Icon name="Instagram" size={20} />
+                    <Instagram size={20} />
                   </a>
                 )}
                 {socialLinks.linkedin && (
@@ -144,7 +145,7 @@ export const Footer: React.FC<FooterProps> = ({
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-white transition-colors"
                   >
-                    <Icon name="Linkedin" size={20} />
+                    <Linkedin size={20} />
                   </a>
                 )}
               </div>
