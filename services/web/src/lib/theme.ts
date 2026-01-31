@@ -1,10 +1,10 @@
 export const theme = {
     colors: {
-      // Primary brand
-      primary: '#10B981',          // Green
-      primaryHover: '#059669',     // Darker green on hover
-      primaryLight: '#E6F9F2',     // Light green tint for backgrounds
-      primaryDark: '#047857',      // Deep green for text on light backgrounds
+      // Primary brand (Zepto Red)
+      primary: '#E8142B',          // Red
+      primaryHover: '#C91122',     // Darker red on hover
+      primaryLight: '#FEE2E2',     // Light red tint for backgrounds
+      primaryDark: '#991B1B',      // Deep red for text on light backgrounds
   
       // Secondary brand
       secondary: '#3B82F6',        // Blue
@@ -19,8 +19,12 @@ export const theme = {
       accentDark: '#B45309',        // Deep amber for text on light backgrounds
   
       // Status
-      success: '#10B981',          // Green (same as primary)
-      successLight: '#E6F9F2',     // Light green tint for backgrounds
+      success: '#10B981',          // Green
+      successLight: '#D1FAE5',     // Light green tint for backgrounds
+      
+      // Discount colors for Badge component
+      discount: '#10B981',         // Green for discount badges
+      discountBg: '#D1FAE5',       // Light green background
       warning: '#F59E0B',           // Amber (same as accent)
       warningLight: '#FEF3C7',       // Light amber tint for backgrounds
       error: '#EF4444',             // Red

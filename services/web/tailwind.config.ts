@@ -10,10 +10,10 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#10B981',
-          hover: '#059669',
-          light: '#E6F9F2',
-          dark: '#047857',
+          DEFAULT: '#E8142B',
+          hover: '#C91122',
+          light: '#FEE2E2',
+          dark: '#991B1B',
         },
         secondary: {
           DEFAULT: '#3B82F6',
@@ -29,7 +29,11 @@ const config: Config = {
         },
         success: {
           DEFAULT: '#10B981',
-          light: '#E6F9F2',
+          light: '#D1FAE5',
+        },
+        discount: {
+          DEFAULT: '#10B981',
+          bg: '#D1FAE5',
         },
         warning: {
           DEFAULT: '#F59E0B',

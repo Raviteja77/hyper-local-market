@@ -11,7 +11,7 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'ghost', 'danger'],
+      options: ['primary', 'secondary', 'ghost'],
     },
     size: {
       control: 'select',
@@ -53,44 +53,15 @@ export const Ghost: Story = {
   },
 };
 
-export const Danger: Story = {
-  args: {
-    variant: 'danger',
-    children: 'Delete',
-  },
-};
-
-export const Small: Story = {
-  args: {
-    size: 'sm',
-    children: 'Small Button',
-  },
-};
-
-export const Large: Story = {
-  args: {
-    size: 'lg',
-    children: 'Large Button',
-  },
-};
-
-export const Disabled: Story = {
-  args: {
-    disabled: true,
-    children: 'Disabled Button',
-  },
-};
-
 export const Sizes: Story = {
   render: () => (
-    <div className="flex gap-2">
+    <div className="flex gap-2 items-center">
       <Button size="sm">Small</Button>
       <Button size="md">Medium</Button>
       <Button size="lg">Large</Button>
     </div>
   ),
 };
-
 
 export const FullWidth: Story = {
   args: {
@@ -118,8 +89,24 @@ export const Loading: Story = {
   },
 };
 
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+    children: 'Disabled Button',
+  },
+};
+
 export const AddToCartZeptoStyle: Story = {
   args: {
-    variant: 'primary', size: 'lg', fullWidth: true, children: 'Add to Cart', leftIcon: <ShoppingCart size={20} />
-  }
-}
+    variant: 'primary',
+    size: 'lg',
+    fullWidth: true,
+    children: 'Add to Cart',
+    leftIcon: <ShoppingCart size={20} />,
+  },
+  render: (args) => (
+    <div className="max-w-xs">
+      <Button {...args} />
+    </div>
+  ),
+};

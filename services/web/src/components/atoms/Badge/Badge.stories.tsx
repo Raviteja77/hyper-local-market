@@ -1,6 +1,8 @@
 // services/web/src/components/atoms/Badge/Badge.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react';
 import { Badge } from './Badge';
+import React from 'react';
+import { Clock } from 'lucide-react';
 
 const meta: Meta<typeof Badge> = {
   title: 'Atoms/Badge',
@@ -9,13 +11,9 @@ const meta: Meta<typeof Badge> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'success', 'warning', 'danger', 'info'],
+      options: ['discount', 'delivery', 'stock', 'error', 'info', 'default'],
     },
-    size: {
-      control: 'select',
-      options: ['sm', 'md', 'lg'],
-    },
-    rounded: {
+    dot: {
       control: 'boolean',
     },
   },
@@ -24,73 +22,57 @@ const meta: Meta<typeof Badge> = {
 export default meta;
 type Story = StoryObj<typeof Badge>;
 
-export const Primary: Story = {
+export const Discount: Story = {
   args: {
-    variant: 'primary',
-    children: 'Primary',
+    variant: 'discount',
+    children: '20% OFF',
   },
 };
 
-export const Secondary: Story = {
+export const DeliveryTime: Story = {
   args: {
-    variant: 'secondary',
-    children: 'Secondary',
+    variant: 'delivery',
+    leftIcon: <Clock size={12} />,
+    children: '10 min',
   },
 };
 
-export const Success: Story = {
+export const LowStock: Story = {
   args: {
-    variant: 'success',
-    children: 'Active',
+    variant: 'stock',
+    children: 'Only 3 left',
   },
 };
 
-export const Warning: Story = {
-  args: {
-    variant: 'warning',
-    children: 'Pending',
-  },
+export const AllVariants: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-2">
+      <Badge variant="discount">20% OFF</Badge>
+      <Badge variant="delivery" leftIcon={<Clock size={12} />}>10 min</Badge>
+      <Badge variant="stock">Only 3 left</Badge>
+      <Badge variant="error">Out of Stock</Badge>
+      <Badge variant="info">New</Badge>
+      <Badge variant="default">Default</Badge>
+    </div>
+  ),
 };
 
-export const Danger: Story = {
-  args: {
-    variant: 'danger',
-    children: 'Cancelled',
-  },
+export const DotVariants: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-4">
+      <Badge variant="discount" dot>In Stock</Badge>
+      <Badge variant="error" dot>Out of Stock</Badge>
+    </div>
+  ),
 };
 
-export const Info: Story = {
-  args: {
-    variant: 'info',
-    children: 'Info',
-  },
-};
-
-export const Small: Story = {
-  args: {
-    size: 'sm',
-    children: 'Small',
-  },
-};
-
-export const Large: Story = {
-  args: {
-    size: 'lg',
-    children: 'Large',
-  },
-};
-
-export const Rounded: Story = {
-  args: {
-    rounded: true,
-    children: '5',
-  },
-};
-
-export const OrderStatus: Story = {
-  args: {
-    variant: 'success',
-    children: 'Delivered',
-    rounded: true,
-  },
+export const OnProductCardZepto: Story = {
+  render: () => (
+    <div className="relative w-48 h-32 bg-white rounded-lg border border-gray-200 p-4">
+      <div className="absolute top-2 right-2">
+        <Badge variant="discount">20% OFF</Badge>
+      </div>
+      <div className="text-sm text-gray-600 mt-8">Product Card</div>
+    </div>
+  ),
 };

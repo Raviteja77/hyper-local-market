@@ -1,37 +1,44 @@
 // services/web/src/components/atoms/Icon/Icon.tsx
 import React from 'react';
-import * as LucideIcons from 'lucide-react';
-
-export type IconName = keyof typeof LucideIcons;
+import { LucideProps } from 'lucide-react';
 
 export interface IconProps {
-  name: IconName;
-  size?: number;
-  color?: string;
-  strokeWidth?: number;
+  icon: React.ComponentType<LucideProps>;
+  size?: 'xs' | 'sm' | 'md' | 'lg';
+  color?: 'primary' | 'gray' | 'success' | 'error' | 'warning' | 'current';
   className?: string;
 }
 
 export const Icon: React.FC<IconProps> = ({
-  name,
-  size = 24,
-  color = 'currentColor',
-  strokeWidth = 2,
+  icon: IconComponent,
+  size = 'md',
+  color = 'current',
   className = '',
 }) => {
-  const LucideIcon = LucideIcons[name] as React.ComponentType<any>;
+  const sizeMap = {
+    xs: 12,
+    sm: 16,
+    md: 20,
+    lg: 24,
+  };
   
-  if (!LucideIcon) {
-    console.warn(`Icon "${name}" not found in lucide-react`);
-    return null;
+  const colorMap = {
+    primary: 'text-primary',
+    gray: 'text-gray-500',
+    success: 'text-success',
+    error: 'text-error',
+    warning: 'text-warning',
+    current: 'text-current',
+  };
+
+  if (!IconComponent) {
+    return <span>Error: Icon component is undefined</span>;
   }
   
   return (
-    <LucideIcon
-      size={size}
-      color={color}
-      strokeWidth={strokeWidth}
-      className={className}
+    <IconComponent 
+      size={sizeMap[size]} 
+      className={`${colorMap[color]} ${className}`}
     />
   );
 };

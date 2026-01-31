@@ -3,36 +3,34 @@ import React from 'react';
 
 export interface SpinnerProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
-  color?: 'primary' | 'secondary' | 'white' | 'gray';
+  label?: string;
   className?: string;
 }
 
 export const Spinner: React.FC<SpinnerProps> = ({
   size = 'md',
-  color = 'primary',
+  label,
   className = '',
 }) => {
   const sizes = {
     sm: 'w-4 h-4 border-2',
-    md: 'w-8 h-8 border-2',
-    lg: 'w-12 h-12 border-3',
-    xl: 'w-16 h-16 border-4',
-  };
-  
-  const colors = {
-    primary: 'border-primary border-t-transparent',
-    secondary: 'border-secondary border-t-transparent',
-    white: 'border-white border-t-transparent',
-    gray: 'border-gray-300 border-t-transparent',
+    md: 'w-6 h-6 border-3',
+    lg: 'w-8 h-8 border-4',
+    xl: 'w-12 h-12 border-4',
   };
   
   return (
-    <div
-      className={`${sizes[size]} ${colors[color]} rounded-full animate-spin ${className}`}
-      role="status"
-      aria-label="Loading"
-    >
-      <span className="sr-only">Loading...</span>
+    <div className={`flex flex-col items-center justify-center gap-2 ${className}`}>
+      <div
+        className={`${sizes[size]} border-gray-200 border-t-primary rounded-full animate-spin`}
+        role="status"
+        aria-label="Loading"
+      >
+        <span className="sr-only">Loading...</span>
+      </div>
+      {label && (
+        <span className="text-sm text-gray-500">{label}</span>
+      )}
     </div>
   );
 };

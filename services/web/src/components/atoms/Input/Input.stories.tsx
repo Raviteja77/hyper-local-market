@@ -1,27 +1,19 @@
 // services/web/src/components/atoms/Input/Input.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react';
 import { Input } from './Input';
+import React from 'react';
+import { Search } from 'lucide-react';
 
 const meta: Meta<typeof Input> = {
   title: 'Atoms/Input',
   component: Input,
   tags: ['autodocs'],
   argTypes: {
-    type: {
-      control: 'select',
-      options: ['text', 'email', 'password', 'number', 'tel', 'search'],
-    },
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg'],
     },
-    error: {
-      control: 'boolean',
-    },
     disabled: {
-      control: 'boolean',
-    },
-    fullWidth: {
       control: 'boolean',
     },
   },
@@ -36,32 +28,27 @@ export const Default: Story = {
   },
 };
 
-export const Email: Story = {
+export const WithLabel: Story = {
   args: {
-    type: 'email',
+    label: 'Email Address',
     placeholder: 'Enter your email',
+    type: 'email',
   },
 };
 
-export const Password: Story = {
+export const WithLeftIcon: Story = {
   args: {
-    type: 'password',
-    placeholder: 'Enter password',
-  },
-};
-
-export const Search: Story = {
-  args: {
-    type: 'search',
-    placeholder: 'Search products...',
+    placeholder: 'Search...',
+    leftIcon: <Search size={16} />,
   },
 };
 
 export const WithError: Story = {
   args: {
-    placeholder: 'Enter text...',
-    error: true,
-    value: 'Invalid input',
+    label: 'Username',
+    placeholder: 'Enter username',
+    error: 'This field is required',
+    value: '',
   },
 };
 
@@ -73,23 +60,20 @@ export const Disabled: Story = {
   },
 };
 
-export const Small: Story = {
-  args: {
-    size: 'sm',
-    placeholder: 'Small input',
-  },
+export const Sizes: Story = {
+  render: () => (
+    <div className="space-y-4">
+      <Input size="sm" placeholder="Small input" />
+      <Input size="md" placeholder="Medium input" />
+      <Input size="lg" placeholder="Large input" />
+    </div>
+  ),
 };
 
-export const Large: Story = {
+export const SearchInputZeptoStyle: Story = {
   args: {
-    size: 'lg',
-    placeholder: 'Large input',
-  },
-};
-
-export const FullWidth: Story = {
-  args: {
-    fullWidth: true,
-    placeholder: 'Full width input',
+    leftIcon: <Search size={16} />,
+    placeholder: 'Search groceries, milk, eggs…',
+    size: 'md',
   },
 };
