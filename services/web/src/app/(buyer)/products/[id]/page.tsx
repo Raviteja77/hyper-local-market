@@ -1,58 +1,80 @@
 // services/web/src/app/(buyer)/products/[id]/page.tsx
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, use } from 'react';
+import { useRouter } from 'next/navigation';
 import { ChevronLeft, Heart, Plus, Minus } from 'lucide-react';
 import { BuyerLayout } from '@/components/templates';
 import { Button, Typography } from '@/components/atoms';
 import { PriceDisplay } from '@/components/molecules';
+import { PRODUCT_SECTIONS } from '@/lib/mockData/buyerMock';
+import { useCartStore, useAuthStore, useUIStore } from '@/store';
 
-export default function ProductDetailsPage() {
-  const [inCart, setInCart] = useState(false);
-  const [quantity, setQuantity] = useState(0);
+export default function ProductDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = use(params);
+  const router = useRouter();
+  const { user } = useAuthStore();
+  const { items: cartItems, addItem, updateQuantity } = useCartStore();
+  const { showToast } = useUIStore();
   const [isFavorite, setIsFavorite] = useState(false);
 
-  const product = {
-    id: '1',
-    name: 'Organic Fresh Milk',
-    weight: '1 Liter',
-    description:
-      'Premium quality organic milk sourced from local dairy farms. Rich in nutrients and free from harmful chemicals. Perfect for your daily needs. Fresh and pasteurized for maximum health benefits.',
-    price: 65,
-    mrp: 75,
-    image: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=800&h=600&fit=crop',
-    nutrition: {
-      calories: '150 kcal',
-      protein: '8g',
-      fat: '8g',
-      carbs: '12g',
-    },
-  };
+  // Find product from mock data
+  const allProducts = PRODUCT_SECTIONS.flatMap(section => section.products);
+  const product = allProducts.find(p => p.id === resolvedParams.id);
+
+  // Get cart quantity for this product
+  const cartItem = cartItems.find(item => item.productId === resolvedParams.id);
+  const inCart = !!cartItem;
+  const quantity = cartItem?.quantity || 0;
+
+  if (!product) {
+    return (
+      <BuyerLayout userName={user?.name} cartItems={cartItems} showFooter={false}>
+        <div className="flex items-center justify-center h-screen">
+          <Typography variant="h3">Product not found</Typography>
+        </div>
+      </BuyerLayout>
+    );
+  }
 
   const handleAddToCart = () => {
-    setInCart(true);
-    setQuantity(1);
+    addItem({
+      id: `cart-${product.id}`,
+      productId: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      storeId: 'store-1',
+      storeName: 'Sharma Kirana Store',
+    });
+    
+    showToast({
+      type: 'success',
+      message: `${product.name} added to cart`,
+      duration: 2000,
+    });
   };
 
   const handleIncrement = () => {
-    setQuantity((prev) => prev + 1);
+    if (cartItem) {
+      updateQuantity(product.id, quantity + 1);
+    }
   };
 
   const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity((prev) => prev - 1);
-    } else {
-      setInCart(false);
-      setQuantity(0);
+    if (cartItem && quantity > 1) {
+      updateQuantity(product.id, quantity - 1);
+    } else if (cartItem && quantity === 1) {
+      updateQuantity(product.id, 0); // This will remove the item
     }
   };
 
   const handleGoToCart = () => {
-    console.log('Go to cart');
+    router.push('/cart');
   };
 
   return (
-    <BuyerLayout userName="John Doe" cartItems={[]} showFooter={false}>
+    <BuyerLayout userName={user?.name} userAvatar={user?.avatar} cartItems={cartItems} showFooter={false}>
       <div className="bg-white min-h-screen pb-24">
         {/* Full-bleed Product Image */}
         <div className="relative w-full h-[40vh] bg-gray-100">
@@ -65,7 +87,7 @@ export default function ProductDetailsPage() {
 
           {/* Back Arrow Button */}
           <button
-            onClick={() => console.log('Go back')}
+            onClick={() => router.back()}
             className="absolute top-4 left-4 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-50 transition-colors"
           >
             <ChevronLeft size={24} color="#374151" />
@@ -93,12 +115,12 @@ export default function ProductDetailsPage() {
 
           {/* Weight/Unit */}
           <Typography variant="small" color="muted" className="mb-4">
-            {product.weight}
+            {product.pack}
           </Typography>
 
           {/* Price */}
           <div className="mb-6">
-            <PriceDisplay price={product.price} originalPrice={product.mrp} size="lg" />
+            <PriceDisplay price={product.price} originalPrice={product.original} size="lg" />
           </div>
 
           {/* Divider */}
@@ -110,55 +132,33 @@ export default function ProductDetailsPage() {
               About this product
             </Typography>
             <Typography variant="body" color="muted" className="leading-relaxed">
-              {product.description}
+              {product.tag ? `${product.tag}. ` : ''}
+              Premium quality product sourced from trusted manufacturers. Perfect for your daily needs. 
+              Highly rated by {product.reviews.toLocaleString()} customers with an average rating of {product.rating} stars.
             </Typography>
           </div>
 
-          {/* Divider */}
-          <div className="border-t border-gray-200 my-6"></div>
-
-          {/* Nutrition Info */}
-          {product.nutrition && (
-            <div className="mb-6">
-              <Typography variant="h4" weight="semibold" className="mb-3">
-                Nutrition Information
-              </Typography>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-gray-50 p-3 rounded-lg">
-                  <Typography variant="caption" color="muted" className="text-xs">
-                    Calories
-                  </Typography>
-                  <Typography variant="body" weight="medium">
-                    {product.nutrition.calories}
-                  </Typography>
-                </div>
-                <div className="bg-gray-50 p-3 rounded-lg">
-                  <Typography variant="caption" color="muted" className="text-xs">
-                    Protein
-                  </Typography>
-                  <Typography variant="body" weight="medium">
-                    {product.nutrition.protein}
-                  </Typography>
-                </div>
-                <div className="bg-gray-50 p-3 rounded-lg">
-                  <Typography variant="caption" color="muted" className="text-xs">
-                    Fat
-                  </Typography>
-                  <Typography variant="body" weight="medium">
-                    {product.nutrition.fat}
-                  </Typography>
-                </div>
-                <div className="bg-gray-50 p-3 rounded-lg">
-                  <Typography variant="caption" color="muted" className="text-xs">
-                    Carbs
-                  </Typography>
-                  <Typography variant="body" weight="medium">
-                    {product.nutrition.carbs}
-                  </Typography>
-                </div>
+          {/* Rating Display */}
+          <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+            <div className="flex items-center justify-between">
+              <div>
+                <Typography variant="h3" weight="bold" className="text-primary">
+                  {product.rating}
+                </Typography>
+                <Typography variant="small" color="muted">
+                  {product.reviews.toLocaleString()} reviews
+                </Typography>
+              </div>
+              <div className="text-right">
+                <Typography variant="body" weight="semibold" className="text-green-600">
+                  {product.discount}% OFF
+                </Typography>
+                <Typography variant="small" color="muted">
+                  Save ₹{product.original - product.price}
+                </Typography>
               </div>
             </div>
-          )}
+          </div>
         </div>
 
         {/* Sticky Bottom Bar */}

@@ -1,25 +1,47 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { BuyerLayout } from '@/components/templates';
 import { CategoryBar } from '@/components/organisms';
 import { Badge, Typography } from '@/components/atoms';
 import { PriceDisplay, RatingStars } from '@/components/molecules';
 import { CATEGORIES, PRODUCT_SECTIONS, Product } from '@/lib/mockData/buyerMock';
+import { useCartStore, useAuthStore, useUIStore } from '@/store';
 
 export default function HomePage() {
-  const [cart, setCart] = useState<Record<string, number>>({});
+  const router = useRouter();
+  const { user } = useAuthStore();
+  const { items: cartItems, addItem } = useCartStore();
+  const { showToast } = useUIStore();
   const [searchValue, setSearchValue] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
 
-  // Derive cart count
-  const totalCartCount = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
+  // Derive cart count from store
+  const totalCartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
-  const handleAddToCart = (productId: string) => {
-    setCart((prev) => ({
-      ...prev,
-      [productId]: (prev[productId] || 0) + 1,
-    }));
+  const handleAddToCart = (product: Product) => {
+    // Add product to cart using store
+    addItem({
+      id: `cart-${product.id}`,
+      productId: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      storeId: 'store-1', // Mock store ID
+      storeName: 'Sharma Kirana Store', // Mock store name
+    });
+    
+    // Show success toast
+    showToast({
+      type: 'success',
+      message: `${product.name} added to cart`,
+      duration: 2000,
+    });
+  };
+
+  const handleProductClick = (productId: string) => {
+    router.push(`/products/${productId}`);
   };
 
   const handleSearch = (query: string) => {
@@ -34,19 +56,28 @@ export default function HomePage() {
 
   const handleNavClick = (route: string) => {
     console.log('Nav clicked:', route);
+    if (route === 'home') {
+      router.push('/');
+    } else if (route === 'search') {
+      // Future: Navigate to search page
+      showToast({ type: 'info', message: 'Search page coming soon!' });
+    } else if (route === 'profile') {
+      router.push('/profile');
+    }
   };
 
   return (
     <BuyerLayout
-      userName="John Doe"
-      cartItems={[]}
+      userName={user?.name}
+      userAvatar={user?.avatar}
+      cartItems={cartItems}
       cartCount={totalCartCount}
       onSearch={handleSearch}
-      onCartCheckout={() => console.log('Checkout')}
+      onCartCheckout={() => router.push('/checkout')}
       onCartUpdateQuantity={(id, qty) => console.log('Update:', id, qty)}
       onCartRemoveItem={(id) => console.log('Remove:', id)}
-      onProfileClick={() => console.log('Profile clicked')}
-      onLogoClick={() => console.log('Logo clicked')}
+      onProfileClick={() => router.push('/profile')}
+      onLogoClick={() => router.push('/')}
       activeRoute="home"
       onNavClick={handleNavClick}
       showFooter={false}
@@ -72,14 +103,20 @@ export default function HomePage() {
               {/* scrollbar-hide utility defined in tailwind.config.ts */}
               <div className="overflow-x-auto scrollbar-hide -mx-4 px-4">
                 <div className="flex gap-3 pb-2" style={{ width: 'max-content' }}>
-                  {section.products.map((product) => (
-                    <ProductCard
-                      key={product.id}
-                      product={product}
-                      onAddToCart={handleAddToCart}
-                      cartQuantity={cart[product.id] || 0}
-                    />
-                  ))}
+                  {section.products.map((product) => {
+                    const cartItem = cartItems.find(item => item.productId === product.id);
+                    const cartQuantity = cartItem?.quantity || 0;
+                    
+                    return (
+                      <ProductCard
+                        key={product.id}
+                        product={product}
+                        onAddToCart={handleAddToCart}
+                        onProductClick={handleProductClick}
+                        cartQuantity={cartQuantity}
+                      />
+                    );
+                  })}
                 </div>
               </div>
             </section>
@@ -93,13 +130,17 @@ export default function HomePage() {
 // Product Card Component
 interface ProductCardProps {
   product: Product;
-  onAddToCart: (productId: string) => void;
+  onAddToCart: (product: Product) => void;
+  onProductClick: (productId: string) => void;
   cartQuantity: number;
 }
 
-function ProductCard({ product, onAddToCart, cartQuantity }: ProductCardProps) {
+function ProductCard({ product, onAddToCart, onProductClick, cartQuantity }: ProductCardProps) {
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-3 w-40 flex-shrink-0 hover:shadow-md transition-shadow">
+    <div 
+      className="bg-white border border-gray-200 rounded-lg p-3 w-40 flex-shrink-0 hover:shadow-md transition-shadow cursor-pointer"
+      onClick={() => onProductClick(product.id)}
+    >
       {/* Product Image */}
       <div className="relative mb-2">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -167,10 +208,13 @@ function ProductCard({ product, onAddToCart, cartQuantity }: ProductCardProps) {
 
         {/* Add to Cart Button */}
         <button
-          onClick={() => onAddToCart(product.id)}
+          onClick={(e) => {
+            e.stopPropagation(); // Prevent card click when clicking button
+            onAddToCart(product);
+          }}
           className="w-full mt-2 bg-primary hover:bg-primary-hover text-white text-xs font-medium py-1.5 px-3 rounded-md transition-colors"
         >
-          {cartQuantity > 0 ? `Added (${cartQuantity})` : 'Add'}
+          {cartQuantity > 0 ? `In Cart (${cartQuantity})` : 'Add'}
         </button>
       </div>
     </div>

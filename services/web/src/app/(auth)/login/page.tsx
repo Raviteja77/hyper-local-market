@@ -1,10 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { AuthLayout } from '@/components/templates';
 import { LoginForm } from '@/components/organisms';
+import { useAuthStore } from '@/store';
 
 export default function LoginPage() {
+  const router = useRouter();
+  const { login } = useAuthStore();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [mode, setMode] = useState<'phone' | 'otp'>('phone');
@@ -19,10 +23,29 @@ export default function LoginPage() {
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
       if (data.otp) {
-        // Verify OTP
-        console.log('Verifying OTP:', data.otp, 'for phone:', data.phone);
-        // Redirect to dashboard after successful login
-        // router.push('/');
+        // Verify OTP - Mock authentication
+        if (data.otp === '1234') {
+          // Mock user data
+          const user = {
+            id: `user-${Date.now()}`,
+            name: 'John Doe',
+            phone: data.phone,
+            role: 'buyer' as const,
+            avatar: 'https://i.pravatar.cc/150?img=1',
+          };
+          
+          // Mock tokens
+          const accessToken = `mock-access-token-${Date.now()}`;
+          const refreshToken = `mock-refresh-token-${Date.now()}`;
+          
+          // Login using auth store
+          login(user, accessToken, refreshToken);
+          
+          // Redirect to buyer home page
+          router.push('/');
+        } else {
+          setError('Invalid OTP. Use 1234 for testing.');
+        }
       } else {
         // Send OTP
         console.log('Sending OTP to:', data.phone);
@@ -52,18 +75,22 @@ export default function LoginPage() {
   };
 
   return (
-    <AuthLayout
-      title="HyperLocal"
-      subtitle="Fresh groceries from local stores, delivered fast"
-    >
-      <LoginForm
-        onSubmit={handleSubmit}
-        onResendOTP={handleResendOTP}
-        loading={loading}
-        error={error}
-        mode={mode}
-        phoneNumber={phoneNumber}
-      />
+    <AuthLayout>
+      <div className="bg-white p-8 rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold mb-2">Welcome Back</h2>
+        <p className="text-gray-600 mb-6">Sign in to continue shopping</p>
+        <LoginForm
+          onSubmit={handleSubmit}
+          onResendOTP={handleResendOTP}
+          loading={loading}
+          error={error}
+          mode={mode}
+          phoneNumber={phoneNumber}
+        />
+        <p className="text-sm text-gray-500 mt-4 text-center">
+          For testing, use OTP: <strong>1234</strong>
+        </p>
+      </div>
     </AuthLayout>
   );
 }
