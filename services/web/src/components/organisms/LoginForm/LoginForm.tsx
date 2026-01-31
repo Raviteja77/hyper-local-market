@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ShoppingBag, AlertCircle } from 'lucide-react';
 import { FormField } from '../../molecules';
-import { Button, Icon, Typography } from '../../atoms';
+import { Button, Typography } from '../../atoms';
 
 export interface LoginFormProps {
   onSubmit: (data: { phone: string; otp?: string }) => void;

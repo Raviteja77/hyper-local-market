@@ -1,5 +1,5 @@
 import React from 'react';
-import { Clock, CheckCircle, PackageOpen, Truck, XCircle } from 'lucide-react';
+import { Clock, CheckCircle, PackageOpen, Truck, XCircle, Bike, Package } from 'lucide-react';
 import { Badge } from '../../atoms';
 import type { LucideIcon } from 'lucide-react';
 
@@ -43,12 +43,12 @@ const statusConfig: Record<OrderStatus, {
   ready: {
     label: 'Ready for Pickup',
     variant: 'primary',
-    icon: CheckCircle,
+    icon: Package,
   },
   picked_up: {
     label: 'Picked Up',
     variant: 'primary',
-    icon: CheckCircle,
+    icon: Bike,
   },
   out_for_delivery: {
     label: 'Out for Delivery',
