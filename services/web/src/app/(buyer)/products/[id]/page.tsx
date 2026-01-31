@@ -2,216 +2,211 @@
 'use client';
 
 import React, { useState } from 'react';
+import { ChevronLeft, Heart, Plus, Minus } from 'lucide-react';
 import { BuyerLayout } from '@/components/templates';
-import { Badge, Button, Icon, Typography } from '@/components/atoms';
-import { PriceDisplay, ProductCard, RatingStars } from '@/components/molecules';
+import { Button, Typography } from '@/components/atoms';
+import { PriceDisplay } from '@/components/molecules';
 
 export default function ProductDetailsPage() {
-  const [quantity, setQuantity] = useState(1);
+  const [inCart, setInCart] = useState(false);
+  const [quantity, setQuantity] = useState(0);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const product = {
     id: '1',
     name: 'Organic Fresh Milk',
-    description: 'Premium quality organic milk sourced from local dairy farms. Rich in nutrients and free from harmful chemicals. Perfect for your daily needs.',
+    weight: '1 Liter',
+    description:
+      'Premium quality organic milk sourced from local dairy farms. Rich in nutrients and free from harmful chemicals. Perfect for your daily needs. Fresh and pasteurized for maximum health benefits.',
     price: 65,
     mrp: 75,
-    discount: 13,
-    category: 'Dairy',
-    rating: 4.5,
-    totalReviews: 128,
-    inStock: true,
-    unit: 'liter',
-    quantity: 1,
-    images: [
-      'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=600',
-      'https://images.unsplash.com/photo-1563636619-e9143da7973b?w=600',
-    ],
-    tags: ['Organic', 'Fresh', 'Local'],
-    storeName: 'Sharma Kirana Store',
-    storeDistance: 0.5,
-    deliveryTime: 10,
+    image: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=800&h=600&fit=crop',
+    nutrition: {
+      calories: '150 kcal',
+      protein: '8g',
+      fat: '8g',
+      carbs: '12g',
+    },
   };
-
-  const relatedProducts = [
-    {
-      id: '2',
-      name: 'Greek Yogurt',
-      price: 85,
-      category: 'Dairy',
-      image: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400',
-      onAddToCart: (id: string) => console.log('Add to cart:', id),
-    },
-    {
-      id: '3',
-      name: 'Cottage Cheese',
-      price: 120,
-      category: 'Dairy',
-      image: 'https://images.unsplash.com/photo-1628088062854-d1870b4553da?w=400',
-      onAddToCart: (id: string) => console.log('Add to cart:', id),
-    },
-  ];
-
-  const [currentImage, setCurrentImage] = useState(0);
 
   const handleAddToCart = () => {
-    console.log(`Add ${quantity} to cart`);
+    setInCart(true);
+    setQuantity(1);
   };
 
-  const handleBuyNow = () => {
-    console.log(`Buy now ${quantity}`);
+  const handleIncrement = () => {
+    setQuantity((prev) => prev + 1);
+  };
+
+  const handleDecrement = () => {
+    if (quantity > 1) {
+      setQuantity((prev) => prev - 1);
+    } else {
+      setInCart(false);
+      setQuantity(0);
+    }
+  };
+
+  const handleGoToCart = () => {
+    console.log('Go to cart');
   };
 
   return (
-    <BuyerLayout
-      userName="John Doe"
-      cartItems={[]}
-      onCartCheckout={() => {}}
-      onCartUpdateQuantity={() => {}}
-      onCartRemoveItem={() => {}}
-    >
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm mb-6">
-          <button onClick={() => console.log('Go home')} className="text-gray-500 hover:text-primary">
-            Home
+    <BuyerLayout userName="John Doe" cartItems={[]} showFooter={false}>
+      <div className="bg-white min-h-screen pb-24">
+        {/* Full-bleed Product Image */}
+        <div className="relative w-full h-[40vh] bg-gray-100">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-cover"
+          />
+
+          {/* Back Arrow Button */}
+          <button
+            onClick={() => console.log('Go back')}
+            className="absolute top-4 left-4 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-50 transition-colors"
+          >
+            <ChevronLeft size={24} color="#374151" />
           </button>
-          <Icon name="ChevronRight" size={16} color="#6B7280" />
-          <button onClick={() => console.log('Go to category')} className="text-gray-500 hover:text-primary">
-            {product.category}
+
+          {/* Heart/Favorite Button */}
+          <button
+            onClick={() => setIsFavorite(!isFavorite)}
+            className="absolute top-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-50 transition-colors"
+          >
+            <Heart
+              size={24}
+              color={isFavorite ? '#EF4444' : '#374151'}
+              fill={isFavorite ? '#EF4444' : 'none'}
+            />
           </button>
-          <Icon name="ChevronRight" size={16} color="#6B7280" />
-          <Typography variant="small" color="default">
-            {product.name}
-          </Typography>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {/* Left - Images */}
-          <div>
-            {/* Main Image */}
-            <div className="aspect-square bg-gray-100 rounded-lg mb-4 overflow-hidden">
-              <img
-                src={product.images[currentImage]}
-                alt={product.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
+        {/* Product Details Card */}
+        <div className="bg-white rounded-t-3xl -mt-6 relative z-10 px-4 py-6">
+          {/* Product Name */}
+          <Typography variant="h2" weight="bold" className="mb-1">
+            {product.name}
+          </Typography>
 
-            {/* Thumbnail Images */}
-            {product.images.length > 1 && (
-              <div className="flex gap-2">
-                {product.images.map((image, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentImage(index)}
-                    className={`w-20 h-20 rounded-lg overflow-hidden border-2 ${
-                      currentImage === index ? 'border-primary' : 'border-transparent'
-                    }`}
-                  >
-                    <img src={image} alt={`${product.name} ${index + 1}`} className="w-full h-full object-cover" />
-                  </button>
-                ))}
-              </div>
-            )}
+          {/* Weight/Unit */}
+          <Typography variant="small" color="muted" className="mb-4">
+            {product.weight}
+          </Typography>
+
+          {/* Price */}
+          <div className="mb-6">
+            <PriceDisplay price={product.price} originalPrice={product.mrp} size="lg" />
           </div>
 
-          {/* Right - Product Info */}
-          <div>
-            <Typography variant="h2" weight="bold" className="mb-2">
-              {product.name}
+          {/* Divider */}
+          <div className="border-t border-gray-200 my-6"></div>
+
+          {/* Description Section */}
+          <div className="mb-6">
+            <Typography variant="h4" weight="semibold" className="mb-3">
+              About this product
             </Typography>
-
-            <div className="flex items-center gap-4 mb-4">
-              <RatingStars rating={product.rating} showValue showCount count={product.totalReviews} />
-              {product.inStock ? (
-                <Badge variant="success">In Stock</Badge>
-              ) : (
-                <Badge variant="danger">Out of Stock</Badge>
-              )}
-            </div>
-
-            <PriceDisplay price={product.price} originalPrice={product.mrp} size="lg" className="mb-4" />
-
-            <Typography variant="body" color="muted" className="mb-6">
+            <Typography variant="body" color="muted" className="leading-relaxed">
               {product.description}
             </Typography>
+          </div>
 
-            {/* Tags */}
-            <div className="flex flex-wrap gap-2 mb-6">
-              {product.tags.map((tag) => (
-                <Badge key={tag} variant="info">
-                  {tag}
-                </Badge>
-              ))}
-            </div>
+          {/* Divider */}
+          <div className="border-t border-gray-200 my-6"></div>
 
-            {/* Quantity Selector */}
+          {/* Nutrition Info */}
+          {product.nutrition && (
             <div className="mb-6">
-              <Typography variant="small" weight="medium" className="mb-2">
-                Quantity
+              <Typography variant="h4" weight="semibold" className="mb-3">
+                Nutrition Information
               </Typography>
-              <div className="flex items-center gap-3">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-gray-50 p-3 rounded-lg">
+                  <Typography variant="caption" color="muted" className="text-xs">
+                    Calories
+                  </Typography>
+                  <Typography variant="body" weight="medium">
+                    {product.nutrition.calories}
+                  </Typography>
+                </div>
+                <div className="bg-gray-50 p-3 rounded-lg">
+                  <Typography variant="caption" color="muted" className="text-xs">
+                    Protein
+                  </Typography>
+                  <Typography variant="body" weight="medium">
+                    {product.nutrition.protein}
+                  </Typography>
+                </div>
+                <div className="bg-gray-50 p-3 rounded-lg">
+                  <Typography variant="caption" color="muted" className="text-xs">
+                    Fat
+                  </Typography>
+                  <Typography variant="body" weight="medium">
+                    {product.nutrition.fat}
+                  </Typography>
+                </div>
+                <div className="bg-gray-50 p-3 rounded-lg">
+                  <Typography variant="caption" color="muted" className="text-xs">
+                    Carbs
+                  </Typography>
+                  <Typography variant="body" weight="medium">
+                    {product.nutrition.carbs}
+                  </Typography>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Sticky Bottom Bar */}
+        <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 p-4 z-50">
+          {!inCart ? (
+            // Full-width "Add to Cart" button
+            <Button
+              variant="primary"
+              size="lg"
+              fullWidth
+              onClick={handleAddToCart}
+              className="rounded-full"
+            >
+              Add to Cart
+            </Button>
+          ) : (
+            // Quantity stepper + "Go to Cart" button
+            <div className="flex items-center gap-3">
+              {/* Quantity Stepper */}
+              <div className="flex items-center gap-2 bg-primary bg-opacity-10 rounded-full px-3 py-2">
                 <button
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-50"
+                  onClick={handleDecrement}
+                  className="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-sm hover:bg-gray-50 transition-colors"
                 >
-                  <Icon name="Minus" size={20} />
+                  <Minus size={16} color="#10B981" />
                 </button>
-                <Typography variant="h4" weight="medium" className="w-12 text-center">
+                <Typography variant="body" weight="semibold" className="w-8 text-center text-primary">
                   {quantity}
                 </Typography>
                 <button
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-50"
+                  onClick={handleIncrement}
+                  className="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-sm hover:bg-gray-50 transition-colors"
                 >
-                  <Icon name="Plus" size={20} />
+                  <Plus size={16} color="#10B981" />
                 </button>
               </div>
-            </div>
 
-            {/* Action Buttons */}
-            <div className="flex gap-3 mb-6">
-              <Button variant="primary" size="lg" fullWidth onClick={handleAddToCart} disabled={!product.inStock}>
-                <Icon name="ShoppingCart" size={20} className="mr-2" />
-                Add to Cart
+              {/* Go to Cart Button */}
+              <Button
+                variant="primary"
+                size="lg"
+                fullWidth
+                onClick={handleGoToCart}
+                className="rounded-full"
+              >
+                Go to Cart →
               </Button>
-              <Button variant="secondary" size="lg" fullWidth onClick={handleBuyNow} disabled={!product.inStock}>
-                Buy Now
-              </Button>
             </div>
-
-            {/* Store Info */}
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <div className="flex items-center justify-between mb-2">
-                <Typography variant="small" weight="semibold">
-                  Available at {product.storeName}
-                </Typography>
-                <button className="text-primary hover:underline text-sm">View Store</button>
-              </div>
-              <div className="flex items-center gap-4 text-sm text-gray-600">
-                <div className="flex items-center gap-1">
-                  <Icon name="MapPin" size={16} />
-                  <span>{product.storeDistance} km away</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <Icon name="Clock" size={16} />
-                  <span>{product.deliveryTime} min delivery</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Related Products */}
-        <div>
-          <Typography variant="h3" weight="bold" className="mb-6">
-            Related Products
-          </Typography>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {relatedProducts.map((product) => (
-              <ProductCard key={product.id} {...product} />
-            ))}
-          </div>
+          )}
         </div>
       </div>
     </BuyerLayout>
