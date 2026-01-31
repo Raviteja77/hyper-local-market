@@ -11,77 +11,53 @@ const meta: Meta<typeof PriceDisplay> = {
       control: 'select',
       options: ['sm', 'md', 'lg'],
     },
-    showDiscount: {
-      control: 'boolean',
-    },
   },
 };
 
 export default meta;
 type Story = StoryObj<typeof PriceDisplay>;
 
-export const Default: Story = {
-  args: {
-    price: 299,
-  },
-};
-
+// Story 1: "With Discount" — price=177, original=249, discount=72
 export const WithDiscount: Story = {
   args: {
-    price: 199,
-    originalPrice: 299,
-  },
-};
-
-export const LargeDiscount: Story = {
-  args: {
-    price: 99,
+    currentPrice: 177,
     originalPrice: 249,
+    discountPercent: 72,
   },
 };
 
-export const Small: Story = {
+// Story 2: "No Discount" — price=199 only (plain bold, no pill)
+export const NoDiscount: Story = {
   args: {
-    price: 49,
-    originalPrice: 99,
-    size: 'sm',
+    currentPrice: 199,
   },
 };
 
-export const Medium: Story = {
+// Story 3: "High Discount" — price=532, original=1499, discount=67
+export const HighDiscount: Story = {
   args: {
-    price: 149,
-    originalPrice: 199,
-    size: 'md',
+    currentPrice: 532,
+    originalPrice: 1499,
+    discountPercent: 67,
   },
 };
 
-export const Large: Story = {
-  args: {
-    price: 399,
-    originalPrice: 599,
-    size: 'lg',
-  },
-};
-
-export const WithoutDiscountLabel: Story = {
-  args: {
-    price: 179,
-    originalPrice: 299,
-    showDiscount: false,
-  },
-};
-
-export const HighPrice: Story = {
-  args: {
-    price: 1999,
-    originalPrice: 2999,
-  },
-};
-
-export const SmallPrice: Story = {
-  args: {
-    price: 25,
-    originalPrice: 50,
-  },
+// Story 4: "All Sizes" — show sm, md, lg side by side
+export const AllSizes: Story = {
+  render: () => (
+    <div className="flex flex-col gap-6">
+      <div>
+        <h3 className="text-xs font-semibold text-gray-500 uppercase mb-2">Small (sm)</h3>
+        <PriceDisplay currentPrice={177} originalPrice={249} discountPercent={72} size="sm" />
+      </div>
+      <div>
+        <h3 className="text-xs font-semibold text-gray-500 uppercase mb-2">Medium (md) - Default</h3>
+        <PriceDisplay currentPrice={177} originalPrice={249} discountPercent={72} size="md" />
+      </div>
+      <div>
+        <h3 className="text-xs font-semibold text-gray-500 uppercase mb-2">Large (lg)</h3>
+        <PriceDisplay currentPrice={177} originalPrice={249} discountPercent={72} size="lg" />
+      </div>
+    </div>
+  ),
 };
