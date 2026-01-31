@@ -23,20 +23,8 @@ export const CategoryBar: React.FC<CategoryBarProps> = ({
 }) => {
   return (
     <div
-      className={`w-full bg-white border-b border-gray-200 overflow-x-auto ${className}`}
-      style={{
-        scrollbarWidth: 'none',
-        msOverflowStyle: 'none',
-        WebkitOverflowScrolling: 'touch',
-      } as React.CSSProperties}
+      className={`w-full bg-white border-b border-gray-200 overflow-x-auto scrollbar-hide ${className}`}
     >
-      <style dangerouslySetInnerHTML={{
-        __html: `
-          .overflow-x-auto::-webkit-scrollbar {
-            display: none;
-          }
-        `
-      }} />
       <div className="flex flex-nowrap">
         {categories.map((category) => {
           const isActive = activeCategory === category.id;

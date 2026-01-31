@@ -84,7 +84,7 @@ export const ScrollableWithActive: Story = {
 };
 
 export const Interactive: Story = {
-  render: () => {
+  render: function InteractiveStory() {
     const [activeCategory, setActiveCategory] = React.useState('all');
     
     return (
