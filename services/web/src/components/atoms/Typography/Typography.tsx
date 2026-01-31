@@ -2,63 +2,62 @@
 import React from 'react';
 
 export interface TypographyProps {
-  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'body' | 'small' | 'caption';
+  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'body' | 'caption' | 'overline';
+  color?: 'primary' | 'secondary' | 'muted' | 'error' | 'success';
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div' | 'label';
+  weight?: 'regular' | 'medium' | 'semibold' | 'bold';
   children: React.ReactNode;
-  color?: 'primary' | 'secondary' | 'default' | 'muted' | 'error' | 'success';
-  weight?: 'light' | 'normal' | 'medium' | 'semibold' | 'bold';
-  align?: 'left' | 'center' | 'right';
   className?: string;
-  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span' | 'div';
 }
 
 export const Typography: React.FC<TypographyProps> = ({
   variant = 'body',
-  children,
-  color = 'default',
-  weight,
-  align = 'left',
-  className = '',
+  color = 'primary',
   as,
+  weight,
+  children,
+  className = '',
 }) => {
-  const variants = {
-    h1: 'text-4xl font-bold',
-    h2: 'text-3xl font-semibold',
-    h3: 'text-2xl font-semibold',
-    h4: 'text-xl font-medium',
-    body: 'text-base',
-    small: 'text-sm',
-    caption: 'text-xs',
+  // Variant -> default mapping
+  const variantMap = {
+    h1: { element: 'h1', className: 'text-3xl font-bold text-gray-900' },
+    h2: { element: 'h2', className: 'text-2xl font-semibold text-gray-900' },
+    h3: { element: 'h3', className: 'text-xl font-semibold text-gray-900' },
+    h4: { element: 'h4', className: 'text-lg font-medium text-gray-900' },
+    body: { element: 'p', className: 'text-base font-normal text-gray-700' },
+    caption: { element: 'span', className: 'text-sm font-normal text-gray-500' },
+    overline: { element: 'span', className: 'text-xs font-semibold text-gray-500 uppercase tracking-wide' },
   };
-
-  const colors = {
-    primary: 'text-primary',
-    secondary: 'text-secondary',
-    default: 'text-gray-900',
+  
+  const colorMap = {
+    primary: 'text-gray-900',
+    secondary: 'text-gray-700',
     muted: 'text-gray-500',
-    error: 'text-danger',
+    error: 'text-error',
     success: 'text-success',
   };
-
-  const weights = {
-    light: 'font-light',
-    normal: 'font-normal',
+  
+  const weightMap = {
+    regular: 'font-normal',
     medium: 'font-medium',
     semibold: 'font-semibold',
     bold: 'font-bold',
   };
-
-  const aligns = {
-    left: 'text-left',
-    center: 'text-center',
-    right: 'text-right',
-  };
-
-  const Component = as || (variant.startsWith('h') ? variant : 'p');
-  const weightClass = weight ? weights[weight] : '';
-
+  
+  const Component = (as || variantMap[variant].element) as keyof JSX.IntrinsicElements;
+  const variantClasses = variantMap[variant].className;
+  
+  // Extract the base size/spacing but allow color override
+  const baseClasses = variantClasses
+    .split(' ')
+    .filter(c => !c.startsWith('text-gray') && !c.startsWith('font-'))
+    .join(' ');
+  
+  const fontWeight = weight ? weightMap[weight] : variantClasses.split(' ').find(c => c.startsWith('font-'));
+  
   return (
     <Component
-      className={`${variants[variant]} ${colors[color]} ${weightClass} ${aligns[align]} ${className}`}
+      className={`${baseClasses} ${fontWeight} ${colorMap[color]} ${className}`}
     >
       {children}
     </Component>

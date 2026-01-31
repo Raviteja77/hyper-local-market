@@ -1,6 +1,7 @@
 // services/web/src/components/atoms/Typography/Typography.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react';
 import { Typography } from './Typography';
+import React from 'react';
 
 const meta: Meta<typeof Typography> = {
   title: 'Atoms/Typography',
@@ -9,19 +10,15 @@ const meta: Meta<typeof Typography> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['h1', 'h2', 'h3', 'h4', 'body', 'small', 'caption'],
+      options: ['h1', 'h2', 'h3', 'h4', 'body', 'caption', 'overline'],
     },
     color: {
       control: 'select',
-      options: ['primary', 'secondary', 'default', 'muted', 'error', 'success'],
+      options: ['primary', 'secondary', 'muted', 'error', 'success'],
     },
     weight: {
       control: 'select',
-      options: ['light', 'normal', 'medium', 'semibold', 'bold'],
-    },
-    align: {
-      control: 'select',
-      options: ['left', 'center', 'right'],
+      options: ['regular', 'medium', 'semibold', 'bold'],
     },
   },
 };
@@ -29,91 +26,46 @@ const meta: Meta<typeof Typography> = {
 export default meta;
 type Story = StoryObj<typeof Typography>;
 
-export const Heading1: Story = {
+export const Default: Story = {
   args: {
-    variant: 'h1',
-    children: 'Heading 1',
+    children: 'Default Typography',
   },
 };
 
-export const Heading2: Story = {
-  args: {
-    variant: 'h2',
-    children: 'Heading 2',
-  },
+export const TypeScale: Story = {
+  render: () => (
+    <div className="space-y-4">
+      <Typography variant="h1">Heading 1 - The quick brown fox</Typography>
+      <Typography variant="h2">Heading 2 - The quick brown fox</Typography>
+      <Typography variant="h3">Heading 3 - The quick brown fox</Typography>
+      <Typography variant="h4">Heading 4 - The quick brown fox</Typography>
+      <Typography variant="body">Body - The quick brown fox jumps over the lazy dog</Typography>
+      <Typography variant="caption">Caption - Additional information text</Typography>
+      <Typography variant="overline">Overline - Label text</Typography>
+    </div>
+  ),
 };
 
-export const Heading3: Story = {
-  args: {
-    variant: 'h3',
-    children: 'Heading 3',
-  },
+export const Colors: Story = {
+  render: () => (
+    <div className="space-y-2">
+      <Typography color="primary">Primary color text</Typography>
+      <Typography color="secondary">Secondary color text</Typography>
+      <Typography color="muted">Muted color text</Typography>
+      <Typography color="error">Error color text</Typography>
+      <Typography color="success">Success color text</Typography>
+    </div>
+  ),
 };
 
-export const Heading4: Story = {
-  args: {
-    variant: 'h4',
-    children: 'Heading 4',
-  },
-};
-
-export const Body: Story = {
-  args: {
-    variant: 'body',
-    children: 'This is body text used for paragraphs and general content.',
-  },
-};
-
-export const Small: Story = {
-  args: {
-    variant: 'small',
-    children: 'Small text for secondary information',
-  },
-};
-
-export const Caption: Story = {
-  args: {
-    variant: 'caption',
-    children: 'Caption text for labels and metadata',
-  },
-};
-
-export const Primary: Story = {
-  args: {
-    variant: 'h3',
-    color: 'primary',
-    children: 'Primary colored text',
-  },
-};
-
-export const Error: Story = {
-  args: {
-    variant: 'body',
-    color: 'error',
-    children: 'Error message text',
-  },
-};
-
-export const Muted: Story = {
-  args: {
-    variant: 'body',
-    color: 'muted',
-    children: 'Muted secondary text',
-  },
-};
-
-export const Centered: Story = {
-  args: {
-    variant: 'h2',
-    align: 'center',
-    children: 'Centered text',
-  },
-};
-
-export const Bold: Story = {
-  args: {
-    variant: 'body',
-    weight: 'bold',
-    children: 'Bold text',
-  },
+export const ZeptoProductTitle: Story = {
+  render: () => (
+    <div className="p-4 bg-white rounded-lg border border-gray-200 max-w-xs">
+      <Typography variant="h4">Organic Milk 1L</Typography>
+      <div className="flex items-baseline gap-2 mt-2">
+        <Typography variant="body" weight="bold" color="primary">₹89</Typography>
+        <Typography variant="caption" className="line-through">₹110</Typography>
+      </div>
+    </div>
+  ),
 };
