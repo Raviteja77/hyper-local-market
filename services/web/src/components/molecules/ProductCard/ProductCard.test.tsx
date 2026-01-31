@@ -65,12 +65,11 @@ describe('ProductCard', () => {
   });
 
   it('renders discount in red pill when discounted', () => {
-    const { container } = render(
+    render(
       <ProductCard {...defaultProps} originalPrice={249} discountPercent={72} />
     );
-    const pricePill = container.querySelector('.bg-primary');
-    expect(pricePill).toBeInTheDocument();
-    expect(pricePill).toHaveTextContent('₹177');
+    // Look for the price pill specifically in the price display area
+    expect(screen.getByText('₹177')).toHaveClass('bg-primary');
   });
 
   it('renders discount percentage', () => {

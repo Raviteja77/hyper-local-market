@@ -11,11 +11,11 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],
-    include: ['src/components/atoms/**/*.test.{ts,tsx}'],
+    include: ['src/components/**/*.test.{ts,tsx}'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html', 'lcov'],
-      include: ['src/components/atoms/**/*.{ts,tsx}'],
+      include: ['src/components/**/*.{ts,tsx}'],
       exclude: [
         'node_modules/',
         'src/test/',
