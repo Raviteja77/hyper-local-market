@@ -1,94 +1,71 @@
+// services/web/src/components/molecules/StoreCard/StoreCard.tsx
 import React from 'react';
-import { Avatar, Badge, Icon, Typography } from '../../atoms';
+import { Badge } from '../../atoms';
+import { Clock, Star } from 'lucide-react';
 
 export interface StoreCardProps {
   id: string;
   name: string;
-  distance: number;
-  eta?: number;
-  rating?: number;
-  isOpen?: boolean;
-  image?: string;
-  address?: string;
-  onStoreClick?: (id: string) => void;
+  image: string;
+  deliveryTime: string;
+  rating: number;
+  isFreeDelivery?: boolean;
+  onClick: (id: string) => void;
   className?: string;
 }
 
 export const StoreCard: React.FC<StoreCardProps> = ({
   id,
   name,
-  distance,
-  eta,
-  rating,
-  isOpen = true,
   image,
-  address,
-  onStoreClick,
+  deliveryTime,
+  rating,
+  isFreeDelivery = false,
+  onClick,
   className = '',
 }) => {
   return (
     <div
-      className={`bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 p-4 border border-gray-200 cursor-pointer ${className}`}
-      onClick={() => onStoreClick?.(id)}
+      className={`bg-white rounded-lg shadow-md p-3 cursor-pointer hover:shadow-lg transition-shadow duration-200 ${className}`}
+      onClick={() => onClick(id)}
       role="button"
       tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          onClick(id);
+        }
+      }}
     >
       <div className="flex items-start gap-3">
-        <Avatar
+        {/* Store image (square, rounded-lg, object-cover) on the left — ~64px */}
+        <img
           src={image}
           alt={name}
-          size="lg"
-          fallback={name.substring(0, 2)}
+          className="w-16 h-16 rounded-lg object-cover flex-shrink-0"
         />
 
-        <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between gap-2 mb-1">
-            <Typography variant="body" weight="semibold" className="truncate">
-              {name}
-            </Typography>
-            {isOpen ? (
-              <Badge variant="success" size="sm">
-                Open
-              </Badge>
-            ) : (
-              <Badge variant="danger" size="sm">
-                Closed
-              </Badge>
-            )}
+        {/* Right side (flex column, gap-1) */}
+        <div className="flex-1 flex flex-col gap-1 min-w-0">
+          {/* Store name */}
+          <h4 className="text-base font-semibold text-gray-900 truncate">
+            {name}
+          </h4>
+
+          {/* Delivery time badge */}
+          <Badge variant="delivery" leftIcon={<Clock size={12} />}>
+            {deliveryTime}
+          </Badge>
+
+          {/* Rating: small star + rating text in text-sm */}
+          <div className="flex items-center gap-1">
+            <Star size={14} className="text-yellow-500 fill-yellow-500" />
+            <span className="text-sm text-gray-700">{rating.toFixed(1)}</span>
           </div>
 
-          {address && (
-            <Typography variant="small" color="muted" className="mb-2 line-clamp-1">
-              {address}
-            </Typography>
+          {/* Optional "Free delivery" text in green */}
+          {isFreeDelivery && (
+            <span className="text-xs text-success">Free delivery</span>
           )}
-
-          <div className="flex items-center gap-4 flex-wrap">
-            <div className="flex items-center gap-1">
-              <Icon name="MapPin" size={16} color="#6B7280" />
-              <Typography variant="small" color="muted">
-                {distance.toFixed(1)} km
-              </Typography>
-            </div>
-
-            {eta && (
-              <div className="flex items-center gap-1">
-                <Icon name="Clock" size={16} color="#6B7280" />
-                <Typography variant="small" color="muted">
-                  {eta} min
-                </Typography>
-              </div>
-            )}
-
-            {rating && (
-              <div className="flex items-center gap-1">
-                <Icon name="Star" size={16} color="#F59E0B" />
-                <Typography variant="small" color="default" weight="medium">
-                  {rating.toFixed(1)}
-                </Typography>
-              </div>
-            )}
-          </div>
         </div>
       </div>
     </div>
