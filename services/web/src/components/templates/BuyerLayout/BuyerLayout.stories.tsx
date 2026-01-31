@@ -61,13 +61,45 @@ export const Default: Story = {
     cartItems: mockCartItems,
     cartSubtotal: 130,
     cartDeliveryFee: 15,
+    activeRoute: 'home',
     onSearch: (query) => console.log('Search:', query),
     onCartCheckout: () => console.log('Checkout'),
     onCartUpdateQuantity: (id, qty) => console.log('Update:', id, qty),
     onCartRemoveItem: (id) => console.log('Remove:', id),
+    onNavClick: (route) => console.log('Nav clicked:', route),
     children: (
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="px-4 py-8">
         <ProductGrid products={mockProducts} title="Featured Products" />
+      </div>
+    ),
+  },
+};
+
+export const HomeLayout: Story = {
+  args: {
+    userName: 'John Doe',
+    cartItems: [],
+    activeRoute: 'home',
+    onNavClick: (route) => console.log('Nav clicked:', route),
+    children: (
+      <div className="px-4 py-8">
+        <h1 className="text-2xl font-bold mb-4">Home Content</h1>
+        <p className="text-gray-600">This is the home page layout with bottom navigation.</p>
+      </div>
+    ),
+  },
+};
+
+export const SearchLayout: Story = {
+  args: {
+    userName: 'John Doe',
+    cartItems: [],
+    activeRoute: 'search',
+    onNavClick: (route) => console.log('Nav clicked:', route),
+    children: (
+      <div className="px-4 py-8">
+        <h1 className="text-2xl font-bold mb-4">Search Content</h1>
+        <p className="text-gray-600">This is the search page layout with bottom navigation.</p>
       </div>
     ),
   },
@@ -75,10 +107,12 @@ export const Default: Story = {
 
 export const GuestUser: Story = {
   args: {
+    activeRoute: 'home',
     onSearch: (query) => console.log('Search:', query),
     onLoginClick: () => console.log('Login clicked'),
+    onNavClick: (route) => console.log('Nav clicked:', route),
     children: (
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="px-4 py-8">
         <ProductGrid products={mockProducts} title="Featured Products" />
       </div>
     ),
@@ -107,12 +141,14 @@ export const WithFullCart: Story = {
     cartSubtotal: 260,
     cartDeliveryFee: 20,
     cartDiscount: 30,
+    activeRoute: 'cart',
     onSearch: (query) => console.log('Search:', query),
     onCartCheckout: () => console.log('Checkout'),
     onCartUpdateQuantity: (id, qty) => console.log('Update:', id, qty),
     onCartRemoveItem: (id) => console.log('Remove:', id),
+    onNavClick: (route) => console.log('Nav clicked:', route),
     children: (
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="px-4 py-8">
         <ProductGrid products={mockProducts} title="Popular Today" />
       </div>
     ),
@@ -123,9 +159,11 @@ export const WithoutFooter: Story = {
   args: {
     userName: 'Alex Kumar',
     showFooter: false,
+    activeRoute: 'profile',
     onSearch: (query) => console.log('Search:', query),
+    onNavClick: (route) => console.log('Nav clicked:', route),
     children: (
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="px-4 py-8">
         <ProductGrid products={mockProducts} />
       </div>
     ),
