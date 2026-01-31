@@ -58,21 +58,24 @@ export default function OrderDetailsPage() {
       onCartUpdateQuantity={() => {}}
       onCartRemoveItem={() => {}}
     >
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="px-4 py-8">
         {/* Header */}
         <div className="mb-8">
-          <button
-            onClick={() => console.log('Go back')}
-            className="flex items-center gap-2 text-primary hover:underline mb-4"
-          >
-            <Icon name="ArrowLeft" size={20} />
-            <Typography variant="body" color="primary">
-              Back to Orders
+          <div className="flex items-center justify-between mb-4">
+            <button
+              onClick={() => console.log('Go back')}
+              className="flex items-center gap-2 text-primary hover:underline"
+            >
+              <Icon name="ArrowLeft" size={20} />
+              <Typography variant="body" color="primary">
+                Back
+              </Typography>
+            </button>
+            <Typography variant="h3" weight="bold" className="flex-1 text-center">
+              Order #{orderId}
             </Typography>
-          </button>
-          <Typography variant="h2" weight="bold">
-            Order Details
-          </Typography>
+            <div className="w-16"></div> {/* Spacer for centering */}
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -218,12 +221,15 @@ export default function OrderDetailsPage() {
                 <Icon name="Download" size={18} className="mr-2" />
                 Download Invoice
               </Button>
-              <Button variant="ghost" fullWidth>
-                <Icon name="HeadphonesIcon" size={18} className="mr-2" />
-                Get Help
-              </Button>
             </div>
           </div>
+        </div>
+
+        {/* Need help? link */}
+        <div className="text-center mt-8">
+          <button onClick={() => console.log('Need help')} className="text-primary hover:underline">
+            Need help?
+          </button>
         </div>
       </div>
     </BuyerLayout>
