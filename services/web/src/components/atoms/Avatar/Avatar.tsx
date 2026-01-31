@@ -22,7 +22,7 @@ const getColorFromName = (name: string): string => {
   ];
   
   let hash = 0;
-  for (let i = 0; i < name.length; i++) {
+  for (let i = 0; i < name?.length; i++) {
     hash = name.charCodeAt(i) + ((hash << 5) - hash);
   }
   
@@ -31,11 +31,16 @@ const getColorFromName = (name: string): string => {
 
 // Get initials from name (first letter of first and last name)
 const getInitials = (name: string): string => {
-  const parts = name.trim().split(' ');
-  if (parts.length === 1) {
+  const parts = name?.trim().split(' ');
+  if (!parts || parts.length === 0) {
+    return '';
+  } else if (parts.length === 1) {
     return parts[0].substring(0, 2).toUpperCase();
+  } else {
+    const first = parts[0]?.[0] || '';
+    const last = parts[parts.length - 1]?.[0] || '';
+    return (first + last).toUpperCase();
   }
-  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 };
 
 export const Avatar: React.FC<AvatarProps> = ({

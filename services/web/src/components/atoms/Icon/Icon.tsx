@@ -30,6 +30,10 @@ export const Icon: React.FC<IconProps> = ({
     warning: 'text-warning',
     current: 'text-current',
   };
+
+  if (!IconComponent) {
+    return <span>Error: Icon component is undefined</span>;
+  }
   
   return (
     <IconComponent 

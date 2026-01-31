@@ -44,16 +44,16 @@ export const Typography: React.FC<TypographyProps> = ({
     bold: 'font-bold',
   };
   
-  const Component = (as || variantMap[variant].element) as keyof JSX.IntrinsicElements;
-  const variantClasses = variantMap[variant].className;
+  const Component = (as || variantMap[variant]?.element || 'p') as keyof JSX.IntrinsicElements;
+  const variantClasses = variantMap[variant]?.className;
   
   // Extract the base size/spacing but allow color override
   const baseClasses = variantClasses
-    .split(' ')
-    .filter(c => !c.startsWith('text-gray') && !c.startsWith('font-'))
-    .join(' ');
+    ?.split(' ')
+    ?.filter(c => !c.startsWith('text-gray') && !c.startsWith('font-'))
+    ?.join(' ');
   
-  const fontWeight = weight ? weightMap[weight] : (variantClasses.split(' ').find(c => c.startsWith('font-')) || '');
+  const fontWeight = weight ? weightMap[weight] : (variantClasses?.split(' ')?.find(c => c.startsWith('font-')) || '');
   
   return (
     <Component
