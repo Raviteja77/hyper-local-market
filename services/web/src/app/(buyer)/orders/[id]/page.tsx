@@ -1,69 +1,47 @@
 // services/web/src/app/(buyer)/orders/[id]/page.tsx
 'use client';
 
-import React from 'react';
+import React, { use } from 'react';
+import { useRouter } from 'next/navigation';
 import { BuyerLayout } from '@/components/templates';
 import { OrderTracker } from '@/components/organisms';
 import { Avatar, Button, Icon, Typography } from '@/components/atoms';
+import { useOrderStore, useAuthStore } from '@/store';
 
-export default function OrderDetailsPage() {
-  const orderId = 'ORD-12345';
-  const orderStatus = 'out_for_delivery';
+export default function OrderDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = use(params);
+  const router = useRouter();
+  const { user } = useAuthStore();
+  const { getOrderById } = useOrderStore();
+  
+  const order = getOrderById(resolvedParams.id);
 
-  const orderItems = [
-    {
-      id: '1',
-      name: 'Organic Fresh Milk',
-      price: 65,
-      quantity: 2,
-      image: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=200',
-    },
-    {
-      id: '2',
-      name: 'Whole Wheat Bread',
-      price: 40,
-      quantity: 1,
-      image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=200',
-    },
-    {
-      id: '3',
-      name: 'Fresh Tomatoes',
-      price: 30,
-      quantity: 3,
-    },
-  ];
-
-  const subtotal = 260;
-  const deliveryFee = 20;
-  const discount = 30;
-  const total = 250;
-
-  const storeInfo = {
-    name: 'Sharma Kirana Store',
-    address: 'Shop 12, MG Road, Sector 5',
-    phone: '+91 98765 43210',
-  };
-
-  const deliveryAddress = {
-    name: 'John Doe',
-    address: '123 Main Street, Apartment 4B, Near Park Gate, Sector 10',
-    phone: '+91 98765 12345',
-  };
+  if (!order) {
+    return (
+      <BuyerLayout userName={user?.name} userAvatar={user?.avatar} cartItems={[]}>
+        <div className="flex flex-col items-center justify-center h-screen px-4">
+          <Typography variant="h3" className="mb-4">Order not found</Typography>
+          <Button variant="primary" onClick={() => router.push('/orders')}>
+            View All Orders
+          </Button>
+        </div>
+      </BuyerLayout>
+    );
+  }
 
   return (
     <BuyerLayout
-      userName="John Doe"
+      userName={user?.name}
+      userAvatar={user?.avatar}
       cartItems={[]}
-      onCartCheckout={() => {}}
-      onCartUpdateQuantity={() => {}}
-      onCartRemoveItem={() => {}}
+      showFooter={false}
     >
       <div className="px-4 py-8">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center mb-4">
             <button
-              onClick={() => console.log('Go back')}
+              onClick={() => router.back()}
               className="flex items-center gap-2 text-primary hover:underline"
             >
               <Icon name="ArrowLeft" size={20} />
@@ -72,7 +50,7 @@ export default function OrderDetailsPage() {
               </Typography>
             </button>
             <Typography variant="h3" weight="bold" className="flex-1 text-center -ml-16">
-              Order #{orderId}
+              Order #{order.orderId}
             </Typography>
           </div>
         </div>
@@ -82,11 +60,11 @@ export default function OrderDetailsPage() {
           <div className="lg:col-span-2 space-y-6">
             {/* Order Tracker */}
             <OrderTracker
-              currentStatus={orderStatus}
-              orderId={orderId}
-              estimatedTime="8 mins"
-              riderName="Rajesh Kumar"
-              riderPhone="+91 98765 99999"
+              currentStatus={order.status}
+              orderId={order.orderId}
+              estimatedTime={order.estimatedTime}
+              riderName={order.riderName}
+              riderPhone={order.riderPhone}
             />
 
             {/* Order Items */}
@@ -95,7 +73,7 @@ export default function OrderDetailsPage() {
                 Order Items
               </Typography>
               <div className="space-y-4">
-                {orderItems.map((item) => (
+                {order.items.map((item) => (
                   <div key={item.id} className="flex gap-4 pb-4 border-b border-gray-200 last:border-0">
                     {item.image ? (
                       <img
@@ -133,20 +111,11 @@ export default function OrderDetailsPage() {
                 <Avatar size="lg" fallback="SK" />
                 <div className="flex-1">
                   <Typography variant="body" weight="semibold">
-                    {storeInfo.name}
+                    {order.storeName}
                   </Typography>
                   <Typography variant="small" color="muted" className="mt-1">
-                    {storeInfo.address}
+                    {order.storeAddress}
                   </Typography>
-                  <a
-                    href={`tel:${storeInfo.phone}`}
-                    className="flex items-center gap-2 mt-3 text-primary hover:underline"
-                  >
-                    <Icon name="Phone" size={16} color="#10B981" />
-                    <Typography variant="small" color="primary">
-                      {storeInfo.phone}
-                    </Typography>
-                  </a>
                 </div>
               </div>
             </div>
@@ -164,21 +133,21 @@ export default function OrderDetailsPage() {
                   <Typography variant="body" color="muted">
                     Subtotal
                   </Typography>
-                  <Typography variant="body">₹{subtotal.toFixed(2)}</Typography>
+                  <Typography variant="body">₹{order.subtotal.toFixed(2)}</Typography>
                 </div>
                 <div className="flex justify-between">
                   <Typography variant="body" color="muted">
                     Delivery Fee
                   </Typography>
-                  <Typography variant="body">₹{deliveryFee.toFixed(2)}</Typography>
+                  <Typography variant="body">₹{order.deliveryFee.toFixed(2)}</Typography>
                 </div>
-                {discount > 0 && (
+                {order.discount > 0 && (
                   <div className="flex justify-between">
                     <Typography variant="body" color="success">
                       Discount
                     </Typography>
                     <Typography variant="body" color="success">
-                      -₹{discount.toFixed(2)}
+                      -₹{order.discount.toFixed(2)}
                     </Typography>
                   </div>
                 )}
@@ -187,7 +156,7 @@ export default function OrderDetailsPage() {
                     Total Paid
                   </Typography>
                   <Typography variant="h4" weight="bold" color="primary">
-                    ₹{total.toFixed(2)}
+                    ₹{order.total.toFixed(2)}
                   </Typography>
                 </div>
               </div>
@@ -202,13 +171,13 @@ export default function OrderDetailsPage() {
                 <Icon name="MapPin" size={20} color="#10B981" className="mt-0.5" />
                 <div>
                   <Typography variant="body" weight="semibold">
-                    {deliveryAddress.name}
+                    {order.deliveryAddress.name}
                   </Typography>
                   <Typography variant="small" color="muted" className="mt-1">
-                    {deliveryAddress.address}
+                    {order.deliveryAddress.address}
                   </Typography>
                   <Typography variant="small" color="muted" className="mt-1">
-                    {deliveryAddress.phone}
+                    {order.deliveryAddress.phone}
                   </Typography>
                 </div>
               </div>
@@ -228,7 +197,7 @@ export default function OrderDetailsPage() {
         <div className="text-center mt-8">
           <button onClick={() => console.log('Need help')} className="text-primary hover:underline">
             Need help?
-          </button>
+          </Button>
         </div>
       </div>
     </BuyerLayout>
