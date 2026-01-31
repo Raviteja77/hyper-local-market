@@ -1,6 +1,6 @@
 // services/web/src/components/molecules/ProductCard/ProductCard.stories.tsx
+import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 import { ProductCard } from './ProductCard';
 

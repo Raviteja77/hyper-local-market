@@ -1,4 +1,5 @@
 // services/web/src/components/molecules/PriceDisplay/PriceDisplay.stories.tsx
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { PriceDisplay } from './PriceDisplay';
 
