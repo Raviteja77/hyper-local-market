@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ShoppingBag, AlertCircle } from 'lucide-react';
 import { FormField } from '../../molecules';
 import { Button, Icon, Typography } from '../../atoms';
 
@@ -96,7 +97,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
     <div className={`bg-white rounded-lg shadow-lg p-8 w-full max-w-md ${className}`}>
       <div className="flex items-center justify-center mb-6">
         <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
-          <Icon name="ShoppingBag" size={32} color="white" />
+          <ShoppingBag size={32} color="white" />
         </div>
       </div>
 
@@ -111,7 +112,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
 
       {error && (
         <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2">
-          <Icon name="AlertCircle" size={20} color="#EF4444" />
+          <AlertCircle size={20} color="#EF4444" />
           <Typography variant="small" color="error">
             {error}
           </Typography>

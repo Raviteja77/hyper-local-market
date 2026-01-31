@@ -1,7 +1,8 @@
 // services/web/src/components/organisms/StoreList/StoreList.tsx
 import React, { useState } from 'react';
 import { StoreCard, StoreCardProps } from '../../molecules';
-import { Icon, Typography, Spinner } from '../../atoms';
+import { Typography, Spinner } from '../../atoms';
+import { Store, MapPin, Star, Clock } from 'lucide-react';
 
 export type SortOption = 'distance' | 'rating' | 'eta';
 
@@ -57,7 +58,7 @@ export const StoreList: React.FC<StoreListProps> = ({
   if (stores.length === 0) {
     return (
       <div className={`text-center py-12 ${className}`}>
-        <Icon name="Store" size={64} color="#D1D5DB" className="mx-auto mb-4" />
+        <Store size={64} color="#D1D5DB" className="mx-auto mb-4" />
         <Typography variant="h4" color="muted">
           {emptyMessage}
         </Typography>
@@ -92,7 +93,7 @@ export const StoreList: React.FC<StoreListProps> = ({
             }`}
           >
             <div className="flex items-center gap-1">
-              <Icon name="MapPin" size={14} color={sortBy === 'distance' ? 'white' : '#374151'} />
+              <MapPin size={14} color={sortBy === 'distance' ? 'white' : '#374151'} />
               Distance
             </div>
           </button>
@@ -105,7 +106,7 @@ export const StoreList: React.FC<StoreListProps> = ({
             }`}
           >
             <div className="flex items-center gap-1">
-              <Icon name="Star" size={14} color={sortBy === 'rating' ? 'white' : '#374151'} />
+              <Star size={14} color={sortBy === 'rating' ? 'white' : '#374151'} />
               Rating
             </div>
           </button>
@@ -118,7 +119,7 @@ export const StoreList: React.FC<StoreListProps> = ({
             }`}
           >
             <div className="flex items-center gap-1">
-              <Icon name="Clock" size={14} color={sortBy === 'eta' ? 'white' : '#374151'} />
+              <Clock size={14} color={sortBy === 'eta' ? 'white' : '#374151'} />
               Delivery Time
             </div>
           </button>

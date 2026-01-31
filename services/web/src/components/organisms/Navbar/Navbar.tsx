@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Avatar, Badge, Button, Icon, Typography } from '../../atoms';
+import { ShoppingBag, ShoppingCart, X, Menu } from 'lucide-react';
+import { Avatar, Badge, Button, Typography } from '../../atoms';
 import { SearchBar } from '../../molecules';
 
 export interface NavbarProps {
@@ -42,7 +43,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center gap-2 cursor-pointer"
             onClick={onLogoClick}
           >
-            <Icon name="ShoppingBag" size={28} color="#10B981" />
+            <ShoppingBag size={28} color="#10B981" />
             <Typography variant="h4" weight="bold" color="primary">
               {brandName}
             </Typography>
@@ -66,7 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={onCartClick}
               className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors"
             >
-              <Icon name="ShoppingCart" size={24} color="#374151" />
+              <ShoppingCart size={24} color="#374151" />
               {cartItemCount > 0 && (
                 <div className="absolute -top-1 -right-1">
                   <Badge variant="danger" size="sm" rounded>
@@ -99,7 +100,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden p-2 hover:bg-gray-100 rounded-lg"
           >
-            <Icon name={mobileMenuOpen ? 'X' : 'Menu'} size={24} />
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
@@ -125,7 +126,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg"
             >
               <div className="flex items-center gap-2">
-                <Icon name="ShoppingCart" size={20} />
+                <ShoppingCart size={20} />
                 <Typography variant="body">Cart</Typography>
               </div>
               {cartItemCount > 0 && (

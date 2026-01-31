@@ -1,6 +1,7 @@
 import React from 'react';
 import { ProductCard, ProductCardProps } from '../../molecules';
-import { Button, Icon, Typography, Spinner } from '../../atoms';
+import { Button, Typography, Spinner } from '../../atoms';
+import { Package } from 'lucide-react';
 
 export interface ProductGridProps {
   products: ProductCardProps[];
@@ -43,7 +44,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
   if (products.length === 0) {
     return (
       <div className={`text-center py-12 ${className}`}>
-        <Icon name="Package" size={64} color="#D1D5DB" className="mx-auto mb-4" />
+        <Package size={64} color="#D1D5DB" className="mx-auto mb-4" />
         <Typography variant="h4" color="muted">
           {emptyMessage}
         </Typography>
