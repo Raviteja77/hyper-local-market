@@ -1,15 +1,14 @@
+// services/web/src/components/molecules/RatingStars/RatingStars.tsx
 import React from 'react';
-import { Icon, Typography } from '../../atoms';
+import { Star } from 'lucide-react';
 
 export interface RatingStarsProps {
   rating: number;
   maxRating?: number;
-  size?: 'sm' | 'md' | 'lg';
-  showValue?: boolean;
-  showCount?: boolean;
-  count?: number;
+  size?: 'sm' | 'md';
+  showNumeric?: boolean;
   interactive?: boolean;
-  onChange?: (rating: number) => void;
+  onRate?: (rating: number) => void;
   className?: string;
 }
 
@@ -17,76 +16,65 @@ export const RatingStars: React.FC<RatingStarsProps> = ({
   rating,
   maxRating = 5,
   size = 'md',
-  showValue = false,
-  showCount = false,
-  count,
+  showNumeric = false,
   interactive = false,
-  onChange,
+  onRate,
   className = '',
 }) => {
   const [hoverRating, setHoverRating] = React.useState(0);
 
-  const sizes = {
-    sm: 14,
-    md: 18,
-    lg: 24,
+  const sizeClasses = {
+    sm: { icon: 12, container: 'w-3 h-3' },
+    md: { icon: 16, container: 'w-4 h-4' },
   };
 
-  const iconSize = sizes[size];
+  const iconSize = sizeClasses[size].icon;
   const displayRating = interactive && hoverRating > 0 ? hoverRating : rating;
 
   const handleClick = (value: number) => {
-    if (interactive && onChange) {
-      onChange(value);
+    if (interactive && onRate) {
+      onRate(value);
     }
   };
 
+  const stars = [];
+  for (let i = 1; i <= maxRating; i++) {
+    const isFilled = i <= displayRating;
+    const isHalfFilled = !isFilled && i - 0.5 <= displayRating;
+
+    stars.push(
+      <button
+        key={i}
+        type="button"
+        onClick={() => handleClick(i)}
+        onMouseEnter={() => interactive && setHoverRating(i)}
+        onMouseLeave={() => interactive && setHoverRating(0)}
+        disabled={!interactive}
+        className={`${interactive ? 'cursor-pointer hover:scale-110' : 'cursor-default'} transition-transform`}
+      >
+        {isFilled ? (
+          <Star size={iconSize} className="text-yellow-500 fill-yellow-500" />
+        ) : isHalfFilled ? (
+          <div className="relative" style={{ width: iconSize, height: iconSize }}>
+            <Star size={iconSize} className="text-gray-300 absolute" />
+            <div style={{ width: '50%', overflow: 'hidden' }} className="absolute">
+              <Star size={iconSize} className="text-yellow-500 fill-yellow-500" />
+            </div>
+          </div>
+        ) : (
+          <Star size={iconSize} className="text-gray-300" />
+        )}
+      </button>
+    );
+  }
+
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
-      <div className="flex items-center gap-0.5">
-        {Array.from({ length: maxRating }, (_, index) => {
-          const starValue = index + 1;
-          const isFilled = starValue <= displayRating;
-          const isPartial = !isFilled && starValue - 0.5 <= displayRating;
-
-          return (
-            <button
-              key={index}
-              type="button"
-              onClick={() => handleClick(starValue)}
-              onMouseEnter={() => interactive && setHoverRating(starValue)}
-              onMouseLeave={() => interactive && setHoverRating(0)}
-              disabled={!interactive}
-              className={`${interactive ? 'cursor-pointer hover:scale-110' : 'cursor-default'} transition-transform`}
-            >
-              <Icon
-                name={isFilled ? 'Star' : isPartial ? 'StarHalf' : 'Star'}
-                size={iconSize}
-                color={isFilled || isPartial ? '#F59E0B' : '#D1D5DB'}
-                className={isFilled || isPartial ? 'fill-current' : ''}
-              />
-            </button>
-          );
-        })}
-      </div>
-
-      {showValue && (
-        <Typography
-          variant={size === 'sm' ? 'small' : size === 'lg' ? 'body' : 'small'}
-          weight="medium"
-          color="default"
-        >
+    <div className={`flex items-center gap-1 ${className}`}>
+      <div className="flex items-center gap-0.5">{stars}</div>
+      {showNumeric && (
+        <span className="text-sm text-gray-500">
           {rating.toFixed(1)}
-        </Typography>
-      )}
-
-      {showCount && count !== undefined && (
-        <Typography
-          variant={size === 'sm' ? 'caption' : 'small'}
-          color="muted"
-        >
-          ({count})
-        </Typography>
+        </span>
       )}
     </div>
   );
