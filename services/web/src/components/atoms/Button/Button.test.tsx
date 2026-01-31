@@ -1,6 +1,5 @@
 // services/web/src/components/atoms/Button/Button.test.tsx
 import { describe, it, expect, vi } from 'vitest';
-import '@testing-library/jest-dom/extend-expect';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Button } from './Button';
 
