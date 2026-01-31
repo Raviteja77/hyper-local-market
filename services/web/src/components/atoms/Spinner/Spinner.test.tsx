@@ -16,8 +16,8 @@ describe('Spinner', () => {
 
   it('applies correct size class', () => {
     const { container } = render(<Spinner size="lg" />);
-    const spinner = container.querySelector('.w-8.h-8');
-    expect(spinner).toBeInTheDocument();
+    const spinner = container.querySelector('[role="status"]');
+    expect(spinner).toHaveClass('w-8', 'h-8');
   });
 
   it('has animate-spin class', () => {

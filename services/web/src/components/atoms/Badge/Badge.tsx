@@ -37,10 +37,11 @@ export const Badge: React.FC<BadgeProps> = ({
   };
   
   if (dot) {
+    const textColor = variants[variant].split(' ').find(c => c.startsWith('text-')) || 'text-gray-700';
     return (
       <span className={`${baseStyles} ${className}`}>
         <span className={`w-2 h-2 rounded-full ${dotVariants[variant]}`} />
-        <span className={variants[variant].split(' ').find(c => c.startsWith('text-'))}>{children}</span>
+        <span className={textColor}>{children}</span>
       </span>
     );
   }

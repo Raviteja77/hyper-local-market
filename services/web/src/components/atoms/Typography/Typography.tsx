@@ -53,7 +53,7 @@ export const Typography: React.FC<TypographyProps> = ({
     .filter(c => !c.startsWith('text-gray') && !c.startsWith('font-'))
     .join(' ');
   
-  const fontWeight = weight ? weightMap[weight] : variantClasses.split(' ').find(c => c.startsWith('font-'));
+  const fontWeight = weight ? weightMap[weight] : (variantClasses.split(' ').find(c => c.startsWith('font-')) || '');
   
   return (
     <Component

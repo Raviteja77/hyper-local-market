@@ -22,13 +22,13 @@ describe('Badge', () => {
 
   it('renders dot variant', () => {
     const { container } = render(<Badge dot variant="discount">In Stock</Badge>);
-    const dot = container.querySelector('.w-2.h-2.rounded-full');
-    expect(dot).toBeInTheDocument();
+    const dot = container.querySelector('.rounded-full');
+    expect(dot).toHaveClass('w-2', 'h-2');
   });
 
   it('applies correct dot color for variant', () => {
     const { container } = render(<Badge dot variant="error">Out of Stock</Badge>);
-    const dot = container.querySelector('.bg-error');
-    expect(dot).toBeInTheDocument();
+    const dot = container.querySelector('.rounded-full');
+    expect(dot).toHaveClass('bg-error');
   });
 });

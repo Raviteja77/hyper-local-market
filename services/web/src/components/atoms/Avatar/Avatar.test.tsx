@@ -34,7 +34,7 @@ describe('Avatar', () => {
 
   it('applies correct size class', () => {
     const { container } = render(<Avatar name="John Doe" size="lg" />);
-    const avatar = container.querySelector('.w-14.h-14');
-    expect(avatar).toBeInTheDocument();
+    const avatar = container.firstChild;
+    expect(avatar).toHaveClass('w-14', 'h-14');
   });
 });
