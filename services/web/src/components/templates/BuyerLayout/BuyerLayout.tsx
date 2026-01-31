@@ -3,14 +3,15 @@
 // services/web/src/components/templates/BuyerLayout/BuyerLayout.tsx
 import React, { useState } from 'react';
 import { Home, Search, ShoppingBag as ShoppingBagIcon, User } from 'lucide-react';
-import { CartSidebar, CartItem, Footer, Navbar } from '../../organisms';
+import { CartSidebar, Footer, Navbar } from '../../organisms';
 import { Badge, Typography } from '../../atoms';
+import { useCartStore } from '@/store';
 
 export interface BuyerLayoutProps {
   children: React.ReactNode;
   userName?: string;
   userAvatar?: string;
-  cartItems?: CartItem[];
+  cartItems?: any[]; // Keep for backward compatibility but will use store
   cartSubtotal?: number;
   cartDeliveryFee?: number;
   cartDiscount?: number;
@@ -38,10 +39,10 @@ export const BuyerLayout: React.FC<BuyerLayoutProps> = ({
   children,
   userName,
   userAvatar,
-  cartItems = [],
-  cartSubtotal = 0,
-  cartDeliveryFee = 0,
-  cartDiscount = 0,
+  cartItems: _cartItems, // Ignore prop, use store instead
+  cartSubtotal: _cartSubtotal,
+  cartDeliveryFee: _cartDeliveryFee,
+  cartDiscount: _cartDiscount,
   showFooter = true,
   onSearch,
   onCartCheckout = () => {},
@@ -61,6 +62,17 @@ export const BuyerLayout: React.FC<BuyerLayoutProps> = ({
 }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   
+  // Get cart data from store
+  const { 
+    items: cartItems, 
+    subtotal, 
+    deliveryFee, 
+    discount, 
+    total,
+    updateQuantity,
+    removeItem,
+  } = useCartStore();
+  
   // Use cartCount if provided, otherwise fall back to cartItems length
   const totalCartCount = cartCount ?? cartItems.length;
 
@@ -69,6 +81,20 @@ export const BuyerLayout: React.FC<BuyerLayoutProps> = ({
       onCartClick();
     }
     setIsCartOpen(true);
+  };
+
+  const handleUpdateQuantity = (productId: string, quantity: number) => {
+    updateQuantity(productId, quantity);
+    onCartUpdateQuantity(productId, quantity);
+  };
+
+  const handleRemoveItem = (productId: string) => {
+    // Find the cart item to get the actual cart item id
+    const item = cartItems.find(i => i.productId === productId);
+    if (item) {
+      removeItem(productId);
+      onCartRemoveItem(item.id);
+    }
   };
 
   return (
@@ -190,16 +216,16 @@ export const BuyerLayout: React.FC<BuyerLayoutProps> = ({
       <CartSidebar
         isOpen={isCartOpen}
         items={cartItems}
-        subtotal={cartSubtotal}
-        deliveryFee={cartDeliveryFee}
-        discount={cartDiscount}
+        subtotal={subtotal}
+        deliveryFee={deliveryFee}
+        discount={discount}
         onClose={() => setIsCartOpen(false)}
         onCheckout={() => {
           setIsCartOpen(false);
           onCartCheckout();
         }}
-        onUpdateQuantity={onCartUpdateQuantity}
-        onRemoveItem={onCartRemoveItem}
+        onUpdateQuantity={handleUpdateQuantity}
+        onRemoveItem={handleRemoveItem}
       />
     </div>
   );
