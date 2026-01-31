@@ -69,6 +69,7 @@ export default function HomePage() {
               </Typography>
 
               {/* Horizontal scrollable product grid */}
+              {/* scrollbar-hide utility defined in tailwind.config.ts */}
               <div className="overflow-x-auto scrollbar-hide -mx-4 px-4">
                 <div className="flex gap-3 pb-2" style={{ width: 'max-content' }}>
                   {section.products.map((product) => (

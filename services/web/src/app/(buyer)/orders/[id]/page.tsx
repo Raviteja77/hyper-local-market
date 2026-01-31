@@ -61,7 +61,7 @@ export default function OrderDetailsPage() {
       <div className="px-4 py-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center mb-4">
             <button
               onClick={() => console.log('Go back')}
               className="flex items-center gap-2 text-primary hover:underline"
@@ -71,10 +71,9 @@ export default function OrderDetailsPage() {
                 Back
               </Typography>
             </button>
-            <Typography variant="h3" weight="bold" className="flex-1 text-center">
+            <Typography variant="h3" weight="bold" className="flex-1 text-center -ml-16">
               Order #{orderId}
             </Typography>
-            <div className="w-16"></div> {/* Spacer for centering */}
           </div>
         </div>
 

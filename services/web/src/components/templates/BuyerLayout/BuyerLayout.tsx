@@ -61,7 +61,8 @@ export const BuyerLayout: React.FC<BuyerLayoutProps> = ({
 }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   
-  const totalCartCount = cartCount !== undefined ? cartCount : cartItems.length;
+  // Use cartCount if provided, otherwise fall back to cartItems length
+  const totalCartCount = cartCount ?? cartItems.length;
 
   const handleCartClick = () => {
     if (onCartClick) {
@@ -98,6 +99,7 @@ export const BuyerLayout: React.FC<BuyerLayoutProps> = ({
       {showFooter && <Footer className="hidden md:block" />}
 
       {/* Bottom Navigation Bar - Mobile only (hidden on md+) */}
+      {/* Height: 72px (h-18 defined in tailwind.config.ts) */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg h-18 z-30 border-t border-gray-200">
         <div className="max-w-md mx-auto h-full flex items-center justify-around px-4">
           {/* Home */}
