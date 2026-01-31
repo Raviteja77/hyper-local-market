@@ -1,5 +1,8 @@
 // services/web/src/components/molecules/RatingStars/RatingStars.stories.tsx
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { Badge } from '../../atoms';
+import { Clock } from 'lucide-react';
 import { RatingStars } from './RatingStars';
 
 const meta: Meta<typeof RatingStars> = {
@@ -12,12 +15,9 @@ const meta: Meta<typeof RatingStars> = {
     },
     size: {
       control: 'select',
-      options: ['sm', 'md', 'lg'],
+      options: ['sm', 'md'],
     },
-    showValue: {
-      control: 'boolean',
-    },
-    showCount: {
+    showNumeric: {
       control: 'boolean',
     },
     interactive: {
@@ -29,79 +29,63 @@ const meta: Meta<typeof RatingStars> = {
 export default meta;
 type Story = StoryObj<typeof RatingStars>;
 
-export const Default: Story = {
-  args: {
-    rating: 4.5,
-  },
-};
-
-export const WithValue: Story = {
-  args: {
-    rating: 4.5,
-    showValue: true,
-  },
-};
-
-export const WithCount: Story = {
+// Story 1: "Read Only" — rating=4.2, showNumeric=true
+export const ReadOnly: Story = {
   args: {
     rating: 4.2,
-    showValue: true,
-    showCount: true,
-    count: 128,
+    showNumeric: true,
   },
 };
 
-export const FullRating: Story = {
-  args: {
-    rating: 5,
-    showValue: true,
-  },
+// Story 2: "All Ratings" — show 1 through 5 stars stacked
+export const AllRatings: Story = {
+  render: () => (
+    <div className="flex flex-col gap-3">
+      {[1, 2, 3, 4, 5].map((r) => (
+        <div key={r} className="flex items-center gap-3">
+          <span className="text-sm font-medium text-gray-700 w-16">{r} star{r > 1 ? 's' : ''}</span>
+          <RatingStars rating={r} showNumeric />
+        </div>
+      ))}
+      <div className="flex items-center gap-3">
+        <span className="text-sm font-medium text-gray-700 w-16">Half</span>
+        <RatingStars rating={3.5} showNumeric />
+      </div>
+    </div>
+  ),
 };
 
-export const LowRating: Story = {
-  args: {
-    rating: 2,
-    showValue: true,
-  },
-};
-
-export const PartialRating: Story = {
-  args: {
-    rating: 3.7,
-    showValue: true,
-  },
-};
-
-export const Small: Story = {
-  args: {
-    rating: 4.5,
-    size: 'sm',
-    showValue: true,
-  },
-};
-
-export const Large: Story = {
-  args: {
-    rating: 4.5,
-    size: 'lg',
-    showValue: true,
-    showCount: true,
-    count: 256,
-  },
-};
-
+// Story 3: "Interactive" — interactive=true
 export const Interactive: Story = {
   args: {
-    rating: 3,
+    rating: 0,
     interactive: true,
-    showValue: true,
-    onChange: (rating) => console.log('New rating:', rating),
+    showNumeric: true,
+    onRate: (rating) => console.log('Rated:', rating),
   },
 };
 
-export const NoRating: Story = {
-  args: {
-    rating: 0,
-    showValue: true,
-  },
+// Story 4: "On Store Card" — embedded in a mini StoreCard-like layout
+export const OnStoreCard: Story = {
+  render: () => (
+    <div className="bg-white rounded-lg shadow-md p-4 border border-gray-100 max-w-sm">
+      <div className="flex items-start gap-3">
+        <img
+          src="https://picsum.photos/seed/store1/64/64"
+          alt="Store"
+          className="w-16 h-16 rounded-lg object-cover"
+        />
+        <div className="flex-1">
+          <h4 className="text-base font-semibold text-gray-900 mb-1">Quick Mart</h4>
+          <Badge variant="delivery" leftIcon={<Clock size={12} />}>
+            8-12 min
+          </Badge>
+          <div className="mt-2">
+            <RatingStars rating={4.5} size="sm" showNumeric />
+          </div>
+          <p className="text-xs text-success mt-1">Free delivery</p>
+        </div>
+      </div>
+    </div>
+  ),
 };

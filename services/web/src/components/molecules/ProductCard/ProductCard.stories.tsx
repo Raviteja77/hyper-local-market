@@ -1,86 +1,213 @@
 // services/web/src/components/molecules/ProductCard/ProductCard.stories.tsx
+import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { ChevronRight } from 'lucide-react';
 import { ProductCard } from './ProductCard';
 
 const meta: Meta<typeof ProductCard> = {
   title: 'Molecules/ProductCard',
   component: ProductCard,
   tags: ['autodocs'],
-  argTypes: {
-    inStock: {
-      control: 'boolean',
-    },
-  },
 };
 
 export default meta;
 type Story = StoryObj<typeof ProductCard>;
 
-export const Default: Story = {
+// Story 1 — "Default Card": Single card, qty=0, with all fields filled
+export const DefaultCard: Story = {
   args: {
     id: '1',
-    name: 'Organic Fresh Milk',
-    price: 65,
-    category: 'Dairy',
-    image: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&h=400&fit=crop',
-    onAddToCart: (id) => console.log('Add to cart:', id),
-    onCardClick: (id) => console.log('Card clicked:', id),
+    name: 'Rin Matic Top Load Detergent Liquid | Pouch',
+    price: 177,
+    originalPrice: 249,
+    discountPercent: 72,
+    packInfo: '1 pack (2 L)',
+    categoryTag: 'Fresh & Fragrant',
+    rating: 4.8,
+    reviewCount: 29800,
+    isNew: true,
+    quantity: 0,
+    image: 'https://picsum.photos/seed/1/200/200',
+    onAdd: (id) => console.log('Add', id),
+    onRemove: (id) => console.log('Remove', id),
   },
 };
 
-export const WithDiscount: Story = {
+// Story 2 — "In Cart (Stepper Visible)": Same card but quantity: 2
+export const InCart: Story = {
   args: {
-    id: '2',
-    name: 'Whole Wheat Bread',
-    price: 40,
-    discount: 20,
-    category: 'Bakery',
-    image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=400&fit=crop',
-    onAddToCart: (id) => console.log('Add to cart:', id),
+    id: '1',
+    name: 'Rin Matic Top Load Detergent Liquid | Pouch',
+    price: 177,
+    originalPrice: 249,
+    discountPercent: 72,
+    packInfo: '1 pack (2 L)',
+    categoryTag: 'Fresh & Fragrant',
+    rating: 4.8,
+    reviewCount: 29800,
+    isNew: true,
+    quantity: 2,
+    image: 'https://picsum.photos/seed/1/200/200',
+    onAdd: (id) => console.log('Add', id),
+    onRemove: (id) => console.log('Remove', id),
   },
 };
 
-export const OutOfStock: Story = {
+// Story 3 — "No Discount": price: 199, no originalPrice, no discountPercent
+export const NoDiscount: Story = {
   args: {
-    id: '3',
-    name: 'Fresh Tomatoes',
-    price: 30,
-    category: 'Vegetables',
-    inStock: false,
-    image: 'https://images.unsplash.com/photo-1546470427-e26264be0b0d?w=400&h=400&fit=crop',
-    onAddToCart: (id) => console.log('Add to cart:', id),
+    id: '1',
+    name: 'Rin Matic Top Load Detergent Liquid | Pouch',
+    price: 199,
+    packInfo: '1 pack (2 L)',
+    categoryTag: 'Fresh & Fragrant',
+    rating: 4.8,
+    reviewCount: 29800,
+    isNew: false,
+    quantity: 0,
+    image: 'https://picsum.photos/seed/1/200/200',
+    onAdd: (id) => console.log('Add', id),
+    onRemove: (id) => console.log('Remove', id),
   },
 };
 
-export const NoImage: Story = {
-  args: {
-    id: '4',
-    name: 'Premium Rice',
-    price: 120,
-    category: 'Grains',
-    onAddToCart: (id) => console.log('Add to cart:', id),
-  },
-};
+// Story 4 — "8-Column Desktop Grid (Zepto Laundry Care)"
+export const ZeptoLaundryCareGrid: Story = {
+  render: () => {
+    const [cart, setCart] = useState<Record<string, number>>({});
+    
+    const products = [
+      {
+        id: '1',
+        name: 'Rin Matic Top Load Detergent Liquid | Pouch',
+        price: 177,
+        originalPrice: 249,
+        discountPercent: 72,
+        packInfo: '1 pack (2 L)',
+        categoryTag: 'Fresh & Fragrant',
+        rating: 4.8,
+        reviewCount: 29800,
+        isNew: true,
+        image: 'https://picsum.photos/seed/1/200/200',
+      },
+      {
+        id: '2',
+        name: 'Surf Excel Matic Refill Pack | Tough on Dried Stains',
+        price: 268,
+        originalPrice: 329,
+        discountPercent: 61,
+        packInfo: '1 pack (2 kg)',
+        categoryTag: 'Stain Removal',
+        rating: 4.7,
+        reviewCount: 10600,
+        isNew: false,
+        image: 'https://picsum.photos/seed/2/200/200',
+      },
+      {
+        id: '3',
+        name: 'Ariel Matic Liquid Detergent | Front Load',
+        price: 299,
+        originalPrice: 450,
+        discountPercent: 66,
+        packInfo: '1 bottle (2 L)',
+        categoryTag: 'Deep Clean',
+        rating: 4.6,
+        reviewCount: 8400,
+        isNew: true,
+        image: 'https://picsum.photos/seed/3/200/200',
+      },
+      {
+        id: '4',
+        name: 'Tide Plus Detergent Powder | Extra Power',
+        price: 189,
+        originalPrice: 275,
+        discountPercent: 69,
+        packInfo: '1 pack (1 kg)',
+        categoryTag: 'Whitening',
+        rating: 4.5,
+        reviewCount: 15200,
+        isNew: false,
+        image: 'https://picsum.photos/seed/4/200/200',
+      },
+      {
+        id: '5',
+        name: 'Comfort Fabric Conditioner | Fresh Bloom',
+        price: 145,
+        originalPrice: 200,
+        discountPercent: 55,
+        packInfo: '1 bottle (800 ml)',
+        categoryTag: 'Softener',
+        rating: 4.7,
+        reviewCount: 6700,
+        isNew: false,
+        image: 'https://picsum.photos/seed/5/200/200',
+      },
+      {
+        id: '6',
+        name: 'Vanish Stain Remover | Liquid',
+        price: 235,
+        originalPrice: 310,
+        discountPercent: 75,
+        packInfo: '1 bottle (500 ml)',
+        categoryTag: 'Stain Removal',
+        rating: 4.8,
+        reviewCount: 5300,
+        isNew: true,
+        image: 'https://picsum.photos/seed/6/200/200',
+      },
+      {
+        id: '7',
+        name: 'Henko Matic Detergent | Front Load',
+        price: 156,
+        originalPrice: 220,
+        discountPercent: 64,
+        packInfo: '1 pack (1 kg)',
+        categoryTag: 'Fresh & Fragrant',
+        rating: 4.4,
+        reviewCount: 3900,
+        isNew: false,
+        image: 'https://picsum.photos/seed/7/200/200',
+      },
+      {
+        id: '8',
+        name: 'Godrej Ezee Liquid Detergent | Winterwear',
+        price: 198,
+        originalPrice: 280,
+        discountPercent: 70,
+        packInfo: '1 bottle (1 L)',
+        categoryTag: 'Gentle Care',
+        rating: 4.6,
+        reviewCount: 4100,
+        isNew: false,
+        image: 'https://picsum.photos/seed/8/200/200',
+      },
+    ];
 
-export const LongName: Story = {
-  args: {
-    id: '5',
-    name: 'Organic Extra Virgin Cold Pressed Olive Oil - Premium Quality',
-    price: 450,
-    category: 'Oils & Ghee',
-    image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&h=400&fit=crop',
-    onAddToCart: (id) => console.log('Add to cart:', id),
-  },
-};
-
-export const HighDiscount: Story = {
-  args: {
-    id: '6',
-    name: 'Fresh Bananas',
-    price: 50,
-    discount: 50,
-    category: 'Fruits',
-    image: 'https://images.unsplash.com/photo-1603833665858-e61d17a86224?w=400&h=400&fit=crop',
-    onAddToCart: (id) => console.log('Add to cart:', id),
+    return (
+      <div className="bg-white p-6 min-h-screen">
+        {/* Section header */}
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-bold text-gray-900">Laundry Care</h2>
+          <a
+            href="#"
+            className="text-primary text-sm font-medium flex items-center gap-1 hover:underline"
+          >
+            See All <ChevronRight size={14} />
+          </a>
+        </div>
+        {/* 8-column grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
+          {products.map((p) => (
+            <ProductCard
+              key={p.id}
+              {...p}
+              quantity={cart[p.id] || 0}
+              onAdd={() => setCart((c) => ({ ...c, [p.id]: (c[p.id] || 0) + 1 }))}
+              onRemove={() => setCart((c) => ({ ...c, [p.id]: Math.max(0, (c[p.id] || 1) - 1) }))}
+            />
+          ))}
+        </div>
+      </div>
+    );
   },
 };
