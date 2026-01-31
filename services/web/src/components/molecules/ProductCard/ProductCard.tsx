@@ -1,105 +1,167 @@
+// services/web/src/components/molecules/ProductCard/ProductCard.tsx
 import React from 'react';
-import { Badge, Button, Icon, Typography } from '../../atoms';
+import { Star } from 'lucide-react';
 
 export interface ProductCardProps {
   id: string;
   name: string;
+  image: string;
   price: number;
-  image?: string;
-  category?: string;
-  inStock?: boolean;
-  discount?: number;
-  onAddToCart?: (id: string) => void;
-  onCardClick?: (id: string) => void;
-  className?: string;
+  originalPrice?: number;
+  discountPercent?: number;
+  packInfo?: string;
+  categoryTag?: string;
+  rating?: number;
+  reviewCount?: number;
+  isNew?: boolean;
+  quantity: number;
+  onAdd: (id: string) => void;
+  onRemove: (id: string) => void;
+  onClick?: (id: string) => void;
+}
+
+// Helper: format review count
+function formatCount(n: number): string {
+  if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
+  return n.toString();
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
   id,
   name,
-  price,
   image,
-  category,
-  inStock = true,
-  discount,
-  onAddToCart,
-  onCardClick,
-  className = '',
+  price,
+  originalPrice,
+  discountPercent,
+  packInfo,
+  categoryTag,
+  rating,
+  reviewCount,
+  isNew,
+  quantity,
+  onAdd,
+  onRemove,
+  onClick,
 }) => {
-  const discountedPrice = discount ? price - (price * discount) / 100 : null;
+  const hasDiscount = originalPrice && originalPrice > price;
 
   return (
     <div
-      className={`bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden border border-gray-200 ${className}`}
-      onClick={() => onCardClick?.(id)}
-      role={onCardClick ? 'button' : undefined}
-      tabIndex={onCardClick ? 0 : undefined}
+      className="bg-white rounded-lg border border-gray-100 hover:shadow-md hover:scale-[1.01] transition duration-150 flex flex-col overflow-hidden cursor-pointer"
+      onClick={() => onClick?.(id)}
     >
-      <div className="relative aspect-square bg-gray-100">
-        {image ? (
-          <img src={image} alt={name} className="w-full h-full object-cover" />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <Icon name="Package" size={48} color="#D1D5DB" />
-          </div>
-        )}
-        {discount && (
-          <div className="absolute top-2 right-2">
-            <Badge variant="danger" rounded>
-              {discount}% OFF
-            </Badge>
-          </div>
-        )}
-        {!inStock && (
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <Badge variant="danger" size="lg">
-              Out of Stock
-            </Badge>
-          </div>
-        )}
-      </div>
-
-      <div className="p-3">
-        {category && (
-          <Typography variant="caption" color="muted" className="mb-1">
-            {category}
-          </Typography>
-        )}
+      {/* IMAGE AREA */}
+      <div className="relative overflow-hidden rounded-t-lg">
+        <img src={image} alt={name} className="w-full aspect-square object-cover" />
         
-        <Typography variant="body" weight="medium" className="mb-2 line-clamp-2">
-          {name}
-        </Typography>
+        {/* NEW badge: top-left, absolute */}
+        {isNew && (
+          <span className="absolute top-2 left-2 bg-primary text-white text-[9px] font-bold rounded px-1.5 py-0.5">
+            NEW
+          </span>
+        )}
 
-        <div className="flex items-center gap-2 mb-3">
-          {discountedPrice ? (
-            <>
-              <Typography variant="body" weight="bold" color="primary">
-                ₹{discountedPrice.toFixed(2)}
-              </Typography>
-              <Typography variant="small" color="muted" className="line-through">
-                ₹{price.toFixed(2)}
-              </Typography>
-            </>
+        {/* ADD button or Quantity stepper: bottom-right, absolute */}
+        <div className="absolute bottom-2 right-2">
+          {quantity === 0 ? (
+            <button
+              className="bg-primary text-white text-xs font-bold rounded-full px-3 py-1 shadow-sm hover:bg-primary-hover transition duration-150"
+              onClick={(e) => {
+                e.stopPropagation();
+                onAdd(id);
+              }}
+            >
+              ADD
+            </button>
           ) : (
-            <Typography variant="body" weight="bold" color="default">
-              ₹{price.toFixed(2)}
-            </Typography>
+            <div className="flex items-center bg-primary rounded-full shadow-sm overflow-hidden">
+              <button
+                className="text-white px-2 py-1 text-sm hover:bg-primary-hover transition duration-150"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onRemove(id);
+                }}
+              >
+                −
+              </button>
+              <span className="text-white text-xs font-bold px-1.5 min-w-[20px] text-center">
+                {quantity}
+              </span>
+              <button
+                className="text-white px-2 py-1 text-sm hover:bg-primary-hover transition duration-150"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onAdd(id);
+                }}
+              >
+                +
+              </button>
+            </div>
           )}
         </div>
-
-        <Button
-          variant="primary"
-          size="sm"
-          fullWidth
-          disabled={!inStock}
-          onClick={(e) => {
-            e.stopPropagation();
-            onAddToCart?.(id);
-          }}
-        >
-          {inStock ? 'Add to Cart' : 'Unavailable'}
-        </Button>
       </div>
+
+      {/* PRICE ROW */}
+      <div className="px-2 pt-2">
+        <div className="flex items-baseline gap-1.5">
+          {hasDiscount ? (
+            <span className="bg-primary text-white text-sm font-bold rounded px-1.5 py-0.5">
+              ₹{price}
+            </span>
+          ) : (
+            <span className="text-sm font-bold text-gray-900">
+              ₹{price}
+            </span>
+          )}
+          {originalPrice && (
+            <span className="text-sm text-gray-400 line-through">
+              ₹{originalPrice}
+            </span>
+          )}
+        </div>
+        {discountPercent && (
+          <span className="text-xs text-primary font-medium">
+            {discountPercent}% OFF
+          </span>
+        )}
+      </div>
+
+      {/* DASHED BORDER */}
+      <div className="border-t border-dashed border-gray-200 my-1" />
+
+      {/* PRODUCT NAME */}
+      <div className="px-2">
+        <p className="text-sm font-medium text-gray-900 line-clamp-2">
+          {name}
+        </p>
+      </div>
+
+      {/* PACK INFO */}
+      {packInfo && (
+        <div className="px-2 pt-1">
+          <p className="text-xs text-gray-500">{packInfo}</p>
+        </div>
+      )}
+
+      {/* CATEGORY TAG */}
+      {categoryTag && (
+        <div className="px-2 pt-1">
+          <p className="text-xs text-primary font-medium">{categoryTag}</p>
+        </div>
+      )}
+
+      {/* RATING ROW */}
+      {rating && (
+        <div className="px-2 pt-1 pb-2 flex items-center gap-1">
+          <Star size={16} className="text-yellow-500 fill-yellow-500" />
+          <span className="text-sm font-medium text-gray-700">{rating.toFixed(1)}</span>
+          {reviewCount && (
+            <span className="text-xs text-gray-400">
+              ({formatCount(reviewCount)})
+            </span>
+          )}
+        </div>
+      )}
     </div>
   );
 };
