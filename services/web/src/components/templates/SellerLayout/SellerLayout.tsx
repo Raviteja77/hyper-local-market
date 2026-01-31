@@ -12,7 +12,8 @@ import {
   ShoppingBag,
   Package,
   DollarSign,
-  Settings
+  Settings,
+  type LucideIcon
 } from 'lucide-react';
 
 export interface MenuItem {
@@ -44,8 +45,8 @@ const defaultMenuItems: MenuItem[] = [
   { id: 'settings', label: 'Settings', icon: 'Settings', href: '/seller/settings' },
 ];
 
-const getIconComponent = (iconName: IconName) => {
-  const iconMap: Record<string, any> = {
+const getIconComponent = (iconName: IconName): LucideIcon => {
+  const iconMap: Record<string, LucideIcon> = {
     LayoutDashboard,
     ShoppingBag,
     Package,

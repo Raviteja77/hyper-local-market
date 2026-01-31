@@ -15,7 +15,8 @@ import {
   Package, 
   BarChart3, 
   Settings, 
-  LogOut 
+  LogOut,
+  type LucideIcon
 } from 'lucide-react';
 
 export interface AdminMenuItem {
@@ -50,8 +51,8 @@ const defaultMenuItems: AdminMenuItem[] = [
   { id: 'settings', label: 'Settings', icon: 'Settings', href: '/admin/settings' },
 ];
 
-const getIconComponent = (iconName: IconName) => {
-  const iconMap: Record<string, any> = {
+const getIconComponent = (iconName: IconName): LucideIcon => {
+  const iconMap: Record<string, LucideIcon> = {
     LayoutDashboard,
     ShoppingBag,
     Users,
