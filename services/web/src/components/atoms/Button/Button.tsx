@@ -2,16 +2,16 @@
 import React from 'react';
 
 export interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
+  variant?: 'primary' | 'secondary' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
-  children: React.ReactNode;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  disabled?: boolean;
   fullWidth?: boolean;
-  type?: 'button' | 'submit' | 'reset';
   isLoading?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
+  disabled?: boolean;
+  children: React.ReactNode;
+  onClick?: () => void;
+  type?: 'button' | 'submit' | 'reset';
   className?: string;
 }
 
@@ -28,16 +28,12 @@ export const Button: React.FC<ButtonProps> = ({
   rightIcon,
   className = '',
 }) => {
-  const baseStyles = `font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-40 disabled:cursor-not-allowed ${
-    disabled ? 'cursor-not-allowed opacity-40' : 'cursor-pointer'
-  }`;
+  const baseStyles = `inline-flex items-center justify-center gap-2 font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-40 disabled:cursor-not-allowed`;
 
-  
   const variants = {
-    primary: 'rounded-full bg-primary text-white hover:shadow-md focus:ring-primary',
-    secondary: 'rounded-lg bg-white text-primary border border-primary hover:shadow-md focus:ring-primary',
-    ghost: 'rounded-lg bg-transparent text-primary hover:bg-gray-100 focus:ring-primary',
-    danger: 'rounded-lg bg-danger text-white hover:shadow-md focus:ring-danger',
+    primary: 'rounded-full bg-primary text-white hover:shadow-md hover:-translate-y-0.5',
+    secondary: 'rounded-lg bg-white text-primary border border-primary hover:shadow-md',
+    ghost: 'rounded-lg bg-transparent text-primary hover:bg-gray-100',
   };
   
   const sizes = {
@@ -52,16 +48,20 @@ export const Button: React.FC<ButtonProps> = ({
     <button
       type={type}
       onClick={onClick}
-      disabled={disabled}
-      style={{
-        // Prevent onClick being called while loading
-        pointerEvents: isLoading ? 'none' : undefined,
-        // Prevent cursor changing while loading
-        cursor: isLoading ? 'not-allowed' : undefined,
-      }}
+      disabled={disabled || isLoading}
       className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${widthClass} ${className}`}
     >
-      {children}
+      {isLoading ? (
+        <div className="flex items-center justify-center">
+          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" aria-label="Loading" />
+        </div>
+      ) : (
+        <>
+          {leftIcon && <span className="flex-shrink-0">{leftIcon}</span>}
+          {children}
+          {rightIcon && <span className="flex-shrink-0">{rightIcon}</span>}
+        </>
+      )}
     </button>
   );
 };
