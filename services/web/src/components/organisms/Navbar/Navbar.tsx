@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShoppingBag, ShoppingCart, X, Menu } from 'lucide-react';
+import { ShoppingBag, ShoppingCart, X, Menu, MapPin, ChevronDown } from 'lucide-react';
 import { Avatar, Badge, Button, Typography } from '../../atoms';
 import { SearchBar } from '../../molecules';
 
@@ -10,11 +10,13 @@ export interface NavbarProps {
   userName?: string;
   userAvatar?: string;
   showSearch?: boolean;
+  currentAddress?: string;  // e.g. "Koramangala, Bengaluru"
   onSearch?: (query: string) => void;
   onCartClick?: () => void;
   onLoginClick?: () => void;
   onLogoClick?: () => void;
   onProfileClick?: () => void;
+  onLocationClick?: () => void;
   className?: string;
 }
 
@@ -25,11 +27,13 @@ export const Navbar: React.FC<NavbarProps> = ({
   userName,
   userAvatar,
   showSearch = true,
+  currentAddress,
   onSearch,
   onCartClick,
   onLoginClick,
   onLogoClick,
   onProfileClick,
+  onLocationClick,
   className = '',
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -48,6 +52,27 @@ export const Navbar: React.FC<NavbarProps> = ({
               {brandName}
             </Typography>
           </div>
+
+          {/* Location Selector - Desktop */}
+          {currentAddress && (
+            <button
+              onClick={onLocationClick}
+              aria-label="Select delivery location"
+              className="hidden md:flex items-center gap-2 px-3 py-2 ml-4 
+                hover:bg-gray-50 rounded-lg transition-colors border border-gray-200"
+            >
+              <MapPin size={18} className="text-primary" />
+              <div className="flex flex-col items-start">
+                <Typography variant="caption" color="muted" className="text-xs">
+                  Deliver to
+                </Typography>
+                <Typography variant="small" weight="medium" className="text-sm">
+                  {currentAddress}
+                </Typography>
+              </div>
+              <ChevronDown size={16} className="text-gray-400" />
+            </button>
+          )}
 
           {/* Desktop Search */}
           {showSearch && (
@@ -121,6 +146,28 @@ export const Navbar: React.FC<NavbarProps> = ({
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-gray-200 bg-white">
           <div className="px-4 py-3 space-y-3">
+            {/* Location Selector - Mobile */}
+            {currentAddress && (
+              <button
+                onClick={onLocationClick}
+                aria-label="Select delivery location"
+                className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg border border-gray-200"
+              >
+                <div className="flex items-center gap-2">
+                  <MapPin size={18} className="text-primary" />
+                  <div className="flex flex-col items-start">
+                    <Typography variant="caption" color="muted" className="text-xs">
+                      Deliver to
+                    </Typography>
+                    <Typography variant="small" weight="medium" className="text-sm">
+                      {currentAddress}
+                    </Typography>
+                  </div>
+                </div>
+                <ChevronDown size={16} className="text-gray-400" />
+              </button>
+            )}
+
             <button
               onClick={onCartClick}
               className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg"
