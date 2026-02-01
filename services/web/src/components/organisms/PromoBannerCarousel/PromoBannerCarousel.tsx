@@ -34,7 +34,7 @@ export const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = ({
     }, autoPlayInterval);
 
     return () => clearInterval(timer);
-  }, [currentIndex, isPaused, banners.length, autoPlayInterval]);
+  }, [isPaused, banners.length, autoPlayInterval]);
 
   const goToSlide = (index: number) => {
     setCurrentIndex(index);

@@ -5,6 +5,7 @@ import { X, ShoppingCart, Package, Minus, Plus, Trash2 } from 'lucide-react';
 
 export interface CartItem {
   id: string;
+  productId?: string; // Product ID for store operations
   name: string;
   price: number;
   quantity: number;
@@ -19,8 +20,8 @@ export interface CartSidebarProps {
   discount?: number;
   onClose: () => void;
   onCheckout: () => void;
-  onUpdateQuantity: (itemId: string, quantity: number) => void;
-  onRemoveItem: (itemId: string) => void;
+  onUpdateQuantity: (productId: string, quantity: number) => void; // Uses productId for store operations
+  onRemoveItem: (productId: string) => void; // Uses productId for store operations
   isAuthenticated?: boolean;
   onLoginClick?: () => void;
   className?: string;
@@ -108,7 +109,7 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
 
                       <div className="flex items-center gap-2 mt-2">
                         <button
-                          onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
+                          onClick={() => onUpdateQuantity(item.productId || item.id, item.quantity - 1)}
                           disabled={item.quantity <= 1}
                           className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
@@ -118,13 +119,13 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
                           {item.quantity}
                         </Typography>
                         <button
-                          onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
+                          onClick={() => onUpdateQuantity(item.productId || item.id, item.quantity + 1)}
                           className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-50"
                         >
                           <Plus size={16} />
                         </button>
                         <button
-                          onClick={() => onRemoveItem(item.id)}
+                          onClick={() => onRemoveItem(item.productId || item.id)}
                           className="ml-auto p-2 text-danger hover:bg-red-50 rounded"
                         >
                           <Trash2 size={18} color="#EF4444" />

@@ -81,6 +81,7 @@ export default function HomePage() {
         onCartCheckout={() => router.push('/checkout')}
         onCartUpdateQuantity={(id, qty) => console.log('Update:', id, qty)}
         onCartRemoveItem={(id) => console.log('Remove:', id)}
+        onLoginClick={() => router.push('/login')}
         onProfileClick={() => router.push('/profile')}
         onLogoClick={() => router.push('/')}
         activeRoute="home"
