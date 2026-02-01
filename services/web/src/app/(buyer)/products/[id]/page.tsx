@@ -1,23 +1,28 @@
 // services/web/src/app/(buyer)/products/[id]/page.tsx
 'use client';
 
-import React, { useState, use } from 'react';
+import React, { useState, use, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ChevronLeft, Heart, Plus, Minus } from 'lucide-react';
 import { BuyerLayout } from '@/components/templates';
-import { Button, Typography } from '@/components/atoms';
+import { Button, Spinner, Typography } from '@/components/atoms';
 import { PriceDisplay } from '@/components/molecules';
 import { PRODUCT_SECTIONS } from '@/lib/mockData/buyerMock';
 import { useCartStore, useAuthStore, useUIStore } from '@/store';
 
-export default function ProductDetailsPage({ params }: { params: Promise<{ id: string }> }) {
-  const resolvedParams = use(params);
+export default function ProductDetailsPage({ params }: { params: { id: string } }) {
+  const [resolvedParams, setResolvedParams] = useState<{ id: string }>({id: ''});
   const router = useRouter();
   const { user } = useAuthStore();
   const { items: cartItems, addItem, updateQuantity } = useCartStore();
   const { showToast } = useUIStore();
   const [isFavorite, setIsFavorite] = useState(false);
 
+  useEffect(() => {
+    setResolvedParams(params);
+  }, [params]);
+
+  if (!resolvedParams) return <Spinner />;
   // Find product from mock data
   const allProducts = PRODUCT_SECTIONS.flatMap(section => section.products);
   const product = allProducts.find(p => p.id === resolvedParams.id);
@@ -120,7 +125,7 @@ export default function ProductDetailsPage({ params }: { params: Promise<{ id: s
 
           {/* Price */}
           <div className="mb-6">
-            <PriceDisplay price={product.price} originalPrice={product.original} size="lg" />
+            <PriceDisplay currentPrice={product.price} originalPrice={product.original} size="lg" />
           </div>
 
           {/* Divider */}
@@ -145,7 +150,7 @@ export default function ProductDetailsPage({ params }: { params: Promise<{ id: s
                 <Typography variant="h3" weight="bold" className="text-primary">
                   {product.rating}
                 </Typography>
-                <Typography variant="small" color="muted">
+                <Typography variant="caption" color="muted">
                   {product.reviews.toLocaleString()} reviews
                 </Typography>
               </div>
@@ -153,7 +158,7 @@ export default function ProductDetailsPage({ params }: { params: Promise<{ id: s
                 <Typography variant="body" weight="semibold" className="text-green-600">
                   {product.discount}% OFF
                 </Typography>
-                <Typography variant="small" color="muted">
+                <Typography variant="caption" color="muted">
                   Save ₹{product.original - product.price}
                 </Typography>
               </div>

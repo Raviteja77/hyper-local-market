@@ -184,7 +184,7 @@ export const BuyerLayout: React.FC<BuyerLayoutProps> = ({
               />
               {totalCartCount > 0 && (
                 <div className="absolute -top-2 -right-2">
-                  <Badge variant="danger" size="sm" rounded>
+                  <Badge variant="error">
                     {totalCartCount > 9 ? '9+' : totalCartCount}
                   </Badge>
                 </div>
