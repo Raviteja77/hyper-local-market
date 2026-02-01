@@ -21,6 +21,8 @@ export interface CartSidebarProps {
   onCheckout: () => void;
   onUpdateQuantity: (itemId: string, quantity: number) => void;
   onRemoveItem: (itemId: string) => void;
+  isAuthenticated?: boolean;
+  onLoginClick?: () => void;
   className?: string;
 }
 
@@ -34,6 +36,8 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
   onCheckout,
   onUpdateQuantity,
   onRemoveItem,
+  isAuthenticated = true,
+  onLoginClick,
   className = '',
 }) => {
   const total = subtotal + deliveryFee - discount;
@@ -170,9 +174,33 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
                   </Typography>
                 </div>
               </div>
-              <Button variant="primary" size="lg" fullWidth onClick={onCheckout}>
-                Proceed to Checkout
-              </Button>
+              {!isAuthenticated ? (
+                <div className="space-y-3">
+                  <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                    <Typography variant="body" weight="medium" className="mb-2 text-center">
+                      Please login to checkout
+                    </Typography>
+                    <Typography variant="caption" color="muted" className="text-center block">
+                      Login to save your cart and proceed with your order
+                    </Typography>
+                  </div>
+                  <Button 
+                    variant="primary" 
+                    size="lg" 
+                    fullWidth 
+                    onClick={() => {
+                      onClose();
+                      onLoginClick?.();
+                    }}
+                  >
+                    Login to Continue
+                  </Button>
+                </div>
+              ) : (
+                <Button variant="primary" size="lg" fullWidth onClick={onCheckout}>
+                  Proceed to Checkout
+                </Button>
+              )}
             </div>
           )}
         </div>

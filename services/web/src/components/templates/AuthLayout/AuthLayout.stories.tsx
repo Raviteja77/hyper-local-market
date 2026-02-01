@@ -27,36 +27,16 @@ export const WithLoginForm: Story = {
   },
 };
 
-export const WithoutBranding: Story = {
+export const SimpleLayout: Story = {
   args: {
-    showBranding: false,
     children: (
-      <LoginForm
-        onSubmit={(data) => console.log('Login:', data)}
-      />
-    ),
-  },
-};
-
-export const CustomTitle: Story = {
-  args: {
-    title: 'FreshMart',
-    subtitle: 'Your daily groceries, delivered instantly',
-    children: (
-      <LoginForm
-        onSubmit={(data) => console.log('Login:', data)}
-      />
-    ),
-  },
-};
-
-export const WithBackgroundImage: Story = {
-  args: {
-    backgroundImage: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200',
-    children: (
-      <LoginForm
-        onSubmit={(data) => console.log('Login:', data)}
-      />
+      <div className="bg-white p-8 rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold mb-4">Welcome Back</h2>
+        <p className="text-gray-600 mb-6">Sign in to continue to your account</p>
+        <LoginForm
+          onSubmit={(data) => console.log('Login:', data)}
+        />
+      </div>
     ),
   },
 };

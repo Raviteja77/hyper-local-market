@@ -8,6 +8,7 @@ export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
   error?: string;
   label?: string;
   className?: string;
+  fullWidth?: boolean;
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -19,6 +20,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     label,
     className = '',
     disabled = false,
+    fullWidth = false,
     ...props
   }, ref) => {
     const baseStyles = 'w-full rounded-lg bg-white border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-opacity-30 text-gray-900 placeholder:text-gray-400';

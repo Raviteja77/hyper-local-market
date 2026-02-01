@@ -1,97 +1,86 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { BuyerLayout } from '@/components/templates';
-import { Button, Icon, Input,Typography } from '@/components/atoms';
+import { Button, Icon, Input, Typography } from '@/components/atoms';
 import { PriceDisplay } from '@/components/molecules';
-
-interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-  image?: string;
-}
+import { useCartStore, useAuthStore, useUIStore } from '@/store';
 
 export default function CartPage() {
-  const [cartItems, setCartItems] = useState<CartItem[]>([
-    {
-      id: '1',
-      name: 'Organic Fresh Milk',
-      price: 65,
-      quantity: 2,
-      image: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=200',
-    },
-    {
-      id: '2',
-      name: 'Whole Wheat Bread',
-      price: 40,
-      quantity: 1,
-      image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=200',
-    },
-    {
-      id: '3',
-      name: 'Fresh Tomatoes',
-      price: 30,
-      quantity: 3,
-      image: 'https://images.unsplash.com/photo-1546470427-e26264be0b0d?w=200',
-    },
-  ]);
+  const router = useRouter();
+  const { user } = useAuthStore();
+  const { showToast } = useUIStore();
+  const { 
+    items: cartItems, 
+    subtotal, 
+    deliveryFee, 
+    discount, 
+    total,
+    updateQuantity,
+    removeItem,
+    applyCoupon,
+    removeCoupon,
+    couponCode: appliedCoupon,
+  } = useCartStore();
 
   const [couponCode, setCouponCode] = useState('');
-  const [appliedCoupon, setAppliedCoupon] = useState('');
 
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const deliveryFee = 20;
-  const discount = appliedCoupon ? 30 : 0;
-  const total = subtotal + deliveryFee - discount;
-
-  const handleUpdateQuantity = (itemId: string, quantity: number) => {
+  const handleUpdateQuantity = (productId: string, quantity: number) => {
     if (quantity <= 0) {
-      handleRemoveItem(itemId);
+      removeItem(productId);
       return;
     }
-    setCartItems((prev) =>
-      prev.map((item) => (item.id === itemId ? { ...item, quantity } : item))
-    );
+    updateQuantity(productId, quantity);
   };
 
-  const handleRemoveItem = (itemId: string) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== itemId));
+  const handleRemoveItem = (productId: string) => {
+    removeItem(productId);
   };
 
   const handleApplyCoupon = () => {
-    if (couponCode.toLowerCase() === 'save30') {
-      setAppliedCoupon(couponCode);
-    } else {
-      alert('Invalid coupon code');
+    if (couponCode.trim()) {
+      // Mock coupon validation - in real app, this would be an API call
+      if (couponCode.toUpperCase() === 'SAVE30') {
+        applyCoupon(couponCode, 30);
+        setCouponCode('');
+      } else {
+        showToast({
+          type: 'error',
+          message: 'Invalid coupon code. Try "SAVE30"',
+        });
+      }
     }
   };
 
+  const handleRemoveCoupon = () => {
+    removeCoupon();
+  };
+
   const handleCheckout = () => {
-    console.log('Proceeding to checkout');
-    // router.push('/checkout');
+    if (!user) {
+      // Redirect to login if not authenticated
+      router.push('/login');
+      return;
+    }
+    router.push('/checkout');
   };
 
   if (cartItems.length === 0) {
     return (
-      <BuyerLayout
-        userName="John Doe"
-        cartItems={[]}
-        onCartCheckout={() => {}}
-        onCartUpdateQuantity={() => {}}
-        onCartRemoveItem={() => {}}
-      >
+      <BuyerLayout userName={user?.name} userAvatar={user?.avatar} cartItems={[]}>
         <div className="max-w-7xl mx-auto px-4 py-16">
           <div className="text-center">
-            <Icon name="ShoppingCart" size={80} color="#D1D5DB" className="mx-auto mb-6" />
+            <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Icon name="ShoppingCart" size={48} color="#D1D5DB" />
+            </div>
             <Typography variant="h2" weight="bold" className="mb-2">
               Your Cart is Empty
             </Typography>
             <Typography variant="body" color="muted" className="mb-6">
               Start adding items to your cart to see them here
             </Typography>
-            <Button variant="primary" size="lg" onClick={() => console.log('Go to home')}>
+            <Button variant="primary" size="lg" onClick={() => router.push('/')}>
               Start Shopping
             </Button>
           </div>
@@ -101,16 +90,7 @@ export default function CartPage() {
   }
 
   return (
-    <BuyerLayout
-      userName="John Doe"
-      cartItems={cartItems}
-      cartSubtotal={subtotal}
-      cartDeliveryFee={deliveryFee}
-      cartDiscount={discount}
-      onCartCheckout={handleCheckout}
-      onCartUpdateQuantity={handleUpdateQuantity}
-      onCartRemoveItem={handleRemoveItem}
-    >
+    <BuyerLayout userName={user?.name} userAvatar={user?.avatar} cartItems={cartItems}>
       <div className="max-w-7xl mx-auto px-4 py-8">
         <Typography variant="h2" weight="bold" className="mb-8">
           Shopping Cart
@@ -138,15 +118,20 @@ export default function CartPage() {
                   )}
 
                   <div className="flex-1">
-                    <Typography variant="h4" weight="semibold" className="mb-2">
+                    <Typography variant="h4" weight="semibold" className="mb-1">
                       {item.name}
                     </Typography>
-                    <PriceDisplay price={item.price} size="md" />
+                    {item.storeName && (
+                      <Typography variant="caption" color="muted" className="mb-2">
+                        {item.storeName}
+                      </Typography>
+                    )}
+                    <PriceDisplay currentPrice={item.price} size="md" />
 
                     <div className="flex items-center gap-4 mt-4">
                       <div className="flex items-center gap-2">
                         <button
-                          onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}
+                          onClick={() => handleUpdateQuantity(item.productId, item.quantity - 1)}
                           className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-50"
                         >
                           <Icon name="Minus" size={16} />
@@ -155,7 +140,7 @@ export default function CartPage() {
                           {item.quantity}
                         </Typography>
                         <button
-                          onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}
+                          onClick={() => handleUpdateQuantity(item.productId, item.quantity + 1)}
                           className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-50"
                         >
                           <Icon name="Plus" size={16} />
@@ -163,12 +148,19 @@ export default function CartPage() {
                       </div>
 
                       <button
-                        onClick={() => handleRemoveItem(item.id)}
-                        className="ml-auto text-danger hover:bg-red-50 p-2 rounded"
+                        onClick={() => handleRemoveItem(item.productId)}
+                        className="ml-auto text-danger hover:bg-red-50 p-2 rounded flex items-center gap-1"
                       >
                         <Icon name="Trash2" size={20} color="#EF4444" />
+                        <span className="text-sm">Remove</span>
                       </button>
                     </div>
+                  </div>
+
+                  <div className="text-right">
+                    <Typography variant="body" weight="bold">
+                      ₹{(item.price * item.quantity).toFixed(2)}
+                    </Typography>
                   </div>
                 </div>
               </div>
@@ -184,27 +176,30 @@ export default function CartPage() {
 
               {/* Coupon */}
               <div className="mb-4">
-                <div className="flex gap-2">
-                  <Input
-                    type="text"
-                    placeholder="Enter coupon code"
-                    value={couponCode}
-                    onChange={(e) => setCouponCode(e.target.value)}
-                    disabled={!!appliedCoupon}
-                  />
-                  <Button
-                    variant="secondary"
-                    size="md"
-                    onClick={handleApplyCoupon}
-                    disabled={!!appliedCoupon}
-                  >
-                    Apply
-                  </Button>
-                </div>
-                {appliedCoupon && (
-                  <Typography variant="small" color="success" className="mt-1">
-                    Coupon "{appliedCoupon}" applied!
-                  </Typography>
+                <Typography variant="body" weight="medium" className="mb-2">
+                  Have a coupon?
+                </Typography>
+                {appliedCoupon ? (
+                  <div className="flex items-center justify-between p-3 bg-green-50 border border-green-200 rounded">
+                    <Typography variant="caption" className="text-success">
+                      Coupon "{appliedCoupon}" applied!
+                    </Typography>
+                    <button onClick={handleRemoveCoupon} className="text-error">
+                      <Icon name="X" size={16} />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex gap-2">
+                    <Input
+                      type="text"
+                      placeholder="Enter code"
+                      value={couponCode}
+                      onChange={(e) => setCouponCode(e.target.value)}
+                    />
+                    <Button variant="secondary" onClick={handleApplyCoupon}>
+                      Apply
+                    </Button>
+                  </div>
                 )}
               </div>
 
@@ -224,25 +219,26 @@ export default function CartPage() {
                 </div>
                 {discount > 0 && (
                   <div className="flex justify-between">
-                    <Typography variant="body" color="success">
+                    <Typography variant="body" className="text-success">
                       Discount
                     </Typography>
-                    <Typography variant="body" color="success">
+                    <Typography variant="body" className="text-success">
                       -₹{discount.toFixed(2)}
                     </Typography>
                   </div>
                 )}
-                <div className="flex justify-between pt-3 border-t border-gray-200">
-                  <Typography variant="h4" weight="bold">
-                    Total
-                  </Typography>
-                  <Typography variant="h4" weight="bold" color="primary">
-                    ₹{total.toFixed(2)}
-                  </Typography>
-                </div>
               </div>
 
-              <Button variant="primary" size="lg" fullWidth className="mt-6" onClick={handleCheckout}>
+              <div className="flex justify-between py-4">
+                <Typography variant="h4" weight="bold">
+                  Total
+                </Typography>
+                <Typography variant="h4" weight="bold" color="primary">
+                  ₹{total.toFixed(2)}
+                </Typography>
+              </div>
+
+              <Button variant="primary" size="lg" fullWidth onClick={handleCheckout}>
                 Proceed to Checkout
               </Button>
             </div>
