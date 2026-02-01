@@ -49,6 +49,33 @@ export const CATEGORIES: Category[] = [
   { id: 'fashion', label: 'Fashion', icon: Shirt },
 ];
 
+export const PROMO_BANNERS = [
+  {
+    id: '1',
+    title: 'Get 30% off on Dairy Products',
+    subtitle: 'Limited Time Offer',
+    ctaText: 'Shop Now',
+    backgroundColor: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    textColor: '#FFFFFF',
+  },
+  {
+    id: '2',
+    title: 'Free Delivery on Orders ₹199+',
+    subtitle: 'Fast Delivery',
+    ctaText: 'Order Now',
+    backgroundColor: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    textColor: '#FFFFFF',
+  },
+  {
+    id: '3',
+    title: 'Fresh Vegetables at Lowest Prices',
+    subtitle: 'Farm Fresh',
+    ctaText: 'Browse',
+    backgroundColor: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+    textColor: '#FFFFFF',
+  },
+];
+
 export const PRODUCT_SECTIONS: ProductSection[] = [
   {
     title: 'Laundry Care',
