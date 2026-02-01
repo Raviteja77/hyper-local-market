@@ -164,7 +164,7 @@ function ProductCard({ product, onAddToCart, onProductClick, cartQuantity }: Pro
         />
         {product.isNew && (
           <div className="absolute top-1 left-1">
-            <Badge variant="info" size="sm">
+            <Badge variant="info">
               NEW
             </Badge>
           </div>
@@ -205,7 +205,7 @@ function ProductCard({ product, onAddToCart, onProductClick, cartQuantity }: Pro
         {/* Discount Badge */}
         {product.discount > 0 && (
           <div className="inline-block">
-            <Badge variant="success" size="sm" className="text-xs">
+            <Badge variant="discount" className="text-xs">
               {product.discount}% OFF
             </Badge>
           </div>
@@ -213,7 +213,7 @@ function ProductCard({ product, onAddToCart, onProductClick, cartQuantity }: Pro
 
         {/* Rating */}
         <div className="flex items-center gap-1">
-          <RatingStars rating={product.rating} size="sm" showValue={false} />
+          <RatingStars rating={product.rating} size="sm" />
           <Typography variant="caption" color="muted" className="text-xs">
             ({product.reviews.toLocaleString()})
           </Typography>

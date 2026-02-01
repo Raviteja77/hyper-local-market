@@ -6,6 +6,7 @@ import { Home, Search, ShoppingBag as ShoppingBagIcon, User } from 'lucide-react
 import { CartSidebar, Footer, Navbar } from '../../organisms';
 import { Badge, Typography } from '../../atoms';
 import { useCartStore } from '@/store';
+import { useRouter } from 'next/navigation';
 
 export interface BuyerLayoutProps {
   children: React.ReactNode;
@@ -61,6 +62,7 @@ export const BuyerLayout: React.FC<BuyerLayoutProps> = ({
   className = '',
 }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const router = useRouter();
   
   // Get cart data from store
   const { 
@@ -85,7 +87,7 @@ export const BuyerLayout: React.FC<BuyerLayoutProps> = ({
 
   const handleLoginClick = () => {
     if (typeof window !== 'undefined') {
-      window.location.href = '/login';
+      router.push('/login');
     }
   };
 

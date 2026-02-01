@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { MapPin, X, Search, Navigation } from 'lucide-react';
 import { Button } from '@/components/atoms';
 
