@@ -27,34 +27,56 @@ export const LocationModal: React.FC<LocationModalProps> = ({
 
   if (!isOpen) return null;
 
+  const handleUseCurrentLocation = () => {
+    onSelectLocation('Current Location (GPS)');
+    onClose();
+  };
+
   return (
     <>
       {/* Overlay */}
-      <div className="fixed inset-0 bg-black/50 z-50 backdrop-blur-sm" onClick={onClose} />
+      <div 
+        role="presentation"
+        className="fixed inset-0 bg-black/50 z-50 backdrop-blur-sm" 
+        onClick={onClose}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') {
+            onClose();
+          }
+        }}
+        tabIndex={-1}
+      />
       
       {/* Modal */}
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+      <div 
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="location-modal-title"
+        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
             z-50 bg-white rounded-2xl shadow-xl w-full max-w-lg max-h-[80vh] 
             overflow-hidden">
         
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b 
               border-gray-100">
-          <h2 className="text-lg font-bold text-gray-900">
+          <h2 id="location-modal-title" className="text-lg font-bold text-gray-900">
             Select Delivery Location
           </h2>
-          <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+          <button 
+            onClick={onClose} 
+            aria-label="Close location selector"
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+          >
             <X size={20} className="text-gray-500" />
           </button>
         </div>
 
         {/* Current Location Button */}
         <div className="p-4 border-b border-gray-100">
-          <button className="flex items-center gap-3 w-full p-3 rounded-lg 
-                  bg-primary-light hover:bg-primary-light/80 transition-colors" onClick={() => {
-              onSelectLocation('Current Location (GPS)');
-              onClose();
-            }}
+          <button 
+            className="flex items-center gap-3 w-full p-3 rounded-lg 
+                  bg-primary-light hover:bg-primary-light/80 transition-colors" 
+            onClick={handleUseCurrentLocation}
           >
             <div className="p-2 bg-primary rounded-full">
               <Navigation size={16} className="text-white" />

@@ -57,6 +57,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {currentAddress && (
             <button
               onClick={onLocationClick}
+              aria-label="Select delivery location"
               className="hidden md:flex items-center gap-2 px-3 py-2 ml-4 
                 hover:bg-gray-50 rounded-lg transition-colors border border-gray-200"
             >
@@ -149,6 +150,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {currentAddress && (
               <button
                 onClick={onLocationClick}
+                aria-label="Select delivery location"
                 className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg border border-gray-200"
               >
                 <div className="flex items-center gap-2">
