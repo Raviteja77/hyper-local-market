@@ -7,5 +7,6 @@ export * from './LoginForm/LoginForm';
 export * from './Navbar/Navbar';
 export * from './OrderTracker/OrderTracker';
 export * from './ProductGrid/ProductGrid';
+export * from './PromoBannerCarousel/PromoBannerCarousel';
 export * from './StoreList/StoreList';
 export * from './ToastContainer/ToastContainer';

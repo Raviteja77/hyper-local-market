@@ -3,10 +3,10 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { BuyerLayout } from '@/components/templates';
-import { CategoryBar, LocationModal } from '@/components/organisms';
+import { CategoryBar, LocationModal, PromoBannerCarousel } from '@/components/organisms';
 import { Badge, Typography } from '@/components/atoms';
 import { PriceDisplay, RatingStars } from '@/components/molecules';
-import { CATEGORIES, PRODUCT_SECTIONS, Product } from '@/lib/mockData/buyerMock';
+import { CATEGORIES, PRODUCT_SECTIONS, PROMO_BANNERS, Product } from '@/lib/mockData/buyerMock';
 import { useCartStore, useAuthStore, useUIStore } from '@/store';
 
 export default function HomePage() {
@@ -81,6 +81,7 @@ export default function HomePage() {
         onCartCheckout={() => router.push('/checkout')}
         onCartUpdateQuantity={(id, qty) => console.log('Update:', id, qty)}
         onCartRemoveItem={(id) => console.log('Remove:', id)}
+        onLoginClick={() => router.push('/login')}
         onProfileClick={() => router.push('/profile')}
         onLogoClick={() => router.push('/')}
         activeRoute="home"
@@ -95,6 +96,9 @@ export default function HomePage() {
           activeCategory={activeCategory}
           onCategoryClick={handleCategoryChange}
         />
+
+        {/* 3. PROMO BANNER CAROUSEL */}
+        <PromoBannerCarousel banners={PROMO_BANNERS} autoPlayInterval={4000} />
 
         {/* Product Sections */}
         <div className="px-4 py-6 space-y-8">
