@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { BuyerLayout } from '@/components/templates';
-import { CategoryBar } from '@/components/organisms';
+import { CategoryBar, LocationModal } from '@/components/organisms';
 import { Badge, Typography } from '@/components/atoms';
 import { PriceDisplay, RatingStars } from '@/components/molecules';
 import { CATEGORIES, PRODUCT_SECTIONS, Product } from '@/lib/mockData/buyerMock';
@@ -16,6 +16,8 @@ export default function HomePage() {
   const { showToast } = useUIStore();
   const [searchValue, setSearchValue] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
+  const [locationModalOpen, setLocationModalOpen] = useState(false);
+  const [currentAddress, setCurrentAddress] = useState('Koramangala, Bengaluru');
 
   // Derive cart count from store
   const totalCartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -67,21 +69,24 @@ export default function HomePage() {
   };
 
   return (
-    <BuyerLayout
-      userName={user?.name}
-      userAvatar={user?.avatar}
-      cartItems={cartItems}
-      cartCount={totalCartCount}
-      onSearch={handleSearch}
-      onCartCheckout={() => router.push('/checkout')}
-      onCartUpdateQuantity={(id, qty) => console.log('Update:', id, qty)}
-      onCartRemoveItem={(id) => console.log('Remove:', id)}
-      onProfileClick={() => router.push('/profile')}
-      onLogoClick={() => router.push('/')}
-      activeRoute="home"
-      onNavClick={handleNavClick}
-      showFooter={false}
-    >
+    <>
+      <BuyerLayout
+        userName={user?.name}
+        userAvatar={user?.avatar}
+        cartItems={cartItems}
+        cartCount={totalCartCount}
+        address={currentAddress}
+        onAddressClick={() => setLocationModalOpen(true)}
+        onSearch={handleSearch}
+        onCartCheckout={() => router.push('/checkout')}
+        onCartUpdateQuantity={(id, qty) => console.log('Update:', id, qty)}
+        onCartRemoveItem={(id) => console.log('Remove:', id)}
+        onProfileClick={() => router.push('/profile')}
+        onLogoClick={() => router.push('/')}
+        activeRoute="home"
+        onNavClick={handleNavClick}
+        showFooter={false}
+      >
       {/* White page - no red gradient */}
       <div className="bg-white min-h-screen">
         {/* Category Bar */}
@@ -124,6 +129,14 @@ export default function HomePage() {
         </div>
       </div>
     </BuyerLayout>
+
+    <LocationModal
+      isOpen={locationModalOpen}
+      onClose={() => setLocationModalOpen(false)}
+      onSelectLocation={setCurrentAddress}
+      currentLocation={currentAddress}
+    />
+  </>
   );
 }
 

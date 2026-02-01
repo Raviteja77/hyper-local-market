@@ -2,6 +2,7 @@ export * from './CartSidebar/CartSidebar';
 export * from './CategoryBar/CategoryBar';
 export * from './Footer/Footer';
 export * from './InventoryManager/InventoryManager';
+export * from './LocationModal/LocationModal';
 export * from './LoginForm/LoginForm';
 export * from './Navbar/Navbar';
 export * from './OrderTracker/OrderTracker';

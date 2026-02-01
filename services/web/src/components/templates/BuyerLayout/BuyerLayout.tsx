@@ -112,11 +112,13 @@ export const BuyerLayout: React.FC<BuyerLayoutProps> = ({
           userName={userName}
           userAvatar={userAvatar}
           cartItemCount={totalCartCount}
+          currentAddress={address}
           onSearch={onSearch}
           onCartClick={handleCartClick}
           onLoginClick={onLoginClick}
           onProfileClick={onProfileClick}
           onLogoClick={onLogoClick}
+          onLocationClick={onAddressClick}
         />
       </div>
 
