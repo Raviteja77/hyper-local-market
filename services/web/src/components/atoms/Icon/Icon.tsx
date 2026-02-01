@@ -40,8 +40,8 @@ export const Icon: React.FC<IconProps> = ({
   const actualSize = typeof size === 'number' ? size : sizeMap[size];
 
   // Determine the actual color class or style
-  const isColorString = typeof color === 'string' && color.startsWith('#');
-  const colorClass = isColorString ? '' : (colorMap[color as keyof typeof colorMap] || 'text-current');
+  const isHexColor = typeof color === 'string' && /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(color);
+  const colorClass = isHexColor ? '' : (colorMap[color as keyof typeof colorMap] || 'text-current');
 
   // Get the icon component
   let IconToRender = IconComponent;
@@ -58,7 +58,7 @@ export const Icon: React.FC<IconProps> = ({
     <IconToRender 
       size={actualSize} 
       className={`${colorClass} ${className}`}
-      style={isColorString ? { color } : undefined}
+      style={isHexColor ? { color } : undefined}
     />
   );
 };

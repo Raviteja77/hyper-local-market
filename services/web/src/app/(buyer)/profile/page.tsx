@@ -10,14 +10,20 @@ export default function ProfilePage() {
   const router = useRouter();
   const { user, logout } = useAuthStore();
 
+  // Redirect to login if not authenticated
+  React.useEffect(() => {
+    if (!user) {
+      router.push('/login');
+    }
+  }, [user, router]);
+
   const handleLogout = () => {
     logout();
     router.push('/login');
   };
 
-  // If not logged in, redirect to login
+  // Show loading state while checking auth
   if (!user) {
-    router.push('/login');
     return null;
   }
 

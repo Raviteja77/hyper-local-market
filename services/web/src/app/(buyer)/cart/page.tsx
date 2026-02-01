@@ -5,11 +5,12 @@ import { useRouter } from 'next/navigation';
 import { BuyerLayout } from '@/components/templates';
 import { Button, Icon, Input, Typography } from '@/components/atoms';
 import { PriceDisplay } from '@/components/molecules';
-import { useCartStore, useAuthStore } from '@/store';
+import { useCartStore, useAuthStore, useUIStore } from '@/store';
 
 export default function CartPage() {
   const router = useRouter();
   const { user } = useAuthStore();
+  const { showToast } = useUIStore();
   const { 
     items: cartItems, 
     subtotal, 
@@ -40,7 +41,10 @@ export default function CartPage() {
         applyCoupon(couponCode, 30);
         setCouponCode('');
       } else {
-        alert('Invalid coupon code. Try "SAVE30"');
+        showToast({
+          type: 'error',
+          message: 'Invalid coupon code. Try "SAVE30"',
+        });
       }
     }
   };
