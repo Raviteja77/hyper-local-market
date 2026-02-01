@@ -2,10 +2,11 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { TrendingDown, Truck, Clock } from 'lucide-react';
 import { BuyerLayout } from '@/components/templates';
 import { CategoryBar, LocationModal, PromoBannerCarousel } from '@/components/organisms';
 import { Badge, Typography } from '@/components/atoms';
-import { PriceDisplay, RatingStars } from '@/components/molecules';
+import { PriceDisplay, RatingStars, ValuePropCard } from '@/components/molecules';
 import { CATEGORIES, PRODUCT_SECTIONS, PROMO_BANNERS, Product } from '@/lib/mockData/buyerMock';
 import { useCartStore, useAuthStore, useUIStore } from '@/store';
 
@@ -99,6 +100,33 @@ export default function HomePage() {
 
         {/* 3. PROMO BANNER CAROUSEL */}
         <PromoBannerCarousel banners={PROMO_BANNERS} autoPlayInterval={4000} />
+
+        {/* 4. VALUE PROPOSITIONS */}
+        <div className="px-4 py-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <ValuePropCard
+              icon={TrendingDown}
+              title="Lowest Prices"
+              subtitle="Best deals in town"
+              iconColor="text-green-600"
+              iconBgColor="bg-green-100"
+            />
+            <ValuePropCard
+              icon={Truck}
+              title="Free Delivery"
+              subtitle="On orders above ₹99"
+              iconColor="text-blue-600"
+              iconBgColor="bg-blue-100"
+            />
+            <ValuePropCard
+              icon={Clock}
+              title="5 Min Delivery"
+              subtitle="Lightning fast service"
+              iconColor="text-orange-600"
+              iconBgColor="bg-orange-100"
+            />
+          </div>
+        </div>
 
         {/* Product Sections */}
         <div className="px-4 py-6 space-y-8">
