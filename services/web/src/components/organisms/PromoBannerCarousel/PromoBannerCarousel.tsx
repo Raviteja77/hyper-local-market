@@ -8,8 +8,8 @@ export interface Banner {
   title: string;
   subtitle: string;
   ctaText: string;
-  backgroundColor: string;
-  textColor: string;
+  backgroundColor: string; // Note: Ensure sufficient contrast with textColor for WCAG accessibility
+  textColor: string; // Note: Ensure sufficient contrast with backgroundColor for WCAG accessibility
   image?: string;
 }
 
@@ -59,6 +59,10 @@ export const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = ({
       className="relative w-full h-48 overflow-hidden rounded-xl mx-4 my-4"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
+      onFocus={() => setIsPaused(true)}
+      onBlur={() => setIsPaused(false)}
+      role="region"
+      aria-label="Promotional banners"
     >
       {/* Banner Content */}
       <div
@@ -72,7 +76,7 @@ export const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = ({
         <div className="flex-1 space-y-2">
           <h2 className="text-2xl font-bold">{currentBanner.title}</h2>
           <p className="text-lg opacity-90">{currentBanner.subtitle}</p>
-          <button className="mt-4 px-6 py-2 bg-white text-gray-900 rounded-full font-semibold hover:bg-opacity-90 transition-all">
+          <button className="mt-4 px-6 py-2 bg-white text-gray-900 rounded-full font-semibold hover:bg-opacity-90 transition-all focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2">
             {currentBanner.ctaText}
           </button>
         </div>
