@@ -1,38 +1,80 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { Typography, Button, Icon } from "@/components/atoms";
+import { BuyerLayout } from "@/components/templates";
+import { useAuthStore } from "@/store";
 
 export default function ProfilePage() {
+  const router = useRouter();
+  const { user, logout } = useAuthStore();
+
+  const handleLogout = () => {
+    logout();
+    router.push('/login');
+  };
+
+  // If not logged in, redirect to login
+  if (!user) {
+    router.push('/login');
+    return null;
+  }
+
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map(n => n[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header Section */}
-      <div className="bg-white border-b border-gray-200 pt-8 pb-6 px-4">
-        <div className="max-w-2xl mx-auto flex items-center gap-5">
-          <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center text-2xl font-bold text-gray-700">
-            JD
-          </div>
-          <div>
-            <Typography variant="h2" weight="bold" className="text-gray-900">
-              John Doe
-            </Typography>
-            <Typography variant="body" color="muted">
-              +91 98765 43210
-            </Typography>
-            <div className="mt-2">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-blue-600 p-0 h-auto font-medium"
-              >
-                Edit Profile
-              </Button>
+    <BuyerLayout userName={user.name} userAvatar={user.avatar} cartItems={[]} activeRoute="profile" showFooter={false}>
+      <div className="min-h-screen bg-gray-50">
+        {/* Header Section */}
+        <div className="bg-white border-b border-gray-200 pt-8 pb-6 px-4">
+          <div className="max-w-2xl mx-auto flex items-center gap-5">
+            {user.avatar ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img 
+                src={user.avatar} 
+                alt={user.name}
+                className="w-20 h-20 rounded-full object-cover"
+              />
+            ) : (
+              <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center text-2xl font-bold text-gray-700">
+                {getInitials(user.name)}
+              </div>
+            )}
+            <div>
+              <Typography variant="h2" weight="bold" className="text-gray-900">
+                {user.name}
+              </Typography>
+              <Typography variant="body" color="muted">
+                {user.phone}
+              </Typography>
+              {user.email && (
+                <Typography variant="caption" color="muted">
+                  {user.email}
+                </Typography>
+              )}
+              <div className="mt-2">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-blue-600 p-0 h-auto font-medium"
+                  onClick={() => router.push('/profile/edit')}
+                >
+                  Edit Profile
+                </Button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="max-w-2xl mx-auto px-4 py-6 space-y-6">
+        <div className="max-w-2xl mx-auto px-4 py-6 space-y-6">
         {/* Saved Addresses */}
         <section>
           <div className="flex justify-between items-center mb-3 px-1">
@@ -89,17 +131,18 @@ export default function ProfilePage() {
           <Button
             variant="secondary"
             className="w-full border-red-100 text-red-600 hover:bg-red-50 hover:border-red-200 py-3"
+            onClick={handleLogout}
           >
             Log Out
           </Button>
         </div>
 
         <div className="text-center pb-8">
-          <Typography variant="small" color="muted" className="text-xs">
+          <Typography variant="caption" color="muted" className="text-xs">
             Version 1.0.0
           </Typography>
         </div>
       </div>
-    </div>
+    </BuyerLayout>
   );
 }

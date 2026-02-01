@@ -71,7 +71,7 @@ export default function OrdersPage() {
                         {getStatusLabel(order.status)}
                       </Badge>
                     </div>
-                    <Typography variant="small" color="muted">
+                    <Typography variant="caption" color="muted">
                       Placed on {formatDate(order.createdAt)}
                     </Typography>
                   </div>

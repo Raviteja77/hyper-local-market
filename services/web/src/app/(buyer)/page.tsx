@@ -170,7 +170,7 @@ function ProductCard({ product, onAddToCart, onProductClick, cartQuantity }: Pro
       {/* Product Info */}
       <div className="space-y-1">
         {/* Name (truncated to 2 lines) */}
-        <Typography variant="small" weight="medium" className="line-clamp-2 text-xs leading-tight h-8">
+        <Typography variant="caption" weight="medium" className="line-clamp-2 text-xs leading-tight h-8">
           {product.name}
         </Typography>
 

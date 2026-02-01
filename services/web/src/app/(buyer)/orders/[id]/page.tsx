@@ -90,7 +90,7 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                       <Typography variant="body" weight="semibold">
                         {item.name}
                       </Typography>
-                      <Typography variant="small" color="muted">
+                      <Typography variant="caption" color="muted">
                         Qty: {item.quantity}
                       </Typography>
                     </div>
@@ -113,7 +113,7 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                   <Typography variant="body" weight="semibold">
                     {order.storeName}
                   </Typography>
-                  <Typography variant="small" color="muted" className="mt-1">
+                  <Typography variant="caption" color="muted" className="mt-1">
                     {order.storeAddress}
                   </Typography>
                 </div>
@@ -173,10 +173,10 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                   <Typography variant="body" weight="semibold">
                     {order.deliveryAddress.name}
                   </Typography>
-                  <Typography variant="small" color="muted" className="mt-1">
+                  <Typography variant="caption" color="muted" className="mt-1">
                     {order.deliveryAddress.address}
                   </Typography>
-                  <Typography variant="small" color="muted" className="mt-1">
+                  <Typography variant="caption" color="muted" className="mt-1">
                     {order.deliveryAddress.phone}
                   </Typography>
                 </div>

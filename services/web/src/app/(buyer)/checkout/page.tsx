@@ -255,7 +255,7 @@ export default function CheckoutPage() {
                   {loading ? 'Placing Order...' : 'Place Order'}
                 </Button>
 
-                <Typography variant="caption" color="muted" align="center" className="mt-4 block">
+                <Typography variant="caption" color="muted" className="mt-4 block text-center">
                   By placing order you agree to our Terms & Conditions
                 </Typography>
               </div>

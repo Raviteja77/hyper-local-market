@@ -83,6 +83,12 @@ export const BuyerLayout: React.FC<BuyerLayoutProps> = ({
     setIsCartOpen(true);
   };
 
+  const handleLoginClick = () => {
+    if (typeof window !== 'undefined') {
+      window.location.href = '/login';
+    }
+  };
+
   const handleUpdateQuantity = (productId: string, quantity: number) => {
     updateQuantity(productId, quantity);
     onCartUpdateQuantity(productId, quantity);
@@ -219,6 +225,8 @@ export const BuyerLayout: React.FC<BuyerLayoutProps> = ({
         subtotal={subtotal}
         deliveryFee={deliveryFee}
         discount={discount}
+        isAuthenticated={!!userName}
+        onLoginClick={handleLoginClick}
         onClose={() => setIsCartOpen(false)}
         onCheckout={() => {
           setIsCartOpen(false);

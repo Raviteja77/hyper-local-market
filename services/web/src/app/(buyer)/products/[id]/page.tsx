@@ -114,7 +114,7 @@ export default function ProductDetailsPage({ params }: { params: Promise<{ id: s
           </Typography>
 
           {/* Weight/Unit */}
-          <Typography variant="small" color="muted" className="mb-4">
+          <Typography variant="caption" color="muted" className="mb-4">
             {product.pack}
           </Typography>
 
