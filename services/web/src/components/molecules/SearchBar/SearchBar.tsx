@@ -33,8 +33,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      <div className="relative flex-1">
-        <div className="absolute left-3 top-1/2 -translate-y-1/2">
+      <div className="relative flex-1 flex items-center bg-gray-100 rounded-full px-4 py-2 focus-within:ring-2 focus-within:ring-primary-light focus-within:bg-white transition-all duration-150">
+        <div className="flex-shrink-0">
           <Search size={size === 'sm' ? 16 : size === 'lg' ? 24 : 20} color="#6B7280" />
         </div>
         <Input
@@ -45,7 +45,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           onKeyDown={handleKeyPress}
           size={size}
           fullWidth
-          className="pl-10"
+          className="pl-2 bg-transparent border-0 focus:ring-0 focus:outline-none"
         />
       </div>
       {showButton && (

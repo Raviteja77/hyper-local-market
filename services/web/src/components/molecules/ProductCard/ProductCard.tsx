@@ -47,11 +47,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <div
-      className="bg-white rounded-lg border border-gray-100 hover:shadow-md hover:scale-[1.01] transition duration-150 flex flex-col overflow-hidden cursor-pointer"
+      className="bg-white rounded-lg border border-gray-100 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer group flex flex-col overflow-hidden"
       onClick={() => onClick?.(id)}
     >
       {/* IMAGE AREA */}
-      <div className="relative overflow-hidden rounded-t-lg">
+      <div className="relative overflow-hidden rounded-t-lg group-hover:brightness-105 transition-all duration-200">
         <img src={image} alt={name} className="w-full aspect-square object-cover" />
         
         {/* NEW badge: top-left, absolute */}
@@ -65,7 +65,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         <div className="absolute bottom-2 right-2">
           {quantity === 0 ? (
             <button
-              className="bg-primary text-white text-xs font-bold rounded-full px-3 py-1 shadow-sm hover:bg-primary-hover transition duration-150"
+              className="bg-primary text-white text-xs font-bold rounded-full px-3 py-1 shadow-sm hover:bg-primary-hover hover:scale-105 active:scale-95 transition-all duration-150"
               onClick={(e) => {
                 e.stopPropagation();
                 onAdd(id);
@@ -146,7 +146,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       {/* CATEGORY TAG */}
       {categoryTag && (
         <div className="px-2 pt-1">
-          <p className="text-xs text-primary font-medium">{categoryTag}</p>
+          <p className="text-xs text-primary font-medium group-hover:text-primary-dark transition-colors">{categoryTag}</p>
         </div>
       )}
 
