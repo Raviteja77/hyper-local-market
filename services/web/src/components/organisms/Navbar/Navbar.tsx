@@ -76,7 +76,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Desktop Search */}
           {showSearch && (
-            <div className="hidden md:flex flex-1 max-w-2xl mx-8">
+            <div className="hidden md:flex flex-1 max-w-3xl mx-8">
               <SearchBar 
                 onSearch={onSearch} 
                 placeholder="Search products, stores..."

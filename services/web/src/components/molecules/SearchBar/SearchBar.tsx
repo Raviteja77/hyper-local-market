@@ -33,7 +33,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      <div className="relative flex-1 flex items-center bg-gray-100 rounded-full px-4 py-2 focus-within:ring-2 focus-within:ring-primary-light focus-within:bg-white transition-all duration-150">
+      <div className="relative flex-1 flex items-center bg-white rounded-full px-4 py-2 h-10 focus-within:ring-2 focus-within:ring-primary-light transition-all duration-150 border border-gray-200">
         <div className="flex-shrink-0">
           <Search size={size === 'sm' ? 16 : size === 'lg' ? 24 : 20} color="#6B7280" />
         </div>
