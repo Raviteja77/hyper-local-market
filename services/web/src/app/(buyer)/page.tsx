@@ -145,7 +145,7 @@ export default function HomePage() {
                 {/* Horizontal scrollable product grid */}
                 {/* scrollbar-hide utility defined in tailwind.config.ts */}
                 <div className="overflow-x-auto scrollbar-hide -mx-6">
-                  <div className="flex gap-3 pb-2 px-6" style={{ width: 'max-content' }}>
+                  <div className="flex gap-4 pb-2 px-4" style={{ width: 'max-content' }}>
                     {section.products.map((product) => {
                       const cartItem = cartItems.find(item => item.productId === product.id);
                       const cartQuantity = cartItem?.quantity || 0;
