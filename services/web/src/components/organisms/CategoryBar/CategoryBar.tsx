@@ -40,7 +40,7 @@ export const CategoryBar: React.FC<CategoryBarProps> = ({
                 ${
                   isActive
                     ? 'border-primary bg-primary-light'
-                    : 'border-transparent hover:text-primary hover:bg-gray-50 transition-colors duration-150'
+                    : 'border-transparent hover:text-primary hover:bg-gray-50'
                 }
               `}
             >

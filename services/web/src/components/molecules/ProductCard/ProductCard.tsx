@@ -51,8 +51,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       onClick={() => onClick?.(id)}
     >
       {/* IMAGE AREA */}
-      <div className="relative overflow-hidden rounded-t-lg group-hover:brightness-105 transition-all duration-200">
-        <img src={image} alt={name} className="w-full aspect-square object-cover" />
+      <div className="relative overflow-hidden rounded-t-lg">
+        <img src={image} alt={name} className="w-full aspect-square object-cover group-hover:brightness-105 transition-all duration-200" />
         
         {/* NEW badge: top-left, absolute */}
         {isNew && (

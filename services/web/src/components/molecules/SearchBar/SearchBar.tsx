@@ -45,7 +45,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           onKeyDown={handleKeyPress}
           size={size}
           fullWidth
-          className="pl-2 bg-transparent border-0 focus:ring-0 focus:outline-none"
+          className="pl-2 bg-transparent border-0 focus:ring-0"
         />
       </div>
       {showButton && (
