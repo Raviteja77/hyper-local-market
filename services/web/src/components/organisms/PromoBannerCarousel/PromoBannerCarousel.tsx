@@ -56,7 +56,7 @@ export const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = ({
 
   return (
     <div 
-      className="relative w-full h-48 overflow-hidden rounded-xl mx-4 my-4"
+      className="relative w-full h-48 overflow-hidden rounded-xl mr-4 my-4"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocus={() => setIsPaused(true)}

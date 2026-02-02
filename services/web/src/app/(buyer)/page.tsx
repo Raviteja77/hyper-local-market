@@ -89,75 +89,82 @@ export default function HomePage() {
         onNavClick={handleNavClick}
         showFooter={false}
       >
-      {/* White page - no red gradient */}
-      <div className="bg-white min-h-screen">
-        {/* Category Bar */}
-        <CategoryBar
-          categories={CATEGORIES}
-          activeCategory={activeCategory}
-          onCategoryClick={handleCategoryChange}
-        />
-
-        {/* 3. PROMO BANNER CAROUSEL */}
-        <PromoBannerCarousel banners={PROMO_BANNERS} autoPlayInterval={4000} />
-
-        {/* 4. VALUE PROPOSITIONS */}
-        <div className="px-4 py-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <ValuePropCard
-              icon={TrendingDown}
-              title="Lowest Prices"
-              subtitle="Best deals in town"
-              iconColor="text-green-600"
-              iconBgColor="bg-green-100"
-            />
-            <ValuePropCard
-              icon={Truck}
-              title="Free Delivery"
-              subtitle="On orders above ₹99"
-              iconColor="text-blue-600"
-              iconBgColor="bg-blue-100"
-            />
-            <ValuePropCard
-              icon={Clock}
-              title="5 Min Delivery"
-              subtitle="Lightning fast service"
-              iconColor="text-orange-600"
-              iconBgColor="bg-orange-100"
+      {/* Soft gray page background with centered content */}
+      <div className="bg-gray-50 min-h-screen">
+        <div className="max-w-screen-2xl mx-auto">
+          {/* Category Bar */}
+          <div className="px-4">
+            <CategoryBar
+              categories={CATEGORIES}
+              activeCategory={activeCategory}
+              onCategoryClick={handleCategoryChange}
             />
           </div>
-        </div>
 
-        {/* Product Sections */}
-        <div className="px-4 py-6 space-y-8">
-          {PRODUCT_SECTIONS.map((section) => (
-            <section key={section.title}>
-              <Typography variant="h3" weight="bold" className="mb-4">
-                {section.title}
-              </Typography>
+          {/* 3. PROMO BANNER CAROUSEL */}
+          <div className="px-4">
+            <PromoBannerCarousel banners={PROMO_BANNERS} autoPlayInterval={4000} />
+          </div>
 
-              {/* Horizontal scrollable product grid */}
-              {/* scrollbar-hide utility defined in tailwind.config.ts */}
-              <div className="overflow-x-auto scrollbar-hide -mx-4 px-4">
-                <div className="flex gap-3 pb-2" style={{ width: 'max-content' }}>
-                  {section.products.map((product) => {
-                    const cartItem = cartItems.find(item => item.productId === product.id);
-                    const cartQuantity = cartItem?.quantity || 0;
-                    
-                    return (
-                      <ProductCard
-                        key={product.id}
-                        product={product}
-                        onAddToCart={handleAddToCart}
-                        onProductClick={handleProductClick}
-                        cartQuantity={cartQuantity}
-                      />
-                    );
-                  })}
-                </div>
+          {/* Container for spacing between sections */}
+          <div className="space-y-8 px-4 py-6">
+            {/* 4. VALUE PROPOSITIONS */}
+            <div className="bg-white rounded-lg p-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <ValuePropCard
+                  icon={TrendingDown}
+                  title="Lowest Prices"
+                  subtitle="Best deals in town"
+                  iconColor="text-green-600"
+                  iconBgColor="bg-green-100"
+                />
+                <ValuePropCard
+                  icon={Truck}
+                  title="Free Delivery"
+                  subtitle="On orders above ₹99"
+                  iconColor="text-blue-600"
+                  iconBgColor="bg-blue-100"
+                />
+                <ValuePropCard
+                  icon={Clock}
+                  title="5 Min Delivery"
+                  subtitle="Lightning fast service"
+                  iconColor="text-orange-600"
+                  iconBgColor="bg-orange-100"
+                />
               </div>
-            </section>
-          ))}
+            </div>
+
+            {/* Product Sections */}
+            {PRODUCT_SECTIONS.map((section) => (
+              <section key={section.title} className="bg-white rounded-lg p-6">
+                <Typography variant="h3" weight="bold" className="mb-4">
+                  {section.title}
+                </Typography>
+
+                {/* Horizontal scrollable product grid */}
+                {/* scrollbar-hide utility defined in tailwind.config.ts */}
+                <div className="overflow-x-auto scrollbar-hide -mx-6">
+                  <div className="flex gap-4 pb-2 px-4" style={{ width: 'max-content' }}>
+                    {section.products.map((product) => {
+                      const cartItem = cartItems.find(item => item.productId === product.id);
+                      const cartQuantity = cartItem?.quantity || 0;
+                      
+                      return (
+                        <ProductCard
+                          key={product.id}
+                          product={product}
+                          onAddToCart={handleAddToCart}
+                          onProductClick={handleProductClick}
+                          cartQuantity={cartQuantity}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+              </section>
+            ))}
+          </div>
         </div>
       </div>
     </BuyerLayout>
