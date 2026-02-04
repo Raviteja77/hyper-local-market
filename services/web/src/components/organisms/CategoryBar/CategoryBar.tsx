@@ -36,11 +36,11 @@ export const CategoryBar: React.FC<CategoryBarProps> = ({
               onClick={() => onCategoryClick?.(category.id)}
               className={`
                 flex flex-col items-center justify-center gap-1 px-4 py-3 min-w-fit
-                border-b-2 transition-all duration-200
+                border-b-2 transition-all duration-300 ease-in-out
                 ${
                   isActive
                     ? 'border-primary bg-primary-light'
-                    : 'border-transparent hover:bg-gray-50'
+                    : 'border-transparent hover:text-primary hover:bg-gray-50'
                 }
               `}
             >
