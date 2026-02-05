@@ -60,7 +60,7 @@ export const Colors: Story = {
 
 export const ZeptoProductTitle: Story = {
   render: () => (
-    <div className="p-4 bg-white rounded-lg border border-gray-200 max-w-xs">
+    <div className="p-4 bg-white-lg border border-gray-200 max-w-xs">
       <Typography variant="h4">Organic Milk 1L</Typography>
       <div className="flex items-baseline gap-2 mt-2">
         <Typography variant="body" weight="bold" color="primary">₹89</Typography>

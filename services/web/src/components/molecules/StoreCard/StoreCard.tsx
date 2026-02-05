@@ -26,7 +26,7 @@ export const StoreCard: React.FC<StoreCardProps> = ({
 }) => {
   return (
     <div
-      className={`bg-white rounded-lg shadow-md p-3 cursor-pointer hover:shadow-lg transition-shadow duration-200 ${className}`}
+      className={`bg-white-lg shadow-md p-3 cursor-pointer hover:shadow-lg transition-shadow duration-200 ${className}`}
       onClick={() => onClick(id)}
       role="button"
       tabIndex={0}
@@ -37,11 +37,11 @@ export const StoreCard: React.FC<StoreCardProps> = ({
       }}
     >
       <div className="flex items-start gap-3">
-        {/* Store image (square, rounded-lg, object-cover) on the left — ~64px */}
+        {/* Store image (square,-lg, object-cover) on the left — ~64px */}
         <img
           src={image}
           alt={name}
-          className="w-16 h-16 rounded-lg object-cover flex-shrink-0"
+          className="w-16 h-16-lg object-cover flex-shrink-0"
         />
 
         {/* Right side (flex column, gap-1) */}

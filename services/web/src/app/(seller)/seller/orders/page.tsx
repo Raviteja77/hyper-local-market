@@ -114,7 +114,7 @@ export default function SellerOrdersPage() {
         <div className="flex gap-2">
           <Button
             variant="secondary"
-            size="sm"
+            
             className="flex items-center gap-2"
           >
             <Icon name="Download" size={16} /> Export
@@ -168,18 +168,18 @@ export default function SellerOrdersPage() {
                     <Typography variant="h4" weight="bold">
                       {order.orderNumber}
                     </Typography>
-                    <OrderStatusBadge status={order.status} size="sm" />
+                    <OrderStatusBadge status={order.status}  />
                     {order.paymentStatus === "cod" && (
-                      <Badge variant="warning" size="sm">
+                      <Badge variant="info" >
                         Cash on Delivery
                       </Badge>
                     )}
                   </div>
                   <div className="flex items-center gap-2 text-gray-500 mb-4">
                     <Icon name="Clock" size={16} />
-                    <Typography variant="small">{order.createdAt}</Typography>
+                    <Typography variant="caption">{order.createdAt}</Typography>
                     <span>•</span>
-                    <Typography variant="small">
+                    <Typography variant="caption">
                       {order.customerName}
                     </Typography>
                   </div>
@@ -198,7 +198,7 @@ export default function SellerOrdersPage() {
                 {/* Actions & Total */}
                 <div className="flex flex-col justify-between items-end gap-4 min-w-[200px]">
                   <div className="text-right">
-                    <Typography variant="small" color="muted">
+                    <Typography variant="caption" color="muted">
                       Total Amount
                     </Typography>
                     <Typography variant="h3" weight="bold" color="primary">
@@ -211,7 +211,7 @@ export default function SellerOrdersPage() {
                       <>
                         <Button
                           variant="primary"
-                          size="sm"
+                          
                           onClick={() =>
                             handleStatusUpdate(order.id, "preparing")
                           }
@@ -221,7 +221,7 @@ export default function SellerOrdersPage() {
                         </Button>
                         <Button
                           variant="ghost"
-                          size="sm"
+                          
                           className="text-danger hover:bg-red-50 flex-1 sm:flex-none"
                           onClick={() =>
                             handleStatusUpdate(order.id, "cancelled")
@@ -234,7 +234,7 @@ export default function SellerOrdersPage() {
                     {order.status === "preparing" && (
                       <Button
                         variant="primary"
-                        size="sm"
+                        
                         onClick={() => handleStatusUpdate(order.id, "ready")}
                         fullWidth
                       >
@@ -242,7 +242,7 @@ export default function SellerOrdersPage() {
                       </Button>
                     )}
                     {order.status === "ready" && (
-                      <Button variant="secondary" size="sm" disabled fullWidth>
+                      <Button variant="secondary"  disabled fullWidth>
                         Waiting for Rider
                       </Button>
                     )}

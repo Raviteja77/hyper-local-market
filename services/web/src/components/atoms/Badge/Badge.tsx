@@ -40,7 +40,7 @@ export const Badge: React.FC<BadgeProps> = ({
     const textColor = variants[variant].split(' ').find(c => c.startsWith('text-')) || 'text-gray-700';
     return (
       <span className={`${baseStyles} ${className}`}>
-        <span className={`w-2 h-2 rounded-full ${dotVariants[variant]}`} />
+        <span className={`w-2 h-2-full ${dotVariants[variant]}`} />
         <span className={textColor}>{children}</span>
       </span>
     );
@@ -48,7 +48,7 @@ export const Badge: React.FC<BadgeProps> = ({
   
   return (
     <span
-      className={`${baseStyles} ${variants[variant]} px-2 py-0.5 text-xs rounded-full ${className}`}
+      className={`${baseStyles} ${variants[variant]} px-2 py-0.5 text-xs-full ${className}`}
     >
       {leftIcon && <span className="w-3 h-3">{leftIcon}</span>}
       {children}

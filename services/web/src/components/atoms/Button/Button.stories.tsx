@@ -56,7 +56,7 @@ export const Ghost: Story = {
 export const Sizes: Story = {
   render: () => (
     <div className="flex gap-2 items-center">
-      <Button size="sm">Small</Button>
+      <Button>Small</Button>
       <Button size="md">Medium</Button>
       <Button size="lg">Large</Button>
     </div>

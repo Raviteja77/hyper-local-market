@@ -67,7 +67,7 @@ export default function OrdersPage() {
                   <div>
                     <div className="flex items-center gap-3 mb-1">
                       <Typography variant="h4" weight="bold">#{order.orderId}</Typography>
-                      <Badge variant={getStatusVariant(order.status) as any} size="sm">
+                      <Badge variant={getStatusVariant(order.status) as any}>
                         {getStatusLabel(order.status)}
                       </Badge>
                     </div>
@@ -95,7 +95,7 @@ export default function OrdersPage() {
 
                 <div className="flex justify-end">
                   <Link href={`/orders/${order.orderId}`}>
-                    <Button variant="secondary" size="sm" className="flex items-center gap-2">
+                    <Button variant="secondary"  className="flex items-center gap-2">
                       View Details
                       <Icon name="ChevronRight" size={16} />
                     </Button>

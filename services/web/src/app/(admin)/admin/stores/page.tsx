@@ -47,7 +47,7 @@ export default function AdminStoresPage() {
           <Typography variant="h3" weight="bold" className="text-gray-900">
             {stores.length}
           </Typography>
-          <Typography variant="small" className="text-green-600 mt-2">
+          <Typography variant="caption" className="text-green-600 mt-2">
             +2 this month
           </Typography>
         </div>
@@ -59,7 +59,7 @@ export default function AdminStoresPage() {
           <Typography variant="h3" weight="bold" className="text-gray-900">
             {activeStores}
           </Typography>
-          <Typography variant="small" className="text-green-600 mt-2">
+          <Typography variant="caption" className="text-green-600 mt-2">
             {Math.round((activeStores / stores.length) * 100)}% active
           </Typography>
         </div>
@@ -71,7 +71,7 @@ export default function AdminStoresPage() {
           <Typography variant="h3" weight="bold" className="text-gray-900">
             ₹{(totalRevenue / 100000).toFixed(1)}L
           </Typography>
-          <Typography variant="small" className="text-green-600 mt-2">
+          <Typography variant="caption" className="text-green-600 mt-2">
             +15% from last month
           </Typography>
         </div>
@@ -87,7 +87,7 @@ export default function AdminStoresPage() {
             Manage and monitor all seller stores
           </Typography>
         </div>
-        <Button variant="primary" size="sm">
+        <Button variant="primary" >
           Add Store
         </Button>
       </div>
@@ -117,10 +117,10 @@ export default function AdminStoresPage() {
                 </Typography>
                 <div className="flex items-center gap-1 mt-2 text-gray-600">
                   <MapPin size={16} />
-                  <Typography variant="small">{store.location}</Typography>
+                  <Typography variant="caption">{store.location}</Typography>
                 </div>
               </div>
-              <Badge variant={store.status === 'active' ? 'success' : store.status === 'inactive' ? 'warning' : 'danger'}>
+              <Badge variant={store.status === 'active' ? 'delivery' : store.status === 'inactive' ? 'info' : 'error'}>
                 {store.status.charAt(0).toUpperCase() + store.status.slice(1)}
               </Badge>
             </div>
@@ -128,26 +128,26 @@ export default function AdminStoresPage() {
             {/* Store Stats */}
             <div className="space-y-3 mb-4 pb-4 border-b border-gray-100">
               <div className="flex justify-between items-center">
-                <Typography variant="small" className="text-gray-600">
+                <Typography variant="caption" className="text-gray-600">
                   Products
                 </Typography>
-                <Typography variant="small" weight="bold" className="text-gray-900">
+                <Typography variant="caption" weight="bold" className="text-gray-900">
                   {store.products}
                 </Typography>
               </div>
               <div className="flex justify-between items-center">
-                <Typography variant="small" className="text-gray-600">
+                <Typography variant="caption" className="text-gray-600">
                   Revenue
                 </Typography>
-                <Typography variant="small" weight="bold" className="text-gray-900">
+                <Typography variant="caption" weight="bold" className="text-gray-900">
                   ₹{store.revenue.toLocaleString()}
                 </Typography>
               </div>
               <div className="flex justify-between items-center">
-                <Typography variant="small" className="text-gray-600">
+                <Typography variant="caption" className="text-gray-600">
                   Rating
                 </Typography>
-                <Typography variant="small" weight="bold" className="text-amber-600">
+                <Typography variant="caption" weight="bold" className="text-amber-600">
                   ⭐ {store.rating}
                 </Typography>
               </div>

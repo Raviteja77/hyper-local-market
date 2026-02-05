@@ -68,12 +68,12 @@ export const Interactive: Story = {
 // Story 4: "On Store Card" — embedded in a mini StoreCard-like layout
 export const OnStoreCard: Story = {
   render: () => (
-    <div className="bg-white rounded-lg shadow-md p-4 border border-gray-100 max-w-sm">
+    <div className="bg-white-lg shadow-md p-4 border border-gray-100 max-w-sm">
       <div className="flex items-start gap-3">
         <img
           src="https://picsum.photos/seed/store1/64/64"
           alt="Store"
-          className="w-16 h-16 rounded-lg object-cover"
+          className="w-16 h-16-lg object-cover"
         />
         <div className="flex-1">
           <h4 className="text-base font-semibold text-gray-900 mb-1">Quick Mart</h4>
@@ -81,7 +81,7 @@ export const OnStoreCard: Story = {
             8-12 min
           </Badge>
           <div className="mt-2">
-            <RatingStars rating={4.5} size="sm" showNumeric />
+            <RatingStars rating={4.5} showNumeric />
           </div>
           <p className="text-xs text-success mt-1">Free delivery</p>
         </div>

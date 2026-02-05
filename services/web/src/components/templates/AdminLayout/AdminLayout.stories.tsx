@@ -30,25 +30,25 @@ export const Dashboard: Story = {
           Dashboard Overview
         </Typography>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-            <Typography variant="small" color="muted">Total Orders</Typography>
+          <div className="bg-white p-6-lg shadow-sm border border-gray-200">
+            <Typography variant="caption" color="muted">Total Orders</Typography>
             <Typography variant="h3" weight="bold" color="primary" className="mt-2">1,234</Typography>
-            <Typography variant="small" color="success" className="mt-1">↑ 12% from last month</Typography>
+            <Typography variant="caption" color="success" className="mt-1">↑ 12% from last month</Typography>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-            <Typography variant="small" color="muted">Active Users</Typography>
+          <div className="bg-white p-6-lg shadow-sm border border-gray-200">
+            <Typography variant="caption" color="muted">Active Users</Typography>
             <Typography variant="h3" weight="bold" color="primary" className="mt-2">5,678</Typography>
-            <Typography variant="small" color="success" className="mt-1">↑ 8% from last month</Typography>
+            <Typography variant="caption" color="success" className="mt-1">↑ 8% from last month</Typography>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-            <Typography variant="small" color="muted">Total Stores</Typography>
+          <div className="bg-white p-6-lg shadow-sm border border-gray-200">
+            <Typography variant="caption" color="muted">Total Stores</Typography>
             <Typography variant="h3" weight="bold" color="primary" className="mt-2">234</Typography>
-            <Typography variant="small" color="success" className="mt-1">↑ 5% from last month</Typography>
+            <Typography variant="caption" color="success" className="mt-1">↑ 5% from last month</Typography>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-            <Typography variant="small" color="muted">Revenue</Typography>
+          <div className="bg-white p-6-lg shadow-sm border border-gray-200">
+            <Typography variant="caption" color="muted">Revenue</Typography>
             <Typography variant="h3" weight="bold" color="primary" className="mt-2">₹2.4M</Typography>
-            <Typography variant="small" color="success" className="mt-1">↑ 15% from last month</Typography>
+            <Typography variant="caption" color="success" className="mt-1">↑ 15% from last month</Typography>
           </div>
         </div>
       </div>
@@ -98,7 +98,7 @@ export const Users: Story = {
         <Typography variant="h2" weight="bold" className="mb-6">
           User Management
         </Typography>
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-white-lg shadow-sm border border-gray-200 p-6">
           <Typography variant="body" color="muted">
             User list and management tools
           </Typography>
@@ -120,7 +120,7 @@ export const Analytics: Story = {
         <Typography variant="h2" weight="bold" className="mb-6">
           Analytics & Reports
         </Typography>
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 h-96 flex items-center justify-center">
+        <div className="bg-white-lg shadow-sm border border-gray-200 p-6 h-96 flex items-center justify-center">
           <Typography variant="body" color="muted">
             Charts and analytics content
           </Typography>

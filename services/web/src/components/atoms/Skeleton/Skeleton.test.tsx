@@ -27,9 +27,9 @@ describe('Skeleton', () => {
   it('can be used for different shapes', () => {
     const { container } = render(
       <div>
-        <Skeleton className="w-12 h-12 rounded-full" />
-        <Skeleton className="w-full h-4 rounded" />
-        <Skeleton className="w-3/4 h-4 rounded" />
+        <Skeleton className="w-12 h-12-full" />
+        <Skeleton className="w-full h-4" />
+        <Skeleton className="w-3/4 h-4" />
       </div>
     );
     const skeletons = container.querySelectorAll('.animate-pulse');

@@ -23,7 +23,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     fullWidth = false,
     ...props
   }, ref) => {
-    const baseStyles = 'w-full rounded-lg bg-white border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-opacity-30 text-gray-900 placeholder:text-gray-400';
+    const baseStyles = 'w-full-lg bg-white border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-opacity-30 text-gray-900 placeholder:text-gray-400';
     
     const stateStyles = error
       ? 'border-error focus:ring-error focus:border-error'

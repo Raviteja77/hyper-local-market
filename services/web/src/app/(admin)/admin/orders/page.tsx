@@ -22,19 +22,18 @@ const mockOrders: Order[] = [
   { id: '5', orderId: 'ORD-005', customer: 'Charlie Davis', store: 'Quick Shop', total: 320, status: 'completed', date: '2023-10-23', items: 6 },
 ];
 
-const getStatusColor = (status: Order['status']) => {
+const getStatusColor = (status: Order['status']): 'discount' | 'delivery' | 'stock' | 'error' | 'info' | 'default' => {
   switch (status) {
     case 'pending':
-      return 'warning';
+      return 'info';
     case 'processing':
       return 'info';
     case 'completed':
-    case 'completed':
-      return 'success';
+      return 'delivery';
     case 'cancelled':
-      return 'danger';
+      return 'error';
     default:
-      return 'secondary';
+      return 'default';
   }
 };
 
@@ -57,10 +56,10 @@ export default function AdminOrdersPage() {
           </Typography>
         </div>
         <div className="flex gap-2">
-          <Button variant="secondary" size="sm">
+          <Button variant="secondary" >
             Export CSV
           </Button>
-          <Button variant="primary" size="sm">
+          <Button variant="primary" >
             Add Filter
           </Button>
         </div>

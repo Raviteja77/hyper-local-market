@@ -72,7 +72,7 @@ export const Footer: React.FC<FooterProps> = ({
                 {brandName}
               </Typography>
             </div>
-            <Typography variant="small" className="text-gray-400">
+            <Typography variant="caption" className="text-gray-400">
               Your local grocery delivery platform. Fresh products from nearby stores, delivered fast.
             </Typography>
           </div>
@@ -102,7 +102,7 @@ export const Footer: React.FC<FooterProps> = ({
         {/* Social Links & Copyright */}
         <div className="mt-12 pt-8 border-t border-gray-800">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <Typography variant="small" className="text-gray-400">
+            <Typography variant="caption" className="text-gray-400">
               {copyrightText}
             </Typography>
 

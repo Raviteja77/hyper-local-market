@@ -127,7 +127,7 @@ export default function RegisterPage() {
           {/* Manual Select Field since FormField only supports Input */}
           <div className="w-full">
             <label className="block mb-1.5">
-              <Typography variant="small" weight="medium" color="default">
+              <Typography variant="caption" weight="medium" color="primary">
                 Account Type <span className="text-danger ml-1">*</span>
               </Typography>
             </label>

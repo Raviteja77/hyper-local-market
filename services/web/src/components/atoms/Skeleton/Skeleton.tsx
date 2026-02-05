@@ -6,7 +6,7 @@ export interface SkeletonProps {
 
 export const Skeleton: React.FC<SkeletonProps> = ({ className = '' }) => (
   <div
-    className={`animate-pulse bg-gray-200 rounded ${className}`}
+    className={`animate-pulse bg-gray-200 ${className}`}
     aria-busy="true"
     aria-live="polite"
     role="status"

@@ -1,14 +1,9 @@
 'use client';
 
 import { useEffect } from 'react';
-import { Inter } from "next/font/google";
 import "../globals.css";
 import { ToastContainer } from "@/components/organisms";
 import { useCartStore } from "@/store";
-
-const inter = Inter({
-  subsets: ["latin"],
-});
 
 export default function BuyerLayout({
   children,
@@ -24,9 +19,7 @@ export default function BuyerLayout({
   
   return (
     <html lang="en">
-      <body
-        className={`${inter.className} antialiased bg-gray-50`}
-      >
+      <body className="antialiased bg-gray-50">
         {children}
         <ToastContainer />
       </body>

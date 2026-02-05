@@ -23,7 +23,7 @@ const ToastItem: React.FC<{ toast: Toast; onRemove: (id: string) => void }> = ({
 
   return (
     <div
-      className={`flex items-start gap-3 p-4 rounded-lg border shadow-lg ${bgColors[toast.type]} animate-slide-in`}
+      className={`flex items-start gap-3 p-4-lg border shadow-lg ${bgColors[toast.type]} animate-slide-in`}
     >
       {icons[toast.type]}
       <Typography variant="body" className="flex-1">

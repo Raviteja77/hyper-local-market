@@ -83,7 +83,7 @@ export const SellerLayout: React.FC<SellerLayoutProps> = ({
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
+            className="lg:hidden p-2 hover:bg-gray-100-lg"
           >
             {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -95,7 +95,7 @@ export const SellerLayout: React.FC<SellerLayoutProps> = ({
               <Typography variant="body" weight="semibold">
                 {storeName}
               </Typography>
-              <Typography variant="small" color="muted">
+              <Typography variant="caption" color="muted">
                 Seller Dashboard
               </Typography>
             </div>
@@ -103,17 +103,17 @@ export const SellerLayout: React.FC<SellerLayoutProps> = ({
 
           {/* Online Toggle */}
           <div className="flex items-center gap-3">
-            <Typography variant="small" color="muted" className="hidden sm:block">
+            <Typography variant="caption" color="muted" className="hidden sm:block">
               {isOnline ? 'Online' : 'Offline'}
             </Typography>
             <button
               onClick={() => onToggleOnline?.(!isOnline)}
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+              className={`relative inline-flex h-6 w-11 items-center-full transition-colors ${
                 isOnline ? 'bg-primary' : 'bg-gray-300'
               }`}
             >
               <span
-                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                className={`inline-block h-4 w-4 transform-full bg-white transition-transform ${
                   isOnline ? 'translate-x-6' : 'translate-x-1'
                 }`}
               />
@@ -132,10 +132,10 @@ export const SellerLayout: React.FC<SellerLayoutProps> = ({
           <div className="h-full flex flex-col pt-4">
             {/* Pending Orders Alert */}
             {pendingOrders > 0 && (
-              <div className="mx-4 mb-4 p-3 bg-warning bg-opacity-10 border border-warning rounded-lg">
+              <div className="mx-4 mb-4 p-3 bg-warning bg-opacity-10 border border-warning-lg">
                 <div className="flex items-center gap-2">
                   <AlertCircle size={20} color="#F59E0B" />
-                  <Typography variant="small" weight="medium" color="default">
+                  <Typography variant="caption" weight="medium" color="primary">
                     {pendingOrders} pending order{pendingOrders !== 1 ? 's' : ''}
                   </Typography>
                 </div>
@@ -151,7 +151,7 @@ export const SellerLayout: React.FC<SellerLayoutProps> = ({
                   <button
                     key={item.id}
                     onClick={() => handleMenuClick(item.id)}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                    className={`w-full flex items-center gap-3 px-4 py-3-lg transition-colors ${
                       isActive
                         ? 'bg-primary text-white'
                         : 'text-gray-700 hover:bg-gray-100'
@@ -171,8 +171,8 @@ export const SellerLayout: React.FC<SellerLayoutProps> = ({
                     {item.badge !== undefined && item.badge > 0 && (
                       <Badge
                         variant={isActive ? 'secondary' : 'danger'}
-                        size="sm"
-                        rounded
+                       
+                       
                         className="ml-auto"
                       >
                         {item.badge}
@@ -185,13 +185,13 @@ export const SellerLayout: React.FC<SellerLayoutProps> = ({
 
             {/* Help & Logout */}
             <div className="p-4 border-t border-gray-200">
-              <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-100-lg transition-colors">
                 <HelpCircle size={20} color="#374151" />
                 <Typography variant="body" weight="medium">
                   Help & Support
                 </Typography>
               </button>
-              <button className="w-full flex items-center gap-3 px-4 py-3 text-danger hover:bg-red-50 rounded-lg transition-colors mt-1">
+              <button className="w-full flex items-center gap-3 px-4 py-3 text-danger hover:bg-red-50-lg transition-colors mt-1">
                 <LogOut size={20} color="#EF4444" />
                 <Typography variant="body" weight="medium" color="error">
                   Logout

@@ -99,7 +99,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
           <div className="flex items-center gap-4">
             <button
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
+              className="lg:hidden p-2 hover:bg-gray-100-lg"
             >
               {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -132,11 +132,11 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
           <div className="flex items-center gap-3">
             {/* Notifications */}
             {showNotifications && (
-              <button className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors">
+              <button className="relative p-2 hover:bg-gray-100-lg transition-colors">
                 <Bell size={24} color="#374151" />
                 {notificationCount > 0 && (
                   <div className="absolute top-1 right-1">
-                    <Badge variant="danger" size="sm" rounded>
+                    <Badge variant="error">
                       {notificationCount > 9 ? '9+' : notificationCount}
                     </Badge>
                   </div>
@@ -146,8 +146,8 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
 
             {/* Admin Profile */}
             <div className="flex items-center gap-2 pl-2 border-l border-gray-200">
-              <Avatar src={adminAvatar} alt={adminName} size="sm" />
-              <Typography variant="small" weight="medium" className="hidden sm:block">
+              <Avatar src={adminAvatar} alt={adminName} />
+              <Typography variant="caption" weight="medium" className="hidden sm:block">
                 {adminName}
               </Typography>
             </div>
@@ -166,7 +166,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
               fullWidth
-              size="sm"
+             
               className="pl-10"
             />
           </div>
@@ -190,7 +190,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
                   <button
                     key={item.id}
                     onClick={() => handleMenuClick(item.id)}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                    className={`w-full flex items-center gap-3 px-4 py-3-lg transition-colors ${
                       isActive
                         ? 'bg-primary text-white'
                         : 'text-gray-700 hover:bg-gray-100'
@@ -210,8 +210,8 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
                     {item.badge !== undefined && item.badge > 0 && (
                       <Badge
                         variant={isActive ? 'secondary' : 'danger'}
-                        size="sm"
-                        rounded
+                       
+                       
                         className="ml-auto"
                       >
                         {item.badge}
@@ -224,7 +224,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
 
             {/* Logout */}
             <div className="px-2 pt-4 border-t border-gray-200">
-              <button className="w-full flex items-center gap-3 px-4 py-3 text-danger hover:bg-red-50 rounded-lg transition-colors">
+              <button className="w-full flex items-center gap-3 px-4 py-3 text-danger hover:bg-red-50-lg transition-colors">
                 <LogOut size={20} color="#EF4444" />
                 <Typography variant="body" weight="medium" color="error">
                   Logout

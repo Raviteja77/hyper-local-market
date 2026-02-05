@@ -68,7 +68,7 @@ export const DotVariants: Story = {
 
 export const OnProductCardZepto: Story = {
   render: () => (
-    <div className="relative w-48 h-32 bg-white rounded-lg border border-gray-200 p-4">
+    <div className="relative w-48 h-32 bg-white-lg border border-gray-200 p-4">
       <div className="absolute top-2 right-2">
         <Badge variant="discount">20% OFF</Badge>
       </div>

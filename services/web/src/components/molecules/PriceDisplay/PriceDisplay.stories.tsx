@@ -49,7 +49,7 @@ export const AllSizes: Story = {
     <div className="flex flex-col gap-6">
       <div>
         <h3 className="text-xs font-semibold text-gray-500 uppercase mb-2">Small (sm)</h3>
-        <PriceDisplay currentPrice={177} originalPrice={249} discountPercent={72} size="sm" />
+        <PriceDisplay currentPrice={177} originalPrice={249} discountPercent={72} />
       </div>
       <div>
         <h3 className="text-xs font-semibold text-gray-500 uppercase mb-2">Medium (md) - Default</h3>

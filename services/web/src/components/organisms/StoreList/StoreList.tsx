@@ -73,7 +73,7 @@ export const StoreList: React.FC<StoreListProps> = ({
         <Typography variant="h3" weight="bold">
           {title}
         </Typography>
-        <Typography variant="small" color="muted">
+        <Typography variant="caption" color="muted">
           {stores.length} store{stores.length !== 1 ? 's' : ''} found
         </Typography>
       </div>
@@ -81,12 +81,12 @@ export const StoreList: React.FC<StoreListProps> = ({
       {/* Sort Options */}
       {showSortOptions && (
         <div className="flex items-center gap-2 mb-4 overflow-x-auto pb-2">
-          <Typography variant="small" color="muted" className="whitespace-nowrap">
+          <Typography variant="caption" color="muted" className="whitespace-nowrap">
             Sort by:
           </Typography>
           <button
             onClick={() => handleSort('distance')}
-            className={`px-3 py-1.5 rounded-full text-sm whitespace-nowrap transition-colors ${
+            className={`px-3 py-1.5-full text-sm whitespace-nowrap transition-colors ${
               sortBy === 'distance'
                 ? 'bg-primary text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -99,7 +99,7 @@ export const StoreList: React.FC<StoreListProps> = ({
           </button>
           <button
             onClick={() => handleSort('rating')}
-            className={`px-3 py-1.5 rounded-full text-sm whitespace-nowrap transition-colors ${
+            className={`px-3 py-1.5-full text-sm whitespace-nowrap transition-colors ${
               sortBy === 'rating'
                 ? 'bg-primary text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -112,7 +112,7 @@ export const StoreList: React.FC<StoreListProps> = ({
           </button>
           <button
             onClick={() => handleSort('eta')}
-            className={`px-3 py-1.5 rounded-full text-sm whitespace-nowrap transition-colors ${
+            className={`px-3 py-1.5-full text-sm whitespace-nowrap transition-colors ${
               sortBy === 'eta'
                 ? 'bg-primary text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'

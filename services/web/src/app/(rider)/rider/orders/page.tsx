@@ -22,12 +22,12 @@ export default function RiderOrdersPage() {
               <div className="flex items-center gap-2 mb-1">
                 <Typography variant="body" weight="semibold">{order.store}</Typography>
                 {order.status === 'cancelled' ? (
-                  <Badge variant="danger" size="sm">Cancelled</Badge>
+                  <Badge variant="error" >Cancelled</Badge>
                 ) : (
-                  <Badge variant="success" size="sm">Delivered</Badge>
+                  <Badge variant="delivery" >Delivered</Badge>
                 )}
               </div>
-              <Typography variant="small" color="muted">{order.date} • #{order.id}</Typography>
+              <Typography variant="caption" color="muted">{order.date} • #{order.id}</Typography>
             </div>
             <div className="text-right">
               <Typography variant="h4" weight="bold" color={order.status === 'cancelled' ? 'muted' : 'primary'}>

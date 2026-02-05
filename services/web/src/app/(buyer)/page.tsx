@@ -252,7 +252,7 @@ function ProductCard({ product, onAddToCart, onProductClick, cartQuantity }: Pro
 
         {/* Rating */}
         <div className="flex items-center gap-1">
-          <RatingStars rating={product.rating} size="sm" />
+          <RatingStars rating={product.rating}  />
           <Typography variant="caption" color="muted" className="text-xs">
             ({product.reviews.toLocaleString()})
           </Typography>

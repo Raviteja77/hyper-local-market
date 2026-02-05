@@ -56,7 +56,7 @@ export const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = ({
 
   return (
     <div 
-      className="relative w-full h-48 overflow-hidden rounded-xl mr-4 my-4"
+      className="relative w-full h-48 overflow-hidden-xl mr-4 my-4"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocus={() => setIsPaused(true)}
@@ -76,7 +76,7 @@ export const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = ({
         <div className="flex-1 space-y-2">
           <h2 className="text-2xl font-bold">{currentBanner.title}</h2>
           <p className="text-lg opacity-90">{currentBanner.subtitle}</p>
-          <button className="mt-4 px-6 py-2 bg-white text-gray-900 rounded-full font-semibold hover:bg-opacity-90 transition-all focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2">
+          <button className="mt-4 px-6 py-2 bg-white text-gray-900-full font-semibold hover:bg-opacity-90 transition-all focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2">
             {currentBanner.ctaText}
           </button>
         </div>
@@ -99,14 +99,14 @@ export const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = ({
         <>
           <button
             onClick={goToPrevious}
-            className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 backdrop-blur-sm flex items-center justify-center transition-all"
+            className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10-full bg-white bg-opacity-20 hover:bg-opacity-30 backdrop-blur-sm flex items-center justify-center transition-all"
             aria-label="Previous banner"
           >
             <ChevronLeft size={24} className="text-white" />
           </button>
           <button
             onClick={goToNext}
-            className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 backdrop-blur-sm flex items-center justify-center transition-all"
+            className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10-full bg-white bg-opacity-20 hover:bg-opacity-30 backdrop-blur-sm flex items-center justify-center transition-all"
             aria-label="Next banner"
           >
             <ChevronRight size={24} className="text-white" />
@@ -121,7 +121,7 @@ export const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = ({
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-2 h-2 rounded-full transition-all ${
+              className={`w-2 h-2-full transition-all ${
                 index === currentIndex
                   ? 'bg-white w-8'
                   : 'bg-white bg-opacity-50 hover:bg-opacity-75'

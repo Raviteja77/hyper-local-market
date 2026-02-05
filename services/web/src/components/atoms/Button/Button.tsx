@@ -53,7 +53,7 @@ export const Button: React.FC<ButtonProps> = ({
     >
       {isLoading ? (
         <div className="flex items-center justify-center">
-          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" aria-label="Loading" />
+          <div className="w-4 h-4 border-2 border-white border-t-transparent-full animate-spin" aria-label="Loading" />
         </div>
       ) : (
         <>

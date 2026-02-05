@@ -53,7 +53,7 @@ export const Interactive: Story = {
 
     return (
       <div>
-        <div className="mb-4 p-4 bg-gray-100 rounded-lg">
+        <div className="mb-4 p-4 bg-gray-100-lg">
           <p className="text-sm text-gray-600 mb-2">Current Location:</p>
           <p className="text-lg font-semibold text-gray-900">{currentLocation}</p>
         </div>
@@ -93,7 +93,7 @@ export const WithSearchInteraction: Story = {
     return (
       <div>
         {selectedLocation && (
-          <div className="mb-4 p-4 bg-green-100 border border-green-300 rounded-lg">
+          <div className="mb-4 p-4 bg-green-100 border border-green-300-lg">
             <p className="text-sm text-green-800">
               Location selected: <strong>{selectedLocation}</strong>
             </p>
@@ -132,7 +132,7 @@ export const FullscreenDemo: Story = {
             
             <button
               onClick={() => setIsOpen(true)}
-              className="flex items-center gap-2 px-4 py-2 hover:bg-gray-50 rounded-lg transition-colors border border-gray-200"
+              className="flex items-center gap-2 px-4 py-2 hover:bg-gray-50-lg transition-colors border border-gray-200"
             >
               <span className="text-sm text-gray-600">Deliver to</span>
               <span className="text-sm font-medium text-gray-900">{currentLocation}</span>
@@ -144,8 +144,8 @@ export const FullscreenDemo: Story = {
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Products</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-                <div className="h-32 bg-gray-200 rounded-md mb-4"></div>
+              <div key={i} className="bg-white p-4-lg shadow-sm border border-gray-200">
+                <div className="h-32 bg-gray-200-md mb-4"></div>
                 <h3 className="font-semibold text-gray-900">Product {i}</h3>
                 <p className="text-sm text-gray-600">Sample product description</p>
               </div>
