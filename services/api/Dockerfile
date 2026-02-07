@@ -15,9 +15,12 @@ RUN apt-get update && apt-get install -y \
 COPY requirements*.txt ./
 
 RUN pip install --upgrade pip && \
+    pip install setuptools && \
     pip install -r requirements.txt
 
 COPY . .
+
+RUN python manage.py migrate
 
 EXPOSE 8000
 
