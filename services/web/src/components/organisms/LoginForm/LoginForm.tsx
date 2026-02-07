@@ -96,24 +96,24 @@ export const LoginForm: React.FC<LoginFormProps> = ({
   return (
     <div className={`bg-white rounded-lg shadow-lg p-8 w-full max-w-md ${className}`}>
       <div className="flex items-center justify-center mb-6">
-        <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
+        <div className="w-16 h-16 bg-primary-full flex items-center justify-center">
           <ShoppingBag size={32} color="white" />
         </div>
       </div>
 
-      <Typography variant="h2" weight="bold" align="center" className="mb-2">
+      <Typography variant="h2" weight="bold" className="mb-2">
         {mode === 'phone' ? 'Welcome Back' : 'Verify OTP'}
       </Typography>
-      <Typography variant="body" color="muted" align="center" className="mb-6">
+      <Typography variant="body" color="muted" className="mb-6">
         {mode === 'phone'
           ? 'Enter your phone number to continue'
           : `Enter the 6-digit code sent to +91 ${phone}`}
       </Typography>
 
       {error && (
-        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2">
+        <div className="mb-4 p-3 bg-red-50 border border-red-200-lg flex items-start gap-2">
           <AlertCircle size={20} color="#EF4444" />
-          <Typography variant="small" color="error">
+          <Typography variant="caption" color="error">
             {error}
           </Typography>
         </div>
@@ -200,7 +200,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
       )}
 
       <div className="mt-6 text-center">
-        <Typography variant="small" color="muted">
+        <Typography variant="caption" color="muted">
           By continuing, you agree to our{' '}
           <a href="/terms" className="text-primary hover:underline">
             Terms of Service

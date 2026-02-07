@@ -78,7 +78,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
           >
             {loadingMore ? (
               <>
-                <Spinner size="sm" color="white" className="mr-2" />
+                <Spinner color="white" className="mr-2" />
                 Loading...
               </>
             ) : (

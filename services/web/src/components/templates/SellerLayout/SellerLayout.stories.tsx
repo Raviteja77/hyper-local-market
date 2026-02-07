@@ -30,16 +30,16 @@ export const Dashboard: Story = {
           Dashboard
         </Typography>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <Typography variant="small" color="muted">Today's Orders</Typography>
+          <div className="bg-white p-6-lg shadow-sm">
+            <Typography variant="caption" color="muted">Today's Orders</Typography>
             <Typography variant="h3" weight="bold" color="primary" className="mt-2">24</Typography>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <Typography variant="small" color="muted">Revenue</Typography>
+          <div className="bg-white p-6-lg shadow-sm">
+            <Typography variant="caption" color="muted">Revenue</Typography>
             <Typography variant="h3" weight="bold" color="primary" className="mt-2">₹3,450</Typography>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <Typography variant="small" color="muted">Pending Orders</Typography>
+          <div className="bg-white p-6-lg shadow-sm">
+            <Typography variant="caption" color="muted">Pending Orders</Typography>
             <Typography variant="h3" weight="bold" color="secondary" className="mt-2">5</Typography>
           </div>
         </div>

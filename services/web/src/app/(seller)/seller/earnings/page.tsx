@@ -88,14 +88,14 @@ export default function SellerEarningsPage() {
         <div className="flex gap-2">
           <Button
             variant="secondary"
-            size="sm"
+            
             className="flex items-center gap-2"
           >
             <Icon name="Calendar" size={16} /> {dateRange}
           </Button>
           <Button
             variant="primary"
-            size="sm"
+            
             className="flex items-center gap-2"
           >
             <Icon name="Download" size={16} /> Download Report
@@ -110,7 +110,7 @@ export default function SellerEarningsPage() {
             key={index}
             className="bg-white p-6 rounded-lg shadow-sm border border-gray-200"
           >
-            <Typography variant="small" color="muted" className="mb-1">
+            <Typography variant="caption" color="muted" className="mb-1">
               {stat.label}
             </Typography>
             <Typography variant="h3" weight="bold" className="mb-2">
@@ -131,7 +131,7 @@ export default function SellerEarningsPage() {
           <Typography variant="h4" weight="bold">
             Recent Transactions
           </Typography>
-          <Button variant="ghost" size="sm">
+          <Button variant="ghost" >
             View All
           </Button>
         </div>
@@ -175,9 +175,9 @@ export default function SellerEarningsPage() {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <Badge
                       variant={
-                        txn.status === "Completed" ? "success" : "warning"
+                        txn.status === "Completed" ? "delivery" : "info"
                       }
-                      size="sm"
+                      
                     >
                       {txn.status}
                     </Badge>

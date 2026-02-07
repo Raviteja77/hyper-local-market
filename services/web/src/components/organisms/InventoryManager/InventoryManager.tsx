@@ -63,8 +63,8 @@ export const InventoryManager: React.FC<InventoryManagerProps> = ({
             {title}
           </Typography>
           <div className="flex items-center gap-2">
-            <Badge variant="success">{inStockCount} In Stock</Badge>
-            <Badge variant="danger">{items.length - inStockCount} Out of Stock</Badge>
+            <Badge variant="delivery">{inStockCount} In Stock</Badge>
+            <Badge variant="error">{items.length - inStockCount} Out of Stock</Badge>
           </div>
         </div>
 
@@ -123,10 +123,10 @@ export const InventoryManager: React.FC<InventoryManagerProps> = ({
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-16 h-16 object-cover rounded"
+                      className="w-16 h-16 object-cover"
                     />
                   ) : (
-                    <div className="w-16 h-16 bg-gray-100 rounded flex items-center justify-center">
+                    <div className="w-16 h-16 bg-gray-100 flex items-center justify-center">
                       <Package size={24} color="#D1D5DB" />
                     </div>
                   )}
@@ -136,7 +136,7 @@ export const InventoryManager: React.FC<InventoryManagerProps> = ({
                     <Typography variant="body" weight="semibold" className="mb-1">
                       {item.name}
                     </Typography>
-                    <Typography variant="small" color="muted">
+                    <Typography variant="caption" color="muted">
                       {item.category}
                     </Typography>
                   </div>
@@ -149,14 +149,14 @@ export const InventoryManager: React.FC<InventoryManagerProps> = ({
                           type="number"
                           value={displayPrice}
                           onChange={(e) => handlePriceChange(item.id, e.target.value)}
-                          size="sm"
+                         
                           className="w-24"
                           disabled={!isEditingPrice && !item.inStock}
                         />
                         {isEditingPrice ? (
                           <Button
                             variant="primary"
-                            size="sm"
+                           
                             onClick={() => handlePriceSave(item.id)}
                           >
                             Save
@@ -164,7 +164,7 @@ export const InventoryManager: React.FC<InventoryManagerProps> = ({
                         ) : (
                           <button
                             onClick={() => handlePriceChange(item.id, item.price.toString())}
-                            className="p-2 hover:bg-gray-100 rounded"
+                            className="p-2 hover:bg-gray-100"
                             disabled={!item.inStock}
                           >
                             <Edit size={18} color="#6B7280" />

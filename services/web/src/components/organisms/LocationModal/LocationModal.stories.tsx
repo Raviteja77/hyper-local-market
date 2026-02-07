@@ -145,7 +145,7 @@ export const FullscreenDemo: Story = {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[1, 2, 3].map((i) => (
               <div key={i} className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-                <div className="h-32 bg-gray-200 rounded-md mb-4"></div>
+                <div className="h-32 bg-gray-200-md mb-4"></div>
                 <h3 className="font-semibold text-gray-900">Product {i}</h3>
                 <p className="text-sm text-gray-600">Sample product description</p>
               </div>

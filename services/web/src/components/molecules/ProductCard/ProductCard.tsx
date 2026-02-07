@@ -51,12 +51,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       onClick={() => onClick?.(id)}
     >
       {/* IMAGE AREA */}
-      <div className="relative overflow-hidden rounded-t-lg">
+      <div className="relative overflow-hidden-t-lg">
         <img src={image} alt={name} className="w-full aspect-square object-cover group-hover:brightness-105 transition-all duration-200" />
         
         {/* NEW badge: top-left, absolute */}
         {isNew && (
-          <span className="absolute top-2 left-2 bg-primary text-white text-[9px] font-bold rounded px-1.5 py-0.5">
+          <span className="absolute top-2 left-2 bg-primary text-white text-[9px] font-bold px-1.5 py-0.5">
             NEW
           </span>
         )}
@@ -65,7 +65,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         <div className="absolute bottom-2 right-2">
           {quantity === 0 ? (
             <button
-              className="bg-primary text-white text-xs font-bold rounded-full px-3 py-1 shadow-sm hover:bg-primary-hover hover:scale-105 active:scale-95 transition-all duration-150"
+              className="bg-primary text-white text-xs font-bold-full px-3 py-1 shadow-sm hover:bg-primary-hover hover:scale-105 active:scale-95 transition-all duration-150"
               onClick={(e) => {
                 e.stopPropagation();
                 onAdd(id);
@@ -74,7 +74,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               ADD
             </button>
           ) : (
-            <div className="flex items-center bg-primary rounded-full shadow-sm overflow-hidden">
+            <div className="flex items-center bg-primary-full shadow-sm overflow-hidden">
               <button
                 className="text-white px-2 py-1 text-sm hover:bg-primary-hover transition duration-150"
                 onClick={(e) => {
@@ -105,7 +105,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       <div className="px-2 pt-2">
         <div className="flex items-baseline gap-1.5">
           {hasDiscount ? (
-            <span className="bg-primary text-white text-sm font-bold rounded px-1.5 py-0.5">
+            <span className="bg-primary text-white text-sm font-bold px-1.5 py-0.5">
               ₹{price}
             </span>
           ) : (

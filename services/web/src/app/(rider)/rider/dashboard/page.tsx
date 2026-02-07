@@ -65,8 +65,8 @@ export default function RiderDashboardPage() {
           {/* Header */}
           <div className="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
             <div className="flex items-center gap-2">
-              <Badge variant="primary">Picked Up</Badge>
-              <Typography variant="small" color="muted">#{activeOrder.id}</Typography>
+              <Badge variant="delivery">Picked Up</Badge>
+              <Typography variant="caption" color="muted">#{activeOrder.id}</Typography>
             </div>
             <Typography variant="h4" weight="bold" color="primary">₹{activeOrder.earning}</Typography>
           </div>
@@ -77,17 +77,17 @@ export default function RiderDashboardPage() {
               {/* Pickup */}
               <div className="relative">
                 <div className="absolute -left-[39px] top-0 w-5 h-5 rounded-full border-4 border-white bg-gray-300" />
-                <Typography variant="small" color="muted" className="mb-1">PICKUP</Typography>
+                <Typography variant="caption" color="muted" className="mb-1">PICKUP</Typography>
                 <Typography variant="body" weight="semibold">{activeOrder.storeName}</Typography>
-                <Typography variant="small" color="muted">{activeOrder.storeAddress}</Typography>
+                <Typography variant="caption" color="muted">{activeOrder.storeAddress}</Typography>
               </div>
 
               {/* Drop */}
               <div className="relative">
                 <div className="absolute -left-[39px] top-0 w-5 h-5 rounded-full border-4 border-white bg-primary" />
-                <Typography variant="small" color="muted" className="mb-1">DROP</Typography>
+                <Typography variant="caption" color="muted" className="mb-1">DROP</Typography>
                 <Typography variant="body" weight="semibold">{activeOrder.customerName}</Typography>
-                <Typography variant="small" color="muted">{activeOrder.customerAddress}</Typography>
+                <Typography variant="caption" color="muted">{activeOrder.customerAddress}</Typography>
               </div>
             </div>
 
@@ -109,11 +109,11 @@ export default function RiderDashboardPage() {
       {/* Recent Activity / Stats */}
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-white p-4 rounded-xl border border-gray-200">
-          <Typography variant="small" color="muted">Today's Trips</Typography>
+          <Typography variant="caption" color="muted">Today's Trips</Typography>
           <Typography variant="h2" weight="bold">8</Typography>
         </div>
         <div className="bg-white p-4 rounded-xl border border-gray-200">
-          <Typography variant="small" color="muted">Online Time</Typography>
+          <Typography variant="caption" color="muted">Online Time</Typography>
           <Typography variant="h2" weight="bold">4h 12m</Typography>
         </div>
       </div>

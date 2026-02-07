@@ -45,7 +45,7 @@ export const OnlineIndicator: Story = {
 export const Sizes: Story = {
   render: () => (
     <div className="flex gap-4 items-center">
-      <Avatar name="John Doe" size="sm" />
+      <Avatar name="John Doe" />
       <Avatar name="Jane Smith" size="md" />
       <Avatar name="Bob Johnson" size="lg" />
       <Avatar name="Alice Williams" size="xl" />

@@ -140,7 +140,7 @@ export default function SellerDashboardPage() {
                 {stat.change}
               </div>
             </div>
-            <Typography variant="small" color="muted" className="mb-1">
+            <Typography variant="caption" color="muted" className="mb-1">
               {stat.label}
             </Typography>
             <Typography variant="h3" weight="bold">
@@ -178,9 +178,9 @@ export default function SellerDashboardPage() {
                     <Typography variant="body" weight="semibold">
                       {order.orderId}
                     </Typography>
-                    <OrderStatusBadge status={order.status} size="sm" />
+                    <OrderStatusBadge status={order.status}  />
                   </div>
-                  <Typography variant="small" color="muted">
+                  <Typography variant="caption" color="muted">
                     {order.customerName} • {order.items} items • {order.time}
                   </Typography>
                 </div>
@@ -221,7 +221,7 @@ export default function SellerDashboardPage() {
               Manage Inventory
             </Typography>
           </div>
-          <Typography variant="small" color="muted">
+          <Typography variant="caption" color="muted">
             Update product availability and prices
           </Typography>
         </button>
@@ -235,7 +235,7 @@ export default function SellerDashboardPage() {
               View Analytics
             </Typography>
           </div>
-          <Typography variant="small" color="muted">
+          <Typography variant="caption" color="muted">
             Check your sales performance
           </Typography>
         </button>
@@ -249,7 +249,7 @@ export default function SellerDashboardPage() {
               View Earnings
             </Typography>
           </div>
-          <Typography variant="small" color="muted">
+          <Typography variant="caption" color="muted">
             Track your revenue and payouts
           </Typography>
         </button>

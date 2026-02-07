@@ -49,7 +49,7 @@ describe('RatingStars', () => {
   });
 
   it('applies correct size classes', () => {
-    const { container: containerSm } = render(<RatingStars rating={4} size="sm" />);
+    const { container: containerSm } = render(<RatingStars rating={4} />);
     const { container: containerMd } = render(<RatingStars rating={4} size="md" />);
     
     // Both should render, size is applied via SVG size prop

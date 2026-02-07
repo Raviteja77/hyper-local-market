@@ -63,7 +63,7 @@ export const Disabled: Story = {
 export const Sizes: Story = {
   render: () => (
     <div className="space-y-4">
-      <Input size="sm" placeholder="Small input" />
+      <Input placeholder="Small input" />
       <Input size="md" placeholder="Medium input" />
       <Input size="lg" placeholder="Large input" />
     </div>

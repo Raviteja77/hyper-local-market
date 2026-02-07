@@ -73,7 +73,7 @@ export const StoreList: React.FC<StoreListProps> = ({
         <Typography variant="h3" weight="bold">
           {title}
         </Typography>
-        <Typography variant="small" color="muted">
+        <Typography variant="caption" color="muted">
           {stores.length} store{stores.length !== 1 ? 's' : ''} found
         </Typography>
       </div>
@@ -81,7 +81,7 @@ export const StoreList: React.FC<StoreListProps> = ({
       {/* Sort Options */}
       {showSortOptions && (
         <div className="flex items-center gap-2 mb-4 overflow-x-auto pb-2">
-          <Typography variant="small" color="muted" className="whitespace-nowrap">
+          <Typography variant="caption" color="muted" className="whitespace-nowrap">
             Sort by:
           </Typography>
           <button

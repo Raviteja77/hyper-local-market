@@ -23,7 +23,7 @@ export const FormField: React.FC<FormFieldProps> = ({
     <div className="w-full">
       {label && (
         <label htmlFor={fieldId} className="block mb-1.5">
-          <Typography variant="small" weight="medium" color="default">
+          <Typography variant="caption" weight="medium" color="primary">
             {label}
             {required && <span className="text-danger ml-1">*</span>}
           </Typography>
@@ -32,14 +32,14 @@ export const FormField: React.FC<FormFieldProps> = ({
       
       <Input
         id={fieldId}
-        error={hasError}
+        error={errorMessage}
         required={required}
         {...inputProps}
       />
       
       {errorMessage && (
         <div className="mt-1">
-          <Typography variant="small" color="error">
+          <Typography variant="caption" color="error">
             {errorMessage}
           </Typography>
         </div>
@@ -47,7 +47,7 @@ export const FormField: React.FC<FormFieldProps> = ({
       
       {!errorMessage && helperText && (
         <div className="mt-1">
-          <Typography variant="small" color="muted">
+          <Typography variant="caption" color="muted">
             {helperText}
           </Typography>
         </div>

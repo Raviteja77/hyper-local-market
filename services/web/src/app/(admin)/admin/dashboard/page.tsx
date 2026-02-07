@@ -200,7 +200,7 @@ export default function AdminDashboardPage() {
                   {stat.change}
                 </div>
               </div>
-              <Typography variant="small" color="muted" className="mb-1">
+              <Typography variant="caption" color="muted" className="mb-1">
                 {stat.label}
               </Typography>
               <Typography variant="h3" weight="bold">
@@ -235,7 +235,7 @@ export default function AdminDashboardPage() {
                       <Typography variant="body" weight="semibold">
                         {order.orderId}
                       </Typography>
-                      <Typography variant="small" color="muted">
+                      <Typography variant="caption" color="muted">
                         {order.customer} • {order.store}
                       </Typography>
                     </div>
@@ -244,8 +244,8 @@ export default function AdminDashboardPage() {
                     </Typography>
                   </div>
                   <div className="flex items-center justify-between">
-                    <OrderStatusBadge status={order.status} size="sm" />
-                    <Typography variant="small" color="muted">
+                    <OrderStatusBadge status={order.status}  />
+                    <Typography variant="caption" color="muted">
                       {order.time}
                     </Typography>
                   </div>
@@ -270,7 +270,7 @@ export default function AdminDashboardPage() {
                       <Icon name={getActivityIcon(activity.type)} size={16} color="#6B7280" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <Typography variant="small" className="mb-1">
+                      <Typography variant="caption" className="mb-1">
                         {activity.message}
                       </Typography>
                       <Typography variant="caption" color="muted">
@@ -295,7 +295,7 @@ export default function AdminDashboardPage() {
                 Manage Users
               </Typography>
             </div>
-            <Typography variant="small" color="muted">
+            <Typography variant="caption" color="muted">
               View and manage all users
             </Typography>
           </button>
@@ -309,7 +309,7 @@ export default function AdminDashboardPage() {
                 Manage Stores
               </Typography>
             </div>
-            <Typography variant="small" color="muted">
+            <Typography variant="caption" color="muted">
               Onboard and verify stores
             </Typography>
           </button>
@@ -323,7 +323,7 @@ export default function AdminDashboardPage() {
                 Manage Riders
               </Typography>
             </div>
-            <Typography variant="small" color="muted">
+            <Typography variant="caption" color="muted">
               Track delivery partners
             </Typography>
           </button>
@@ -337,7 +337,7 @@ export default function AdminDashboardPage() {
                 View Analytics
               </Typography>
             </div>
-            <Typography variant="small" color="muted">
+            <Typography variant="caption" color="muted">
               Detailed reports and insights
             </Typography>
           </button>

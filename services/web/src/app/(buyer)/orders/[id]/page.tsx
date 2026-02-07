@@ -108,7 +108,7 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                 Store Information
               </Typography>
               <div className="flex items-start gap-3">
-                <Avatar size="lg" fallback="SK" />
+                <Avatar size="lg" name="Sharma Kirana" />
                 <div className="flex-1">
                   <Typography variant="body" weight="semibold">
                     {order.storeName}
@@ -197,7 +197,7 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
         <div className="text-center mt-8">
           <button onClick={() => console.log('Need help')} className="text-primary hover:underline">
             Need help?
-          </Button>
+          </button>
         </div>
       </div>
     </BuyerLayout>

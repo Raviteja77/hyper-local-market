@@ -40,7 +40,7 @@ export const RiderLayout: React.FC<RiderLayoutProps> = ({
                 <Typography variant="body" weight="semibold">
                   {riderName}
                 </Typography>
-                <Typography variant="small" color="muted">
+                <Typography variant="caption" color="muted">
                   Delivery Partner
                 </Typography>
               </div>
@@ -50,9 +50,9 @@ export const RiderLayout: React.FC<RiderLayoutProps> = ({
             <div className="flex items-center gap-4">
               {/* Active Deliveries */}
               {activeDeliveries > 0 && (
-                <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-primary bg-opacity-10 rounded-lg">
+                <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-primary bg-opacity-10-lg">
                   <Bike size={18} color="#10B981" />
-                  <Typography variant="small" weight="medium" color="primary">
+                  <Typography variant="caption" weight="medium" color="primary">
                     {activeDeliveries} Active
                   </Typography>
                 </div>
@@ -61,24 +61,24 @@ export const RiderLayout: React.FC<RiderLayoutProps> = ({
               {/* Today's Earnings */}
               <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-lg">
                 <DollarSign size={18} color="#374151" />
-                <Typography variant="small" weight="medium">
+                <Typography variant="caption" weight="medium">
                   ₹{todayEarnings.toFixed(0)}
                 </Typography>
               </div>
 
               {/* Online Toggle */}
               <div className="flex items-center gap-2">
-                <Typography variant="small" color="muted" className="hidden sm:block">
+                <Typography variant="caption" color="muted" className="hidden sm:block">
                   {isOnline ? 'Online' : 'Offline'}
                 </Typography>
                 <button
                   onClick={() => onToggleOnline?.(!isOnline)}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                  className={`relative inline-flex h-6 w-11 items-center-full transition-colors ${
                     isOnline ? 'bg-primary' : 'bg-gray-300'
                   }`}
                 >
                   <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    className={`inline-block h-4 w-4 transform-full bg-white transition-transform ${
                       isOnline ? 'translate-x-6' : 'translate-x-1'
                     }`}
                   />
@@ -92,14 +92,14 @@ export const RiderLayout: React.FC<RiderLayoutProps> = ({
             {activeDeliveries > 0 && (
               <div className="flex items-center gap-2">
                 <Bike size={16} color="#10B981" />
-                <Typography variant="small" weight="medium" color="primary">
+                <Typography variant="caption" weight="medium" color="primary">
                   {activeDeliveries} Active
                 </Typography>
               </div>
             )}
             <div className="flex items-center gap-2">
               <DollarSign size={16} color="#374151" />
-              <Typography variant="small" weight="medium">
+              <Typography variant="caption" weight="medium">
                 ₹{todayEarnings.toFixed(0)} Today
               </Typography>
             </div>
@@ -131,7 +131,7 @@ export const RiderLayout: React.FC<RiderLayoutProps> = ({
             <Package size={20} color="#374151" />
             {activeDeliveries > 0 && (
               <div className="absolute top-2 right-1/2 translate-x-6">
-                <Badge variant="danger" size="sm" rounded>
+                <Badge variant="error">
                   {activeDeliveries}
                 </Badge>
               </div>

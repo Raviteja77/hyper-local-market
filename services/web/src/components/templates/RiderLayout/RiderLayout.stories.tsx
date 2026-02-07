@@ -31,14 +31,14 @@ export const Online: Story = {
           Active Deliveries
         </Typography>
         <div className="grid gap-4">
-          <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+          <div className="bg-white p-6-lg shadow-sm border border-gray-200">
             <Typography variant="body" weight="semibold" className="mb-2">
               Order #12345
             </Typography>
-            <Typography variant="small" color="muted">
+            <Typography variant="caption" color="muted">
               Pickup: Sharma Kirana Store
             </Typography>
-            <Typography variant="small" color="muted">
+            <Typography variant="caption" color="muted">
               Delivery: 123 Main Street
             </Typography>
           </div>
@@ -59,7 +59,7 @@ export const Offline: Story = {
     onNavigationClick: (section) => console.log('Navigate to:', section),
     children: (
       <div className="p-4 md:p-8">
-        <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-200 text-center">
+        <div className="bg-white p-8-lg shadow-sm border border-gray-200 text-center">
           <Typography variant="h3" weight="bold" className="mb-2">
             You're Offline
           </Typography>
@@ -87,16 +87,16 @@ export const HighEarnings: Story = {
           Today's Summary
         </Typography>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <Typography variant="small" color="muted">Deliveries</Typography>
+          <div className="bg-white p-6-lg shadow-sm">
+            <Typography variant="caption" color="muted">Deliveries</Typography>
             <Typography variant="h3" weight="bold" color="primary" className="mt-2">15</Typography>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <Typography variant="small" color="muted">Earnings</Typography>
+          <div className="bg-white p-6-lg shadow-sm">
+            <Typography variant="caption" color="muted">Earnings</Typography>
             <Typography variant="h3" weight="bold" color="primary" className="mt-2">₹1,250</Typography>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <Typography variant="small" color="muted">Distance</Typography>
+          <div className="bg-white p-6-lg shadow-sm">
+            <Typography variant="caption" color="muted">Distance</Typography>
             <Typography variant="h3" weight="bold" color="primary" className="mt-2">45 km</Typography>
           </div>
         </div>
@@ -137,7 +137,7 @@ export const WithoutHeader: Story = {
         <Typography variant="h2" weight="bold" className="mb-4">
           Map View
         </Typography>
-        <div className="bg-gray-200 rounded-lg h-96 flex items-center justify-center">
+        <div className="bg-gray-200-lg h-96 flex items-center justify-center">
           <Typography variant="body" color="muted">
             Map content here
           </Typography>

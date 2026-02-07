@@ -89,7 +89,7 @@ export const Avatar: React.FC<AvatarProps> = ({
       
       {online && (
         <span
-          className={`absolute bottom-0 right-0 ${onlineSizes[size]} bg-success rounded-full border-2 border-white`}
+          className={`absolute bottom-0 right-0 ${onlineSizes[size]} bg-success-full border-2 border-white`}
         />
       )}
     </div>

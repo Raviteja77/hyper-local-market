@@ -30,7 +30,7 @@ export const WithLoginForm: Story = {
 export const SimpleLayout: Story = {
   args: {
     children: (
-      <div className="bg-white p-8 rounded-lg shadow-md">
+      <div className="bg-white p-8-lg shadow-md">
         <h2 className="text-2xl font-bold mb-4">Welcome Back</h2>
         <p className="text-gray-600 mb-6">Sign in to continue to your account</p>
         <LoginForm

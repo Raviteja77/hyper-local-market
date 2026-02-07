@@ -93,10 +93,10 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
                       <img
                         src={item.image}
                         alt={item.name}
-                        className="w-20 h-20 object-cover rounded"
+                        className="w-20 h-20 object-cover"
                       />
                     ) : (
-                      <div className="w-20 h-20 bg-gray-100 rounded flex items-center justify-center">
+                      <div className="w-20 h-20 bg-gray-100 flex items-center justify-center">
                         <Package size={32} color="#D1D5DB" />
                       </div>
                     )}
@@ -105,13 +105,13 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
                       <Typography variant="body" weight="medium" className="mb-1 line-clamp-2">
                         {item.name}
                       </Typography>
-                      <PriceDisplay price={item.price} size="sm" />
+                      <PriceDisplay currentPrice={item.price} />
 
                       <div className="flex items-center gap-2 mt-2">
                         <button
                           onClick={() => onUpdateQuantity(item.productId || item.id, item.quantity - 1)}
                           disabled={item.quantity <= 1}
-                          className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="w-8 h-8 flex items-center justify-center border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           <Minus size={16} />
                         </button>
@@ -120,13 +120,13 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
                         </Typography>
                         <button
                           onClick={() => onUpdateQuantity(item.productId || item.id, item.quantity + 1)}
-                          className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-50"
+                          className="w-8 h-8 flex items-center justify-center border border-gray-300 hover:bg-gray-50"
                         >
                           <Plus size={16} />
                         </button>
                         <button
                           onClick={() => onRemoveItem(item.productId || item.id)}
-                          className="ml-auto p-2 text-danger hover:bg-red-50 rounded"
+                          className="ml-auto p-2 text-danger hover:bg-red-50"
                         >
                           <Trash2 size={18} color="#EF4444" />
                         </button>

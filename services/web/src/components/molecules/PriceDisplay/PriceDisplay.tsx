@@ -45,7 +45,7 @@ export const PriceDisplay: React.FC<PriceDisplayProps> = ({
       <div className="flex items-baseline gap-1.5">
         {hasDiscount ? (
           // Current price in a RED PILL
-          <span className={`bg-primary text-white ${classes.current} font-bold rounded px-1.5 py-0.5`}>
+          <span className={`bg-primary text-white ${classes.current} font-bold px-1.5 py-0.5`}>
             ₹{currentPrice}
           </span>
         ) : (

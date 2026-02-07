@@ -71,7 +71,7 @@ export const Sizes: Story = {
   render: () => (
     <div className="flex gap-4 items-center">
       <Icon icon={ShoppingCart} size="xs" />
-      <Icon icon={ShoppingCart} size="sm" />
+      <Icon icon={ShoppingCart} />
       <Icon icon={ShoppingCart} size="md" />
       <Icon icon={ShoppingCart} size="lg" />
     </div>
@@ -92,17 +92,17 @@ export const Colors: Story = {
 
 export const ZeptoNavIcons: Story = {
   render: () => (
-    <div className="flex gap-1 p-3 bg-gray-100 rounded-full w-fit">
-      <div className="p-2 hover:bg-white rounded-full transition-colors cursor-pointer">
+    <div className="flex gap-1 p-3 bg-gray-100-full w-fit">
+      <div className="p-2 hover:bg-white-full transition-colors cursor-pointer">
         <Icon icon={Home} size="md" color="gray" />
       </div>
-      <div className="p-2 hover:bg-white rounded-full transition-colors cursor-pointer">
+      <div className="p-2 hover:bg-white-full transition-colors cursor-pointer">
         <Icon icon={Search} size="md" color="gray" />
       </div>
-      <div className="p-2 hover:bg-white rounded-full transition-colors cursor-pointer">
+      <div className="p-2 hover:bg-white-full transition-colors cursor-pointer">
         <Icon icon={ShoppingBag} size="md" color="gray" />
       </div>
-      <div className="p-2 hover:bg-white rounded-full transition-colors cursor-pointer">
+      <div className="p-2 hover:bg-white-full transition-colors cursor-pointer">
         <Icon icon={User} size="md" color="gray" />
       </div>
     </div>

@@ -58,7 +58,7 @@ export const OrderTracker: React.FC<OrderTrackerProps> = ({
       <div className="flex items-center justify-between mb-6">
         <div>
           {orderId && (
-            <Typography variant="small" color="muted" className="mb-1">
+            <Typography variant="caption" color="muted" className="mb-1">
               Order ID: {orderId}
             </Typography>
           )}
@@ -66,7 +66,7 @@ export const OrderTracker: React.FC<OrderTrackerProps> = ({
         </div>
         {estimatedTime && !isCancelled && (
           <div className="text-right">
-            <Typography variant="small" color="muted">
+            <Typography variant="caption" color="muted">
               Estimated Time
             </Typography>
             <Typography variant="h4" weight="bold" color="primary">
@@ -83,7 +83,7 @@ export const OrderTracker: React.FC<OrderTrackerProps> = ({
             <Bike size={20} color="white" />
           </div>
           <div className="flex-1">
-            <Typography variant="small" color="muted">
+            <Typography variant="caption" color="muted">
               Delivery Partner
             </Typography>
             <Typography variant="body" weight="semibold">
@@ -139,17 +139,17 @@ export const OrderTracker: React.FC<OrderTrackerProps> = ({
                   <Typography
                     variant="body"
                     weight={isCurrent ? 'bold' : 'medium'}
-                    color={isCompleted ? 'default' : 'muted'}
+                    color={isCompleted ? 'primary' : 'muted'}
                   >
                     {step.label}
                   </Typography>
                   {step.timestamp && (
-                    <Typography variant="small" color="muted" className="mt-1">
+                    <Typography variant="caption" color="muted" className="mt-1">
                       {step.timestamp}
                     </Typography>
                   )}
                   {step.description && (
-                    <Typography variant="small" color="muted" className="mt-1">
+                    <Typography variant="caption" color="muted" className="mt-1">
                       {step.description}
                     </Typography>
                   )}

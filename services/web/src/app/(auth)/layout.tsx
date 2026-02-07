@@ -13,11 +13,7 @@ export default function AuthLayoutWrapper({
   children: React.ReactNode;
 }) {
   return (
-    <AuthLayout
-      title="HyperLocal"
-      subtitle="Fresh groceries from local stores, delivered fast"
-      showBranding={true}
-    >
+    <AuthLayout>
       {children}
     </AuthLayout>
   );

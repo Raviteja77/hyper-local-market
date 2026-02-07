@@ -66,7 +66,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <Typography variant="caption" color="muted" className="text-xs">
                   Deliver to
                 </Typography>
-                <Typography variant="small" weight="medium" className="text-sm">
+                <Typography variant="caption" weight="medium" className="text-sm">
                   {currentAddress}
                 </Typography>
               </div>
@@ -95,7 +95,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <ShoppingCart size={24} color="#374151" />
               {cartItemCount > 0 && (
                 <div className="absolute -top-1 -right-1">
-                  <Badge variant="danger" size="sm" rounded>
+                  <Badge variant="error">
                     {cartItemCount > 9 ? '9+' : cartItemCount}
                   </Badge>
                 </div>
@@ -108,13 +108,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={onProfileClick}
                 className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-lg transition-colors"
               >
-                <Avatar src={userAvatar} alt={userName} size="sm" />
-                <Typography variant="small" weight="medium">
+                <Avatar src={userAvatar} name={userName || 'User'} alt={userName} />
+                <Typography variant="caption" weight="medium">
                   {userName}
                 </Typography>
               </button>
             ) : (
-              <Button variant="primary" size="sm" onClick={onLoginClick}>
+              <Button variant="primary" onClick={onLoginClick}>
                 Login
               </Button>
             )}
@@ -136,7 +136,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onSearch={onSearch} 
               placeholder="Search..."
               showButton={false}
-              size="sm"
+             
             />
           </div>
         )}
@@ -159,7 +159,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <Typography variant="caption" color="muted" className="text-xs">
                       Deliver to
                     </Typography>
-                    <Typography variant="small" weight="medium" className="text-sm">
+                    <Typography variant="caption" weight="medium" className="text-sm">
                       {currentAddress}
                     </Typography>
                   </div>
@@ -177,7 +177,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <Typography variant="body">Cart</Typography>
               </div>
               {cartItemCount > 0 && (
-                <Badge variant="danger" size="sm" rounded>
+                <Badge variant="error">
                   {cartItemCount}
                 </Badge>
               )}
@@ -188,7 +188,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={onProfileClick}
                 className="w-full flex items-center gap-2 p-3 hover:bg-gray-50 rounded-lg"
               >
-                <Avatar src={userAvatar} alt={userName} size="sm" />
+                <Avatar src={userAvatar} name={userName || "User"} alt={userName} />
                 <Typography variant="body">{userName}</Typography>
               </button>
             ) : (

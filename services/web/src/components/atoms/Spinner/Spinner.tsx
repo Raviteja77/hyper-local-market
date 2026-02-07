@@ -22,7 +22,7 @@ export const Spinner: React.FC<SpinnerProps> = ({
   return (
     <div className={`flex flex-col items-center justify-center gap-2 ${className}`}>
       <div
-        className={`${sizes[size]} border-gray-200 border-t-primary rounded-full animate-spin`}
+        className={`${sizes[size]} border-gray-200 border-t-primary-full animate-spin`}
         role="status"
         aria-label="Loading"
       >
