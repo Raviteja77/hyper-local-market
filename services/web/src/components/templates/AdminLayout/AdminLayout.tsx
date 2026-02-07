@@ -99,7 +99,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
           <div className="flex items-center gap-4">
             <button
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className="lg:hidden p-2 hover:bg-gray-100-lg"
+              className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
             >
               {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -132,7 +132,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
           <div className="flex items-center gap-3">
             {/* Notifications */}
             {showNotifications && (
-              <button className="relative p-2 hover:bg-gray-100-lg transition-colors">
+              <button className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors">
                 <Bell size={24} color="#374151" />
                 {notificationCount > 0 && (
                   <div className="absolute top-1 right-1">

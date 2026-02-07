@@ -55,7 +55,7 @@ export const InventoryManager: React.FC<InventoryManagerProps> = ({
   };
 
   return (
-    <div className={`bg-white-lg shadow-sm border border-gray-200 ${className}`}>
+    <div className={`bg-white rounded-lg shadow-sm border border-gray-200 ${className}`}>
       {/* Header */}
       <div className="p-6 border-b border-gray-200">
         <div className="flex items-center justify-between mb-4">
@@ -89,7 +89,7 @@ export const InventoryManager: React.FC<InventoryManagerProps> = ({
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2-lg text-sm whitespace-nowrap transition-colors ${
+              className={`px-4 py-2 rounded-lg text-sm whitespace-nowrap transition-colors ${
                 selectedCategory === category
                   ? 'bg-primary text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -181,12 +181,12 @@ export const InventoryManager: React.FC<InventoryManagerProps> = ({
                   {/* Stock Toggle */}
                   <button
                     onClick={() => onToggleStock(item.id, !item.inStock)}
-                    className={`relative inline-flex h-6 w-11 items-center-full transition-colors ${
+                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                       item.inStock ? 'bg-primary' : 'bg-gray-300'
                     }`}
                   >
                     <span
-                      className={`inline-block h-4 w-4 transform-full bg-white transition-transform ${
+                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                         item.inStock ? 'translate-x-6' : 'translate-x-1'
                       }`}
                     />

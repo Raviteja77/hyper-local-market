@@ -59,7 +59,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={onLocationClick}
               aria-label="Select delivery location"
               className="hidden md:flex items-center gap-2 px-3 py-2 ml-4 
-                hover:bg-gray-50-lg transition-colors border border-gray-200"
+                hover:bg-gray-50 rounded-lg transition-colors border border-gray-200"
             >
               <MapPin size={18} className="text-primary" />
               <div className="flex flex-col items-start">
@@ -90,7 +90,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Cart */}
             <button
               onClick={onCartClick}
-              className="relative p-2 hover:bg-gray-100-lg transition-colors"
+              className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors"
             >
               <ShoppingCart size={24} color="#374151" />
               {cartItemCount > 0 && (
@@ -106,7 +106,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {isLoggedIn ? (
               <button
                 onClick={onProfileClick}
-                className="flex items-center gap-2 p-2 hover:bg-gray-100-lg transition-colors"
+                className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-lg transition-colors"
               >
                 <Avatar src={userAvatar} name={userName || 'User'} alt={userName} />
                 <Typography variant="caption" weight="medium">
@@ -123,7 +123,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 hover:bg-gray-100-lg"
+            className="md:hidden p-2 hover:bg-gray-100 rounded-lg"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -151,7 +151,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 onClick={onLocationClick}
                 aria-label="Select delivery location"
-                className="w-full flex items-center justify-between p-3 hover:bg-gray-50-lg border border-gray-200"
+                className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg border border-gray-200"
               >
                 <div className="flex items-center gap-2">
                   <MapPin size={18} className="text-primary" />
@@ -170,7 +170,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={onCartClick}
-              className="w-full flex items-center justify-between p-3 hover:bg-gray-50-lg"
+              className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg"
             >
               <div className="flex items-center gap-2">
                 <ShoppingCart size={20} />
@@ -186,7 +186,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {isLoggedIn ? (
               <button
                 onClick={onProfileClick}
-                className="w-full flex items-center gap-2 p-3 hover:bg-gray-50-lg"
+                className="w-full flex items-center gap-2 p-3 hover:bg-gray-50 rounded-lg"
               >
                 <Avatar src={userAvatar} name={userName || "User"} alt={userName} />
                 <Typography variant="body">{userName}</Typography>

@@ -38,7 +38,7 @@ export const Rectangle: Story = {
 
 export const ProductCardSkeleton: Story = {
   render: () => (
-    <div className="bg-white-lg border border-gray-100 p-4 w-64">
+    <div className="bg-white rounded-lg border border-gray-100 p-4 w-64">
       {/* Image skeleton */}
       <Skeleton className="w-full h-48-lg mb-3" />
       

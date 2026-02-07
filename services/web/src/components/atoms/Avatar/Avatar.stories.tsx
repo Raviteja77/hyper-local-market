@@ -55,7 +55,7 @@ export const Sizes: Story = {
 
 export const SellerAvatarZepto: Story = {
   render: () => (
-    <div className="p-4 bg-gray-50-lg max-w-xs">
+    <div className="p-4 bg-gray-50 rounded-lg max-w-xs">
       <div className="flex items-center gap-3">
         <Avatar 
           name="Rajesh Kumar" 

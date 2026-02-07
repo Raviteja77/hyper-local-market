@@ -26,7 +26,7 @@ export const StoreCard: React.FC<StoreCardProps> = ({
 }) => {
   return (
     <div
-      className={`bg-white-lg shadow-md p-3 cursor-pointer hover:shadow-lg transition-shadow duration-200 ${className}`}
+      className={`bg-white rounded-lg shadow-md p-3 cursor-pointer hover:shadow-lg transition-shadow duration-200 ${className}`}
       onClick={() => onClick(id)}
       role="button"
       tabIndex={0}

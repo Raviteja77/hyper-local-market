@@ -53,7 +53,7 @@ export const LocationModal: React.FC<LocationModalProps> = ({
         aria-modal="true"
         aria-labelledby="location-modal-title"
         className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-            z-50 bg-white-2xl shadow-xl w-full max-w-lg max-h-[80vh] 
+            z-50 bg-white rounded-2xl shadow-xl w-full max-w-lg max-h-[80vh] 
             overflow-hidden">
         
         {/* Header */}
@@ -74,7 +74,7 @@ export const LocationModal: React.FC<LocationModalProps> = ({
         {/* Current Location Button */}
         <div className="p-4 border-b border-gray-100">
           <button 
-            className="flex items-center gap-3 w-full p-3-lg 
+            className="flex items-center gap-3 w-full p-3 rounded-lg 
                   bg-primary-light hover:bg-primary-light/80 transition-colors" 
             onClick={handleUseCurrentLocation}
           >
@@ -95,7 +95,7 @@ export const LocationModal: React.FC<LocationModalProps> = ({
         {/* Search */}
         <div className="p-4 border-b border-gray-100">
           <div className="flex items-center gap-2 px-4 py-3 bg-gray-100 
-               -lg">
+               rounded-lg">
             <Search size={18} className="text-gray-400" />
             <input
               type="text"
@@ -122,7 +122,7 @@ export const LocationModal: React.FC<LocationModalProps> = ({
                   onSelectLocation(addr.address);
                   onClose();
                 }}
-                className="flex items-start gap-3 w-full p-3-lg 
+                className="flex items-start gap-3 w-full p-3 rounded-lg 
                       hover:bg-gray-50 transition-colors text-left"
               >
                 <MapPin size={18} className="text-gray-400 mt-0.5 flex-shrink-0" />

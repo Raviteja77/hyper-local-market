@@ -94,7 +94,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
   };
 
   return (
-    <div className={`bg-white-lg shadow-lg p-8 w-full max-w-md ${className}`}>
+    <div className={`bg-white rounded-lg shadow-lg p-8 w-full max-w-md ${className}`}>
       <div className="flex items-center justify-center mb-6">
         <div className="w-16 h-16 bg-primary-full flex items-center justify-center">
           <ShoppingBag size={32} color="white" />

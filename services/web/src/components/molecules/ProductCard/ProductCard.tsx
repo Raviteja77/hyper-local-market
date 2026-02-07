@@ -47,7 +47,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <div
-      className="bg-white-lg border border-gray-100 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer group flex flex-col overflow-hidden"
+      className="bg-white rounded-lg border border-gray-100 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer group flex flex-col overflow-hidden"
       onClick={() => onClick?.(id)}
     >
       {/* IMAGE AREA */}

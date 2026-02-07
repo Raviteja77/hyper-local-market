@@ -86,7 +86,7 @@ export const StoreList: React.FC<StoreListProps> = ({
           </Typography>
           <button
             onClick={() => handleSort('distance')}
-            className={`px-3 py-1.5-full text-sm whitespace-nowrap transition-colors ${
+            className={`px-3 py-1.5 rounded-full text-sm whitespace-nowrap transition-colors ${
               sortBy === 'distance'
                 ? 'bg-primary text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -99,7 +99,7 @@ export const StoreList: React.FC<StoreListProps> = ({
           </button>
           <button
             onClick={() => handleSort('rating')}
-            className={`px-3 py-1.5-full text-sm whitespace-nowrap transition-colors ${
+            className={`px-3 py-1.5 rounded-full text-sm whitespace-nowrap transition-colors ${
               sortBy === 'rating'
                 ? 'bg-primary text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -112,7 +112,7 @@ export const StoreList: React.FC<StoreListProps> = ({
           </button>
           <button
             onClick={() => handleSort('eta')}
-            className={`px-3 py-1.5-full text-sm whitespace-nowrap transition-colors ${
+            className={`px-3 py-1.5 rounded-full text-sm whitespace-nowrap transition-colors ${
               sortBy === 'eta'
                 ? 'bg-primary text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'

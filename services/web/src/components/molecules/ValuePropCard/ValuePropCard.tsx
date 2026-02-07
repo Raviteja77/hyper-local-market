@@ -20,7 +20,7 @@ export const ValuePropCard: React.FC<ValuePropCardProps> = ({
   iconBgColor = 'bg-primary-light',
 }) => {
   return (
-    <div className="flex items-center gap-3 bg-white p-4-lg border border-gray-200">
+    <div className="flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-200">
       {/* Icon container */}
       <div className={`${iconBgColor}-full p-3 flex-shrink-0`}>
         <Icon className={`${iconColor} w-6 h-6`} />

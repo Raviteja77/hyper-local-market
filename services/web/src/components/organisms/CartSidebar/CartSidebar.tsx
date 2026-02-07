@@ -67,7 +67,7 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
             </Typography>
             <button
               onClick={onClose}
-              className="p-2 hover:bg-gray-100-lg transition-colors"
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
             >
               <X size={24} />
             </button>
@@ -87,7 +87,7 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
                 {items.map((item) => (
                   <div
                     key={item.id}
-                    className="flex gap-3 p-3 border border-gray-200-lg"
+                    className="flex gap-3 p-3 border border-gray-200 rounded-lg"
                   >
                     {item.image ? (
                       <img
@@ -177,7 +177,7 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
               </div>
               {!isAuthenticated ? (
                 <div className="space-y-3">
-                  <div className="p-4 bg-blue-50 border border-blue-200-lg">
+                  <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
                     <Typography variant="body" weight="medium" className="mb-2 text-center">
                       Please login to checkout
                     </Typography>

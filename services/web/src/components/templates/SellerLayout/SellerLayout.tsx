@@ -83,7 +83,7 @@ export const SellerLayout: React.FC<SellerLayoutProps> = ({
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="lg:hidden p-2 hover:bg-gray-100-lg"
+            className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
           >
             {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -185,7 +185,7 @@ export const SellerLayout: React.FC<SellerLayoutProps> = ({
 
             {/* Help & Logout */}
             <div className="p-4 border-t border-gray-200">
-              <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-100-lg transition-colors">
+              <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
                 <HelpCircle size={20} color="#374151" />
                 <Typography variant="body" weight="medium">
                   Help & Support

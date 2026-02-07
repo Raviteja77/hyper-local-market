@@ -68,7 +68,7 @@ export const Interactive: Story = {
 // Story 4: "On Store Card" — embedded in a mini StoreCard-like layout
 export const OnStoreCard: Story = {
   render: () => (
-    <div className="bg-white-lg shadow-md p-4 border border-gray-100 max-w-sm">
+    <div className="bg-white rounded-lg shadow-md p-4 border border-gray-100 max-w-sm">
       <div className="flex items-start gap-3">
         <img
           src="https://picsum.photos/seed/store1/64/64"

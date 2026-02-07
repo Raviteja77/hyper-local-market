@@ -98,7 +98,7 @@ export const Users: Story = {
         <Typography variant="h2" weight="bold" className="mb-6">
           User Management
         </Typography>
-        <div className="bg-white-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <Typography variant="body" color="muted">
             User list and management tools
           </Typography>
@@ -120,7 +120,7 @@ export const Analytics: Story = {
         <Typography variant="h2" weight="bold" className="mb-6">
           Analytics & Reports
         </Typography>
-        <div className="bg-white-lg shadow-sm border border-gray-200 p-6 h-96 flex items-center justify-center">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 h-96 flex items-center justify-center">
           <Typography variant="body" color="muted">
             Charts and analytics content
           </Typography>

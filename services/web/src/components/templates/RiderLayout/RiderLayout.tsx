@@ -59,7 +59,7 @@ export const RiderLayout: React.FC<RiderLayoutProps> = ({
               )}
 
               {/* Today's Earnings */}
-              <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-gray-100-lg">
+              <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-lg">
                 <DollarSign size={18} color="#374151" />
                 <Typography variant="caption" weight="medium">
                   ₹{todayEarnings.toFixed(0)}
