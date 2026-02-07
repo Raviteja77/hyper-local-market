@@ -1,0 +1,25 @@
+# Core Django
+Django==5.0.3
+django-environ==0.11.2
+
+# REST Framework
+djangorestframework==3.14.0
+django-cors-headers==4.3.1
+
+# Authentication
+djangorestframework-simplejwt==5.3.1
+
+# Database
+psycopg2-binary==2.9.9
+
+# Async & WebSockets
+channels==4.0.0
+channels-redis==4.2.0
+redis==5.0.1
+
+# Tasks
+celery==5.3.4
+
+# Utilities
+python-decouple==3.8
+Pillow==10.2.0
