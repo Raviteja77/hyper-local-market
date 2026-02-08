@@ -1,6 +1,8 @@
 # Docker Setup Guide
 
-## Quick Start
+## ⚡ Quick Start
+
+**Important:** On first run or after cleaning volumes, the database initialization may take 30-60 seconds. The backend will wait for the database to be ready before starting.
 
 ### Start all services (backend + database + redis):
 
@@ -8,7 +10,20 @@
 docker-compose up --build
 ```
 
-The backend will be available at `http://localhost:8000`
+The backend will be available at `http://localhost:8000` (after database initialization)
+
+### Automated Testing Script:
+
+```bash
+./test-docker.sh
+```
+
+This script will:
+- Clean up old containers and volumes
+- Build and start all services
+- Wait for services to be ready
+- Verify backend is responding
+- Show access points and credentials
 
 ### Start in detached mode:
 
@@ -100,12 +115,38 @@ lsof -i :8000  # or :5432, :6379, :3000
 
 ### Database connection issues
 
-```bash
-# Restart just the database
-docker-compose restart db
+If you see "db:5432 - no response" errors:
 
+```bash
+# Stop all services
+docker-compose down
+
+# Remove volumes to ensure clean state
+docker-compose down -v
+
+# Rebuild and start (this ensures fresh database)
+docker-compose up --build
+
+# OR if you want to keep data, just restart
+docker-compose restart db
+docker-compose restart backend
+```
+
+**Common causes:**
+- Database container is still initializing (can take 10-30 seconds)
+- Old volumes with corrupted data
+- Port 5432 already in use on host
+
+**Check database health:**
+```bash
 # Check database logs
 docker-compose logs db
+
+# Verify database is running
+docker-compose ps
+
+# Test database connection manually
+docker-compose exec db psql -U postgres -d hyper_local_db -c "SELECT 1;"
 ```
 
 ### Reset everything
