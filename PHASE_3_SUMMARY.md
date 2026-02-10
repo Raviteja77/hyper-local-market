@@ -180,6 +180,10 @@ New model with comprehensive fields:
 
 ## Sample Data
 
+> ⚠️ **SECURITY WARNING:** The credentials below are for development and testing ONLY.
+> Never use these passwords or similar simple passwords in production environments.
+> Always use strong, unique passwords and proper secret management in production.
+
 The existing sample data includes:
 
 ### Users (6 accounts, password: test123)

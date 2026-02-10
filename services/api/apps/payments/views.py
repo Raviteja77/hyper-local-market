@@ -84,7 +84,24 @@ class PaymentViewSet(viewsets.ModelViewSet):
         Handle payment gateway callback/webhook.
         
         This endpoint receives payment confirmation from the payment gateway.
-        In production, you should verify the signature/authenticity of the callback.
+        
+        ⚠️ PRODUCTION SECURITY REQUIREMENT:
+        This endpoint MUST verify the signature/authenticity of the callback
+        before processing. Implement signature verification using the payment
+        gateway's SDK (Razorpay, Stripe, etc.) to prevent fraudulent callbacks.
+        
+        Example for Razorpay:
+        ```python
+        from razorpay import Client
+        client = Client(auth=(key_id, key_secret))
+        client.utility.verify_payment_signature({
+            'razorpay_order_id': gateway_order_id,
+            'razorpay_payment_id': gateway_payment_id,
+            'razorpay_signature': gateway_signature
+        })
+        ```
+        
+        TODO: Implement signature verification before production deployment
         """
         serializer = PaymentCallbackSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
