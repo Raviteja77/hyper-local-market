@@ -6,6 +6,7 @@ app_name = 'orders'
 
 router = DefaultRouter()
 router.register(r'coupons', views.CouponViewSet, basename='coupon')
+router.register(r'', views.OrderViewSet, basename='order')
 
 urlpatterns = [
     path('', include(router.urls)),
