@@ -1,8 +1,12 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from . import views
 
 app_name = 'orders'
 
+router = DefaultRouter()
+router.register(r'coupons', views.CouponViewSet, basename='coupon')
+
 urlpatterns = [
-    # Will be implemented in Phase 3
+    path('', include(router.urls)),
 ]
