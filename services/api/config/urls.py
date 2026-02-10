@@ -35,6 +35,7 @@ urlpatterns = [
     path('api/stores/', include('apps.stores.urls')),
     path('api/products/', include('apps.products.urls')),
     path('api/orders/', include('apps.orders.urls')),
+    path('api/payments/', include('apps.payments.urls')),
 ]
 
 # Serve media files in development
