@@ -6,10 +6,13 @@ Django REST API for the hyper-local grocery delivery platform.
 
 - ✅ JWT Authentication with token refresh
 - ✅ Role-based access control (Buyer, Seller, Rider, Admin)
-- ✅ Product catalog with categories
-- ✅ Store management with geolocation
-- ✅ Order management with status tracking
+- ✅ Product catalog with categories and search
+- ✅ Store management with geolocation and nearby search
+- ✅ Complete order management with status tracking
+- ✅ Payment processing (COD and online payments)
 - ✅ Coupon system with validation
+- ✅ Inventory management with stock tracking
+- ✅ Order rating and review system
 - ✅ CORS enabled for frontend integration
 
 ## Tech Stack
@@ -159,15 +162,44 @@ POST   /api/orders/coupons/validate/  # Validate coupon code
 - Discount calculation (percentage and fixed amount)
 - Clear error messages
 
-### Orders (Phase 3 - Coming Soon)
+### Orders (Phase 3 - ✅ Complete)
 
 ```bash
-GET    /api/orders/                # List user orders
-POST   /api/orders/                # Create order
-GET    /api/orders/{id}/           # Get order detail
-POST   /api/orders/{id}/cancel/    # Cancel order
-POST   /api/orders/{id}/rate/      # Rate order
+GET    /api/orders/                      # List user orders (role-based)
+POST   /api/orders/                      # Create order with items
+GET    /api/orders/{id}/                 # Get order detail
+POST   /api/orders/{id}/cancel/          # Cancel order
+POST   /api/orders/{id}/rate/            # Rate and review order
+PATCH  /api/orders/{id}/update_status/   # Update order status (seller/rider)
 ```
+
+**Features:**
+- Multi-item order creation
+- Automatic inventory validation and updates
+- Coupon application and validation
+- Delivery fee calculation
+- Order cancellation with inventory refund
+- Rating system for delivered orders
+- Status tracking through complete lifecycle
+- Role-based access (buyer, seller, rider, admin)
+
+### Payments (Phase 3 - ✅ Complete)
+
+```bash
+GET    /api/payments/              # List user payments
+POST   /api/payments/              # Create payment for order
+GET    /api/payments/{id}/         # Get payment detail
+GET    /api/payments/{id}/status/  # Check payment status
+POST   /api/payments/callback/     # Payment gateway webhook
+```
+
+**Features:**
+- COD (Cash on Delivery) support
+- Online payment methods (UPI, Card, Wallet)
+- Payment gateway integration ready (Razorpay/Stripe)
+- Webhook callback handling
+- Payment status tracking
+- Automatic order confirmation on payment
 
 ## Database Models
 
@@ -301,15 +333,26 @@ Completed features:
 
 See [PHASE_2_API_DOCUMENTATION.md](../../PHASE_2_API_DOCUMENTATION.md) for detailed API documentation.
 
-### Phase 3: Order & Payment APIs - Coming Next  
-- Order creation and management
-- Payment integration
-- Order tracking and rating
+### Phase 3: Order & Payment APIs - ✅ COMPLETE
 
-### Phase 4: Integration & Testing
-- Connect frontend to backend
-- End-to-end testing
+Completed features:
+- ✅ Order creation and management
+- ✅ Payment processing (COD and online)
+- ✅ Order status tracking and updates
+- ✅ Order cancellation with inventory refund
+- ✅ Rating and review system
+- ✅ Role-based access control
+- ✅ Payment gateway integration structure
+
+See [PHASE_3_API_DOCUMENTATION.md](../../PHASE_3_API_DOCUMENTATION.md) for detailed API documentation.
+
+### Phase 4: Integration & Enhancement - Coming Next
+- Frontend integration with React/Next.js
 - Real-time features with WebSockets
+- Payment gateway integration (Razorpay/Stripe)
+- Push notifications
+- Advanced analytics
+- Comprehensive testing suite
 
 ## License
 
