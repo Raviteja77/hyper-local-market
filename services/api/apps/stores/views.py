@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from .models import Store
 from apps.products.models import Inventory
+from core.utils import calculate_distance
 from .serializers import (
     StoreSerializer, 
     StoreDetailSerializer,
@@ -23,19 +24,7 @@ class StoreViewSet(viewsets.ReadOnlyModelViewSet):
     
     def get_queryset(self):
         """Filter active and verified stores"""
-        queryset = Store.objects.filter(is_active=True, is_verified=True)
-        
-        # Filter by location (nearby search)
-        lat = self.request.query_params.get('lat')
-        lon = self.request.query_params.get('lon')
-        
-        if lat and lon:
-            # For simplicity, we're returning all stores
-            # In production, you'd want to filter by radius
-            # or use PostGIS for geospatial queries
-            queryset = queryset.order_by('id')
-        
-        return queryset
+        return Store.objects.filter(is_active=True, is_verified=True)
     
     def get_serializer_class(self):
         """Return appropriate serializer"""
@@ -56,20 +45,26 @@ class StoreViewSet(viewsets.ReadOnlyModelViewSet):
     def list(self, request, *args, **kwargs):
         """List stores, sorted by distance if location provided"""
         queryset = self.get_queryset()
+        lat = request.query_params.get('lat')
+        lon = request.query_params.get('lon')
         
-        # Get pagination
+        # If location is provided, sort by distance before pagination
+        if lat and lon:
+            # Calculate distances and sort
+            stores_with_distance = []
+            for store in queryset:
+                distance = calculate_distance(lat, lon, store.latitude, store.longitude)
+                stores_with_distance.append((store, distance))
+            
+            # Sort by distance
+            stores_with_distance.sort(key=lambda x: x[1])
+            queryset = [store for store, _ in stores_with_distance]
+        
+        # Paginate results
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
-            data = serializer.data
-            
-            # Sort by distance if available
-            lat = request.query_params.get('lat')
-            lon = request.query_params.get('lon')
-            if lat and lon:
-                data = sorted(data, key=lambda x: x['distance'] if x['distance'] is not None else float('inf'))
-            
-            return self.get_paginated_response(data)
+            return self.get_paginated_response(serializer.data)
         
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)

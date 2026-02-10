@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Store
 from apps.products.models import Inventory
 from apps.products.serializers import ProductSerializer
-import math
+from core.utils import calculate_distance
 
 
 class StoreSerializer(serializers.ModelSerializer):
@@ -25,22 +25,7 @@ class StoreSerializer(serializers.ModelSerializer):
         user_lon = self.context.get('user_lon')
         
         if user_lat and user_lon:
-            # Haversine formula to calculate distance
-            R = 6371  # Earth's radius in kilometers
-            
-            lat1 = math.radians(float(user_lat))
-            lon1 = math.radians(float(user_lon))
-            lat2 = math.radians(float(obj.latitude))
-            lon2 = math.radians(float(obj.longitude))
-            
-            dlat = lat2 - lat1
-            dlon = lon2 - lon1
-            
-            a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
-            c = 2 * math.asin(math.sqrt(a))
-            
-            distance = R * c
-            return round(distance, 2)
+            return calculate_distance(user_lat, user_lon, obj.latitude, obj.longitude)
         
         return None
 
@@ -66,22 +51,7 @@ class StoreDetailSerializer(serializers.ModelSerializer):
         user_lon = self.context.get('user_lon')
         
         if user_lat and user_lon:
-            # Haversine formula
-            R = 6371
-            
-            lat1 = math.radians(float(user_lat))
-            lon1 = math.radians(float(user_lon))
-            lat2 = math.radians(float(obj.latitude))
-            lon2 = math.radians(float(obj.longitude))
-            
-            dlat = lat2 - lat1
-            dlon = lon2 - lon1
-            
-            a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
-            c = 2 * math.asin(math.sqrt(a))
-            
-            distance = R * c
-            return round(distance, 2)
+            return calculate_distance(user_lat, user_lon, obj.latitude, obj.longitude)
         
         return None
 
