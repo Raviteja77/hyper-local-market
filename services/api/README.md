@@ -100,7 +100,7 @@ POST /api/auth/token/refresh/
 }
 ```
 
-### Users (Phase 2 - Coming Soon)
+### Users (Phase 3 - Coming Soon)
 
 ```bash
 GET    /api/users/profile/         # Get current user profile
@@ -109,22 +109,55 @@ GET    /api/users/addresses/       # List user addresses
 POST   /api/users/addresses/       # Create address
 ```
 
-### Products (Phase 2 - Coming Soon)
+### Products (Phase 2 - ✅ Complete)
 
 ```bash
-GET    /api/products/              # List products
-GET    /api/products/{id}/         # Get product detail
-GET    /api/products/search/       # Search products
-GET    /api/products/categories/   # List categories
+GET    /api/products/              # List products with filters
+GET    /api/products/{id}/         # Get product detail with inventory
+GET    /api/products/search/?q=    # Search products by name/description
+GET    /api/products/categories/   # List all categories
 ```
 
-### Stores (Phase 2 - Coming Soon)
+**Features:**
+- Pagination support
+- Filter by category, price range, stock, store
+- Product detail includes inventory from all stores
+- Full-text search
+
+### Stores (Phase 2 - ✅ Complete)
 
 ```bash
-GET    /api/stores/                # List nearby stores
-GET    /api/stores/{id}/           # Get store detail
-GET    /api/stores/{id}/inventory/ # Get store inventory
+GET    /api/stores/                      # List active stores
+GET    /api/stores/?lat={lat}&lon={lon}  # List nearby stores with distance
+GET    /api/stores/{id}/                 # Get store detail
+GET    /api/stores/{id}/inventory/       # Get store inventory with products
 ```
+
+**Features:**
+- Distance calculation using Haversine formula
+- Stores sorted by distance when location provided
+- Filter inventory by category and stock
+- Pagination support
+
+### Coupons (Phase 2 - ✅ Complete)
+
+```bash
+GET    /api/orders/coupons/           # List active coupons
+POST   /api/orders/coupons/validate/  # Validate coupon code
+```
+
+**Request body for validation:**
+```json
+{
+  "code": "SAVE30",
+  "order_value": 150.00
+}
+```
+
+**Features:**
+- Complete validation logic (expiry, usage limits, minimum order value)
+- Discount calculation (percentage and fixed amount)
+- Clear error messages
 
 ### Orders (Phase 3 - Coming Soon)
 
@@ -258,13 +291,17 @@ services/api/
 
 ## Next Steps
 
-### Phase 2: Buyer APIs - Products & Cart
-- Implement product list/search/filter endpoints
-- Store search by location
-- Coupon validation
-- Cart operations
+### Phase 2: Buyer APIs - Products & Cart - ✅ COMPLETE
 
-### Phase 3: Order & Payment APIs  
+Completed features:
+- ✅ Product list/search/filter endpoints
+- ✅ Store search by location with distance calculation
+- ✅ Coupon validation with business rules
+- ✅ Comprehensive API documentation
+
+See [PHASE_2_API_DOCUMENTATION.md](../../PHASE_2_API_DOCUMENTATION.md) for detailed API documentation.
+
+### Phase 3: Order & Payment APIs - Coming Next  
 - Order creation and management
 - Payment integration
 - Order tracking and rating

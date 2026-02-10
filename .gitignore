@@ -17,6 +17,8 @@ services/api/**/db.sqlite3
 services/api/staticfiles/
 services/api/media/
 services/api/*.log
+services/api/venv/
+services/api/env/
 
 # Docker
 *.env
