@@ -8,10 +8,12 @@ services/web/storybook-static/
 
 # Backend
 services/api/__pycache__/
+services/api/**/__pycache__/
 services/api/*.py[cod]
 services/api/*$py.class
 services/api/.env
 services/api/db.sqlite3
+services/api/**/db.sqlite3
 services/api/staticfiles/
 services/api/media/
 services/api/*.log

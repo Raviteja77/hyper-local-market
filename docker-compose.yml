@@ -30,13 +30,17 @@ services:
     volumes:
       - ./services/api:/app
     environment:
-      - DJANGO_SETTINGS_MODULE=config.settings.development
+      - DJANGO_SETTINGS_MODULE=config.settings
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/hyper_local_db
       - REDIS_URL=redis://redis:6379/0
+      - DJANGO_DEBUG=True
+      - DJANGO_SECRET_KEY=docker-dev-secret-key-change-in-production
     command: python manage.py runserver 0.0.0.0:8000
     depends_on:
-      - db
-      - redis
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
 
   db:
     image: postgis/postgis:16-3.4
@@ -49,6 +53,11 @@ services:
       - POSTGRES_PASSWORD=postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   redis:
     image: redis:7-alpine
