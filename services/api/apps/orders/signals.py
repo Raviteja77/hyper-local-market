@@ -1,12 +1,28 @@
 """
 Order signals for real-time updates.
 """
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.utils import timezone
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 from .models import Order
+
+# Dictionary to store old status before save
+_old_status_cache = {}
+
+
+@receiver(pre_save, sender=Order)
+def store_old_status(sender, instance, **kwargs):
+    """
+    Store old status before save for comparison.
+    """
+    if instance.pk:
+        try:
+            old_instance = Order.objects.get(pk=instance.pk)
+            _old_status_cache[instance.pk] = old_instance.status
+        except Order.DoesNotExist:
+            _old_status_cache[instance.pk] = None
 
 
 @receiver(post_save, sender=Order)
@@ -18,12 +34,8 @@ def order_status_changed(sender, instance, created, **kwargs):
     if not channel_layer:
         return
     
-    # Get old status from database if not created
-    old_status = None
-    if not created:
-        old_instance = Order.objects.filter(order_id=instance.order_id).first()
-        if old_instance:
-            old_status = old_instance.status
+    # Get old status from cache
+    old_status = _old_status_cache.pop(instance.pk, None) if not created else None
     
     # Prepare order data
     order_data = {

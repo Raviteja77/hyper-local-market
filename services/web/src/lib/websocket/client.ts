@@ -1,5 +1,3 @@
-import io from 'socket.io-client';
-
 /**
  * WebSocket client for real-time order tracking.
  * 

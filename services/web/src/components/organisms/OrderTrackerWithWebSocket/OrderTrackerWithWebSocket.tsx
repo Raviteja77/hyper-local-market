@@ -78,10 +78,14 @@ export const OrderTrackerWithWebSocket: React.FC<OrderTrackerWithWebSocketProps>
 
       // Play notification sound (optional)
       if (typeof Audio !== 'undefined') {
-        const audio = new Audio('/notification.mp3');
-        audio.play().catch(() => {
-          // Ignore if audio playback fails
-        });
+        try {
+          const audio = new Audio('/notification.mp3');
+          audio.play().catch(() => {
+            // Ignore if audio playback fails (file not found, autoplay blocked, etc.)
+          });
+        } catch (error) {
+          // Ignore audio errors
+        }
       }
 
       // Hide notification after 5 seconds

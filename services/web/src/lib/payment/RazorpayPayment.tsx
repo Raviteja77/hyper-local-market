@@ -91,9 +91,9 @@ export function RazorpayPayment({
         description: `Payment for order ${orderId}`,
         order_id: paymentData.razorpay_order_id,
         prefill: {
-          name: paymentData.user?.name,
-          email: paymentData.user?.email,
-          contact: paymentData.user?.phone,
+          name: paymentData.user?.name || '',
+          email: paymentData.user?.email || '',
+          contact: paymentData.user?.phone || '',
         },
         theme: {
           color: '#10B981',
