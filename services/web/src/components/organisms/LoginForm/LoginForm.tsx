@@ -55,8 +55,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({
       setOtpError('OTP is required');
       return false;
     }
-    if (value.length !== 6) {
-      setOtpError('OTP must be 6 digits');
+    if (value.length < 4 || value.length > 6) {
+      setOtpError('OTP must be 4-6 digits');
       return false;
     }
     setOtpError('');
@@ -151,7 +151,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           <FormField
             label="OTP"
             type="text"
-            placeholder="Enter 6-digit OTP"
+            placeholder="Enter 4-6 digit OTP"
             value={otp}
             onChange={(e) => {
               const value = e.target.value.replace(/\D/g, '').slice(0, 6);
