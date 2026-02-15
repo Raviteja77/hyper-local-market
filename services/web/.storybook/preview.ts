@@ -1,18 +1,6 @@
 import type { Preview } from "@storybook/react";
-import * as NextImage from "next/image";
 import "../src/app/globals.css";
 import theme from "./theme";
-
-// Mock Next.js Image component for Storybook
-const OriginalNextImage = NextImage.default;
-
-Object.defineProperty(NextImage, "default", {
-  configurable: true,
-  value: (props: any) => {
-    // Use unoptimized images in Storybook
-    return <OriginalNextImage {...props} unoptimized />;
-  },
-});
 
 const preview: Preview = {
   parameters: {
@@ -28,6 +16,9 @@ const preview: Preview = {
     },
     nextjs: {
       appDirectory: true,
+      navigation: {
+        pathname: '/',
+      },
     },
   },
 };
