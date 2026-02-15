@@ -114,7 +114,7 @@ export default function SellerDashboardPage() {
           Dashboard
         </Typography>
         <Typography variant="body" color="muted">
-          Welcome back! Here's what's happening with your store today.
+          Welcome back! Here&apos;s what&apos;s happening with your store today.
         </Typography>
       </div>
 

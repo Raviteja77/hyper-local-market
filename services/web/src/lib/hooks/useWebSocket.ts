@@ -101,6 +101,7 @@ export const useWebSocket = (channel?: string) => {
     } catch (error) {
       console.error('Failed to create WebSocket connection:', error);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accessToken, user, channel]);
 
   // Handle incoming messages

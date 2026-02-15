@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Badge } from '../../atoms';
 import { Clock } from 'lucide-react';
 import { RatingStars } from './RatingStars';
+import Image from 'next/image';
 
 const meta: Meta<typeof RatingStars> = {
   title: 'Molecules/RatingStars',
@@ -70,7 +71,7 @@ export const OnStoreCard: Story = {
   render: () => (
     <div className="bg-white rounded-lg shadow-md p-4 border border-gray-100 max-w-sm">
       <div className="flex items-start gap-3">
-        <img
+        <Image
           src="https://picsum.photos/seed/store1/64/64"
           alt="Store"
           className="w-16 h-16-lg object-cover"

@@ -6,6 +6,7 @@ import { BuyerLayout } from '@/components/templates';
 import { Button, Icon, Input, Typography } from '@/components/atoms';
 import { PriceDisplay } from '@/components/molecules';
 import { useCartStore, useAuthStore, useUIStore } from '@/store';
+import Image from 'next/image';
 
 export default function CartPage() {
   const router = useRouter();
@@ -106,11 +107,7 @@ export default function CartPage() {
               >
                 <div className="flex gap-4">
                   {item.image ? (
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-24 h-24 object-cover rounded"
-                    />
+                    <Image src={item.image} alt={item.name} className="w-24 h-24 object-cover rounded" />
                   ) : (
                     <div className="w-24 h-24 bg-gray-100 rounded flex items-center justify-center">
                       <Icon name="Package" size={32} color="#D1D5DB" />
@@ -182,7 +179,7 @@ export default function CartPage() {
                 {appliedCoupon ? (
                   <div className="flex items-center justify-between p-3 bg-green-50 border border-green-200 rounded">
                     <Typography variant="caption" className="text-success">
-                      Coupon "{appliedCoupon}" applied!
+                      Coupon &quot;{appliedCoupon}&quot; applied!
                     </Typography>
                     <button onClick={handleRemoveCoupon} className="text-error">
                       <Icon name="X" size={16} />

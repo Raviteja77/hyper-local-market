@@ -7,6 +7,7 @@ import { BuyerLayout } from '@/components/templates';
 import { OrderTracker } from '@/components/organisms';
 import { Avatar, Button, Icon, Typography } from '@/components/atoms';
 import { useOrderStore, useAuthStore } from '@/store';
+import Image from 'next/image';
 
 export default function OrderDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = use(params);
@@ -76,7 +77,7 @@ export default function OrderDetailsPage({ params }: { params: Promise<{ id: str
                 {order.items.map((item) => (
                   <div key={item.id} className="flex gap-4 pb-4 border-b border-gray-200 last:border-0">
                     {item.image ? (
-                      <img
+                      <Image
                         src={item.image}
                         alt={item.name}
                         className="w-16 h-16 object-cover rounded"

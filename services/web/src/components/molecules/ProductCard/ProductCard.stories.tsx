@@ -73,7 +73,7 @@ export const NoDiscount: Story = {
 
 // Story 4 — "8-Column Desktop Grid (Zepto Laundry Care)"
 export const ZeptoLaundryCareGrid: Story = {
-  render: () => {
+  render: function RenderProductCardGrid() {
     const [cart, setCart] = useState<Record<string, number>>({});
     
     const products = [

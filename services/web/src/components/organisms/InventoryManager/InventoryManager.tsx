@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Badge, Button, Input, Typography } from '../../atoms';
 import { Search, Package, Edit } from 'lucide-react';
+import Image from 'next/image';
 
 export interface InventoryItem {
   id: string;
@@ -120,7 +121,7 @@ export const InventoryManager: React.FC<InventoryManagerProps> = ({
                 <div className="flex items-center gap-4">
                   {/* Image */}
                   {item.image ? (
-                    <img
+                    <Image
                       src={item.image}
                       alt={item.name}
                       className="w-16 h-16 object-cover"

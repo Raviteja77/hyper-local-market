@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Typography } from '../../atoms';
 import { PriceDisplay } from '../../molecules';
 import { X, ShoppingCart, Package, Minus, Plus, Trash2 } from 'lucide-react';
+import Image from 'next/image';
 
 export interface CartItem {
   id: string;
@@ -90,7 +91,7 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
                     className="flex gap-3 p-3 border border-gray-200 rounded-lg"
                   >
                     {item.image ? (
-                      <img
+                      <Image
                         src={item.image}
                         alt={item.name}
                         className="w-20 h-20 object-cover"

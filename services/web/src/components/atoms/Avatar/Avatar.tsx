@@ -1,4 +1,5 @@
 // services/web/src/components/atoms/Avatar/Avatar.tsx
+import Image from 'next/image';
 import React from 'react';
 
 export interface AvatarProps {
@@ -79,7 +80,7 @@ export const Avatar: React.FC<AvatarProps> = ({
           {getInitials(name)}
         </div>
       ) : (
-        <img
+        <Image
           src={src}
           alt={alt || name}
           onError={() => setImgError(true)}

@@ -31,7 +31,7 @@ export const Dashboard: Story = {
         </Typography>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-white p-6-lg shadow-sm">
-            <Typography variant="caption" color="muted">Today's Orders</Typography>
+            <Typography variant="caption" color="muted">Today&apos;s Orders</Typography>
             <Typography variant="h3" weight="bold" color="primary" className="mt-2">24</Typography>
           </div>
           <div className="bg-white p-6-lg shadow-sm">

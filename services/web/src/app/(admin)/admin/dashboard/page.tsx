@@ -174,7 +174,7 @@ export default function AdminDashboardPage() {
             Dashboard Overview
           </Typography>
           <Typography variant="body" color="muted">
-            Welcome back! Here's what's happening across the platform.
+            Welcome back! Here&apos;s what&apos;s happening across the platform.
           </Typography>
         </div>
 

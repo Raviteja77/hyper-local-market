@@ -61,7 +61,7 @@ export const Offline: Story = {
       <div className="p-4 md:p-8">
         <div className="bg-white p-8-lg shadow-sm border border-gray-200 text-center">
           <Typography variant="h3" weight="bold" className="mb-2">
-            You're Offline
+            You&apos;re Offline
           </Typography>
           <Typography variant="body" color="muted" className="mb-4">
             Go online to start receiving delivery requests
@@ -84,7 +84,7 @@ export const HighEarnings: Story = {
     children: (
       <div className="p-4 md:p-8">
         <Typography variant="h2" weight="bold" className="mb-6">
-          Today's Summary
+          Today&apos;s Summary
         </Typography>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-white p-6-lg shadow-sm">

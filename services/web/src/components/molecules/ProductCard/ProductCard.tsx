@@ -1,6 +1,7 @@
 // services/web/src/components/molecules/ProductCard/ProductCard.tsx
 import React from 'react';
 import { Star } from 'lucide-react';
+import Image from 'next/image';
 
 export interface ProductCardProps {
   id: string;
@@ -52,7 +53,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     >
       {/* IMAGE AREA */}
       <div className="relative overflow-hidden-t-lg">
-        <img src={image} alt={name} className="w-full aspect-square object-cover group-hover:brightness-105 transition-all duration-200" />
+        <Image src={image} alt={name} className="w-full aspect-square object-cover group-hover:brightness-105 transition-all duration-200" />
         
         {/* NEW badge: top-left, absolute */}
         {isNew && (

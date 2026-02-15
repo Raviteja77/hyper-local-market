@@ -109,7 +109,7 @@ export default function RiderDashboardPage() {
       {/* Recent Activity / Stats */}
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-white p-4 rounded-xl border border-gray-200">
-          <Typography variant="caption" color="muted">Today's Trips</Typography>
+          <Typography variant="caption" color="muted">Today&apos;s Trips</Typography>
           <Typography variant="h2" weight="bold">8</Typography>
         </div>
         <div className="bg-white p-4 rounded-xl border border-gray-200">

@@ -2,6 +2,7 @@
 import React from 'react';
 import { Badge } from '../../atoms';
 import { Clock, Star } from 'lucide-react';
+import Image from 'next/image';
 
 export interface StoreCardProps {
   id: string;
@@ -38,7 +39,7 @@ export const StoreCard: React.FC<StoreCardProps> = ({
     >
       <div className="flex items-start gap-3">
         {/* Store image (square,-lg, object-cover) on the left — ~64px */}
-        <img
+        <Image
           src={image}
           alt={name}
           className="w-16 h-16-lg object-cover flex-shrink-0"
