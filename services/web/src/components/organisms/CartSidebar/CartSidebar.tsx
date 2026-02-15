@@ -91,11 +91,14 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
                     className="flex gap-3 p-3 border border-gray-200 rounded-lg"
                   >
                     {item.image ? (
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        className="w-20 h-20 object-cover"
-                      />
+                      <div className="relative w-20 h-20">
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          fill
+                          className="object-cover rounded"
+                        />
+                      </div>
                     ) : (
                       <div className="w-20 h-20 bg-gray-100 flex items-center justify-center">
                         <Package size={32} color="#D1D5DB" />

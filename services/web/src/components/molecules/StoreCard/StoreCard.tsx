@@ -39,11 +39,14 @@ export const StoreCard: React.FC<StoreCardProps> = ({
     >
       <div className="flex items-start gap-3">
         {/* Store image (square,-lg, object-cover) on the left — ~64px */}
-        <Image
-          src={image}
-          alt={name}
-          className="w-16 h-16-lg object-cover flex-shrink-0"
-        />
+        <div className="relative w-16 h-16 flex-shrink-0">
+          <Image
+            src={image}
+            alt={name}
+            fill
+            className="rounded-lg object-cover"
+          />
+        </div>
 
         {/* Right side (flex column, gap-1) */}
         <div className="flex-1 flex flex-col gap-1 min-w-0">

@@ -107,7 +107,9 @@ export default function CartPage() {
               >
                 <div className="flex gap-4">
                   {item.image ? (
-                    <Image src={item.image} alt={item.name} className="w-24 h-24 object-cover rounded" />
+                    <div className="relative w-24 h-24 flex-shrink-0">
+                      <Image src={item.image} alt={item.name} fill className="object-cover rounded" />
+                    </div>
                   ) : (
                     <div className="w-24 h-24 bg-gray-100 rounded flex items-center justify-center">
                       <Icon name="Package" size={32} color="#D1D5DB" />

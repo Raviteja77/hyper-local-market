@@ -121,11 +121,14 @@ export const InventoryManager: React.FC<InventoryManagerProps> = ({
                 <div className="flex items-center gap-4">
                   {/* Image */}
                   {item.image ? (
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      className="w-16 h-16 object-cover"
-                    />
+                    <div className="relative w-16 h-16">
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        fill
+                        className="object-cover rounded"
+                      />
+                    </div>
                   ) : (
                     <div className="w-16 h-16 bg-gray-100 flex items-center justify-center">
                       <Package size={24} color="#D1D5DB" />
