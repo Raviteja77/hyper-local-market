@@ -62,7 +62,16 @@ export const BuyerLayout: React.FC<BuyerLayoutProps> = ({
   className = '',
 }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const router = useRouter();
+  
+  // Conditionally use router only in Next.js environment
+  let router: ReturnType<typeof useRouter> | null = null;
+  try {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    router = useRouter();
+  } catch (error) {
+    // Router not available (e.g., in Storybook), that's ok
+    router = null;
+  }
   
   // Get cart data from store
   const { 
@@ -86,7 +95,9 @@ export const BuyerLayout: React.FC<BuyerLayoutProps> = ({
   };
 
   const handleLoginClick = () => {
-    if (typeof window !== 'undefined') {
+    if (onLoginClick) {
+      onLoginClick();
+    } else if (router && typeof window !== 'undefined') {
       router.push('/login');
     }
   };
