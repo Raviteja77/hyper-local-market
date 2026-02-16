@@ -8,6 +8,16 @@ import { Badge, Typography } from '../../atoms';
 import { useCartStore } from '@/store';
 import { useRouter } from 'next/navigation';
 
+// Hook wrapper that safely handles Storybook context
+function useSafeRouter() {
+  try {
+    return useRouter();
+  } catch {
+    // In Storybook or non-Next.js context, return null
+    return null;
+  }
+}
+
 export interface BuyerLayoutProps {
   children: React.ReactNode;
   userName?: string;
@@ -62,16 +72,7 @@ export const BuyerLayout: React.FC<BuyerLayoutProps> = ({
   className = '',
 }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  
-  // Conditionally use router only in Next.js environment
-  let router: ReturnType<typeof useRouter> | null = null;
-  try {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    router = useRouter();
-  } catch (error) {
-    // Router not available (e.g., in Storybook), that's ok
-    router = null;
-  }
+  const router = useSafeRouter();
   
   // Get cart data from store
   const { 
