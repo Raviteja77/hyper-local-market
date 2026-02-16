@@ -8,6 +8,16 @@ import { Badge, Typography } from '../../atoms';
 import { useCartStore } from '@/store';
 import { useRouter } from 'next/navigation';
 
+// Hook wrapper that safely handles Storybook context
+function useSafeRouter() {
+  try {
+    return useRouter();
+  } catch {
+    // In Storybook or non-Next.js context, return null
+    return null;
+  }
+}
+
 export interface BuyerLayoutProps {
   children: React.ReactNode;
   userName?: string;
@@ -62,7 +72,7 @@ export const BuyerLayout: React.FC<BuyerLayoutProps> = ({
   className = '',
 }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const router = useRouter();
+  const router = useSafeRouter();
   
   // Get cart data from store
   const { 
@@ -86,7 +96,9 @@ export const BuyerLayout: React.FC<BuyerLayoutProps> = ({
   };
 
   const handleLoginClick = () => {
-    if (typeof window !== 'undefined') {
+    if (onLoginClick) {
+      onLoginClick();
+    } else if (router && typeof window !== 'undefined') {
       router.push('/login');
     }
   };

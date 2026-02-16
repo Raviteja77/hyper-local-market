@@ -83,8 +83,9 @@ export const Avatar: React.FC<AvatarProps> = ({
         <Image
           src={src}
           alt={alt || name}
+          fill
           onError={() => setImgError(true)}
-          className="w-full h-full object-cover"
+          className="object-cover"
         />
       )}
       
