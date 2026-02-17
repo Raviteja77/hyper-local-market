@@ -65,7 +65,7 @@ export const LocationModal: React.FC<LocationModalProps> = ({
           <button 
             onClick={onClose} 
             aria-label="Close location selector"
-            className="p-2 hover:bg-gray-100-full transition-colors"
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
           >
             <X size={20} className="text-gray-500" />
           </button>
@@ -78,7 +78,7 @@ export const LocationModal: React.FC<LocationModalProps> = ({
                   bg-primary-light hover:bg-primary-light/80 transition-colors" 
             onClick={handleUseCurrentLocation}
           >
-            <div className="p-2 bg-primary-full">
+            <div className="p-2 bg-primary rounded-full">
               <Navigation size={16} className="text-white" />
             </div>
             <div className="flex-1 text-left">

@@ -36,7 +36,7 @@ describe('PriceDisplay', () => {
 
   it('applies correct size classes', () => {
     const { container } = render(
-      <PriceDisplay currentPrice={177} originalPrice={249} discountPercent={72} />
+      <PriceDisplay currentPrice={177} originalPrice={249} discountPercent={72} size="sm" />
     );
     const pricePill = container.querySelector('.bg-primary');
     expect(pricePill).toHaveClass('text-xs');

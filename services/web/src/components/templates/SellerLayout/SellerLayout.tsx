@@ -108,12 +108,12 @@ export const SellerLayout: React.FC<SellerLayoutProps> = ({
             </Typography>
             <button
               onClick={() => onToggleOnline?.(!isOnline)}
-              className={`relative inline-flex h-6 w-11 items-center-full transition-colors ${
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                 isOnline ? 'bg-primary' : 'bg-gray-300'
               }`}
             >
               <span
-                className={`inline-block h-4 w-4 transform-full bg-white transition-transform ${
+                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                   isOnline ? 'translate-x-6' : 'translate-x-1'
                 }`}
               />

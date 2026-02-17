@@ -66,7 +66,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         <div className="absolute bottom-2 right-2">
           {quantity === 0 ? (
             <button
-              className="bg-primary text-white text-xs font-bold-full px-3 py-1 shadow-sm hover:bg-primary-hover hover:scale-105 active:scale-95 transition-all duration-150"
+              className="bg-primary text-white text-xs font-bold rounded-full px-3 py-1 shadow-sm hover:bg-primary-hover hover:scale-105 active:scale-95 transition-all duration-150"
               onClick={(e) => {
                 e.stopPropagation();
                 onAdd(id);
@@ -75,7 +75,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               ADD
             </button>
           ) : (
-            <div className="flex items-center bg-primary-full shadow-sm overflow-hidden">
+            <div className="flex items-center bg-primary rounded-full shadow-sm overflow-hidden">
               <button
                 className="text-white px-2 py-1 text-sm hover:bg-primary-hover transition duration-150"
                 onClick={(e) => {

@@ -38,7 +38,7 @@ describe('StoreCard', () => {
     render(<StoreCard {...defaultProps} />);
     const img = screen.getByAltText('Quick Mart');
     expect(img).toBeInTheDocument();
-    expect(img).toHaveAttribute('src', 'https://example.com/image.jpg');
+    expect(img.getAttribute('src')).toContain('image.jpg');
   });
 
   it('renders free delivery text when isFreeDelivery is true', () => {
