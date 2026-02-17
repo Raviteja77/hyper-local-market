@@ -1,7 +1,12 @@
 // services/web/src/components/molecules/StoreCard/StoreCard.test.tsx
+import React from 'react';
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { StoreCard } from './StoreCard';
+
+vi.mock('next/image', () => ({
+  default: (props: React.ImgHTMLAttributes<HTMLImageElement>) => <img {...props} />,
+}));
 
 describe('StoreCard', () => {
   const mockOnClick = vi.fn();
@@ -38,7 +43,7 @@ describe('StoreCard', () => {
     render(<StoreCard {...defaultProps} />);
     const img = screen.getByAltText('Quick Mart');
     expect(img).toBeInTheDocument();
-    expect(img.getAttribute('src')).toContain('image.jpg');
+    expect(img).toHaveAttribute('src', 'https://example.com/image.jpg');
   });
 
   it('renders free delivery text when isFreeDelivery is true', () => {
