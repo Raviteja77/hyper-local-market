@@ -37,7 +37,7 @@ export const StoreList: React.FC<StoreListProps> = ({
   const sortedStores = [...stores].sort((a, b) => {
     switch (sortBy) {
       case 'distance':
-        return a.distance - b.distance;
+        return (a.distance || 0) - (b.distance || 0);
       case 'rating':
         return (b.rating || 0) - (a.rating || 0);
       case 'eta':

@@ -164,10 +164,22 @@ export const orderAPI = {
 // PAYMENT ENDPOINTS
 // ============================================
 
+interface PaymentIntentResponse {
+  razorpay_key_id: string;
+  razorpay_order_id: string;
+  amount: number;
+  currency: string;
+  user?: {
+    name?: string;
+    email?: string;
+    phone?: string;
+  };
+}
+
 export const paymentAPI = {
   // Create payment intent
   createPaymentIntent: (orderId: string) =>
-    api.post('/payments/create-intent/', { order_id: orderId }),
+    api.post<PaymentIntentResponse>('/payments/create-intent/', { order_id: orderId }),
 
   // Verify payment
   verifyPayment: (paymentId: string, signature: string) =>

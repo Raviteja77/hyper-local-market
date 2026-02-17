@@ -146,7 +146,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
 
             {/* Admin Profile */}
             <div className="flex items-center gap-2 pl-2 border-l border-gray-200">
-              <Avatar src={adminAvatar} alt={adminName} />
+              <Avatar src={adminAvatar} name={adminName} />
               <Typography variant="caption" weight="medium" className="hidden sm:block">
                 {adminName}
               </Typography>
@@ -209,7 +209,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
                     </Typography>
                     {item.badge !== undefined && item.badge > 0 && (
                       <Badge
-                        variant={isActive ? 'secondary' : 'danger'}
+                        variant={isActive ? 'info' : 'error'}
                        
                        
                         className="ml-auto"

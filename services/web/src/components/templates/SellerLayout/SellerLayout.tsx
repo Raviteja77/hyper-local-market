@@ -90,7 +90,7 @@ export const SellerLayout: React.FC<SellerLayoutProps> = ({
 
           {/* Store Info */}
           <div className="flex items-center gap-3">
-            <Avatar src={storeAvatar} alt={storeName} size="md" />
+            <Avatar src={storeAvatar} name={storeName} size="md" />
             <div className="hidden sm:block">
               <Typography variant="body" weight="semibold">
                 {storeName}
@@ -170,7 +170,7 @@ export const SellerLayout: React.FC<SellerLayoutProps> = ({
                     </Typography>
                     {item.badge !== undefined && item.badge > 0 && (
                       <Badge
-                        variant={isActive ? 'secondary' : 'danger'}
+                        variant={isActive ? 'info' : 'error'}
                        
                        
                         className="ml-auto"

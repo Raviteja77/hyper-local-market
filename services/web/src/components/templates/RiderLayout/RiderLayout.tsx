@@ -35,7 +35,7 @@ export const RiderLayout: React.FC<RiderLayoutProps> = ({
           <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             {/* Rider Info */}
             <div className="flex items-center gap-3">
-              <Avatar src={riderAvatar} alt={riderName} size="md" />
+              <Avatar src={riderAvatar} name={riderName} size="md" />
               <div>
                 <Typography variant="body" weight="semibold">
                   {riderName}
