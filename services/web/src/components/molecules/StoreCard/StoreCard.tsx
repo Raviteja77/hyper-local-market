@@ -10,6 +10,8 @@ export interface StoreCardProps {
   image: string;
   deliveryTime: string;
   rating: number;
+  distance?: number;
+  eta?: number;
   isFreeDelivery?: boolean;
   onClick: (id: string) => void;
   className?: string;

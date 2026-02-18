@@ -35,7 +35,7 @@ export const RiderLayout: React.FC<RiderLayoutProps> = ({
           <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             {/* Rider Info */}
             <div className="flex items-center gap-3">
-              <Avatar src={riderAvatar} alt={riderName} size="md" />
+              <Avatar src={riderAvatar} name={riderName} size="md" />
               <div>
                 <Typography variant="body" weight="semibold">
                   {riderName}
@@ -73,12 +73,12 @@ export const RiderLayout: React.FC<RiderLayoutProps> = ({
                 </Typography>
                 <button
                   onClick={() => onToggleOnline?.(!isOnline)}
-                  className={`relative inline-flex h-6 w-11 items-center-full transition-colors ${
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                     isOnline ? 'bg-primary' : 'bg-gray-300'
                   }`}
                 >
                   <span
-                    className={`inline-block h-4 w-4 transform-full bg-white transition-transform ${
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                       isOnline ? 'translate-x-6' : 'translate-x-1'
                     }`}
                   />

@@ -1,7 +1,12 @@
 // services/web/src/components/molecules/StoreCard/StoreCard.test.tsx
+import React from 'react';
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { StoreCard } from './StoreCard';
+
+vi.mock('next/image', () => ({
+  default: (props: React.ImgHTMLAttributes<HTMLImageElement>) => <img {...props} />,
+}));
 
 describe('StoreCard', () => {
   const mockOnClick = vi.fn();

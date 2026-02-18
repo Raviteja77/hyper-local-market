@@ -90,7 +90,7 @@ export const SellerLayout: React.FC<SellerLayoutProps> = ({
 
           {/* Store Info */}
           <div className="flex items-center gap-3">
-            <Avatar src={storeAvatar} alt={storeName} size="md" />
+            <Avatar src={storeAvatar} name={storeName} size="md" />
             <div className="hidden sm:block">
               <Typography variant="body" weight="semibold">
                 {storeName}
@@ -108,12 +108,12 @@ export const SellerLayout: React.FC<SellerLayoutProps> = ({
             </Typography>
             <button
               onClick={() => onToggleOnline?.(!isOnline)}
-              className={`relative inline-flex h-6 w-11 items-center-full transition-colors ${
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                 isOnline ? 'bg-primary' : 'bg-gray-300'
               }`}
             >
               <span
-                className={`inline-block h-4 w-4 transform-full bg-white transition-transform ${
+                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                   isOnline ? 'translate-x-6' : 'translate-x-1'
                 }`}
               />
@@ -170,7 +170,7 @@ export const SellerLayout: React.FC<SellerLayoutProps> = ({
                     </Typography>
                     {item.badge !== undefined && item.badge > 0 && (
                       <Badge
-                        variant={isActive ? 'secondary' : 'danger'}
+                        variant={isActive ? 'info' : 'error'}
                        
                        
                         className="ml-auto"

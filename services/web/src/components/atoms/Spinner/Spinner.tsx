@@ -3,12 +3,14 @@ import React from 'react';
 
 export interface SpinnerProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
+  color?: 'primary' | 'white';
   label?: string;
   className?: string;
 }
 
 export const Spinner: React.FC<SpinnerProps> = ({
   size = 'md',
+  color = 'primary',
   label,
   className = '',
 }) => {
@@ -18,11 +20,13 @@ export const Spinner: React.FC<SpinnerProps> = ({
     lg: 'w-8 h-8 border-4',
     xl: 'w-12 h-12 border-4',
   };
+
+  const borderColor = color === 'white' ? 'border-t-white' : 'border-t-primary';
   
   return (
     <div className={`flex flex-col items-center justify-center gap-2 ${className}`}>
       <div
-        className={`${sizes[size]} border-gray-200 border-t-primary-full animate-spin`}
+        className={`${sizes[size]} border-gray-200 ${borderColor} rounded-full animate-spin`}
         role="status"
         aria-label="Loading"
       >
