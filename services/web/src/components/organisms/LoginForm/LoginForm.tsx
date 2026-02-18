@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { ShoppingBag, AlertCircle } from 'lucide-react';
 import { FormField } from '../../molecules';

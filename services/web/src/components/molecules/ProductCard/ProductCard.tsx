@@ -1,3 +1,5 @@
+'use client';
+
 // services/web/src/components/molecules/ProductCard/ProductCard.tsx
 import React from 'react';
 import { Star } from 'lucide-react';

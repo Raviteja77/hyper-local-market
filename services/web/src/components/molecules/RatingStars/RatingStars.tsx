@@ -1,3 +1,5 @@
+'use client';
+
 // services/web/src/components/molecules/RatingStars/RatingStars.tsx
 import React from 'react';
 import { Star } from 'lucide-react';
