@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { AuthLayout } from '@/components/templates';
@@ -12,7 +12,7 @@ export default function LoginPage() {
   const { login } = useAuthStore();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const phoneRef = useRef('');
 
   const handleSubmit = async (data: { phone: string; otp?: string }) => {
     setLoading(true);
@@ -48,8 +48,7 @@ export default function LoginPage() {
         }
       } else {
         // Send OTP
-        console.log('Sending OTP to:', data.phone);
-        setPhoneNumber(data.phone);
+        phoneRef.current = data.phone;
       }
     } catch (err) {
       setError('Something went wrong. Please try again.');
@@ -65,7 +64,6 @@ export default function LoginPage() {
     try {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log('Resending OTP to:', phoneNumber);
     } catch (err) {
       setError('Failed to resend OTP. Please try again.');
     } finally {
