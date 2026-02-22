@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { AuthLayout } from '@/components/templates';
 import { LoginForm } from '@/components/organisms';
 import { useAuthStore } from '@/store';
@@ -11,7 +12,6 @@ export default function LoginPage() {
   const { login } = useAuthStore();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [mode, setMode] = useState<'phone' | 'otp'>('phone');
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const handleSubmit = async (data: { phone: string; otp?: string }) => {
@@ -50,7 +50,6 @@ export default function LoginPage() {
         // Send OTP
         console.log('Sending OTP to:', data.phone);
         setPhoneNumber(data.phone);
-        setMode('otp');
       }
     } catch (err) {
       setError('Something went wrong. Please try again.');
@@ -76,19 +75,24 @@ export default function LoginPage() {
 
   return (
     <AuthLayout>
-      <div className="bg-white p-8 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold mb-2">Welcome Back</h2>
-        <p className="text-gray-600 mb-6">Sign in to continue shopping</p>
-        <LoginForm
-          onSubmit={handleSubmit}
-          onResendOTP={handleResendOTP}
-          loading={loading}
-          error={error}
-          mode={mode}
-          phoneNumber={phoneNumber}
-        />
-        <p className="text-sm text-gray-500 mt-4 text-center">
+      <LoginForm
+        onSubmit={handleSubmit}
+        onResendOTP={handleResendOTP}
+        loading={loading}
+        error={error}
+      />
+      <div className="text-center mt-4 space-y-2">
+        <p className="text-sm text-gray-500">
           For testing, use OTP: <strong>1234</strong>
+        </p>
+        <p className="text-sm text-gray-600">
+          Don&apos;t have an account?{' '}
+          <Link
+            href="/register"
+            className="text-primary font-medium hover:underline"
+          >
+            Sign Up
+          </Link>
         </p>
       </div>
     </AuthLayout>

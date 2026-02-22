@@ -10,7 +10,8 @@ describe('FormField', () => {
 
   it('shows error message when provided', () => {
     render(<FormField label="Email" errorMessage="Required field" />);
-    expect(screen.getAllByText('Required field').length).toBeGreaterThanOrEqual(1);
+    const errorMessages = screen.getAllByText('Required field');
+    expect(errorMessages).toHaveLength(1);
   });
 
   it('shows helper text when no error', () => {
