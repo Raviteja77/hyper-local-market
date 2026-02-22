@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { ShoppingBag, ShoppingCart, X, Menu, MapPin, ChevronDown } from 'lucide-react';
 import { Avatar, Badge, Button, Typography } from '../../atoms';

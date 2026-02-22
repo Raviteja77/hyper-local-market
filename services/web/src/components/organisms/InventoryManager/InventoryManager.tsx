@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Badge, Button, Input, Typography } from '../../atoms';
 import { Search, Package, Edit } from 'lucide-react';

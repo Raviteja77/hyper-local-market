@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { ProductCard, ProductCardProps } from '../../molecules';
 import { Button, Typography, Spinner } from '../../atoms';

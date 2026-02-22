@@ -1,3 +1,5 @@
+'use client';
+
 // services/web/src/components/molecules/StoreCard/StoreCard.tsx
 import React from 'react';
 import { Badge } from '../../atoms';

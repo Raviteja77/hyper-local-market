@@ -1,3 +1,5 @@
+'use client';
+
 // services/web/src/components/organisms/StoreList/StoreList.tsx
 import React, { useState } from 'react';
 import { StoreCard, StoreCardProps } from '../../molecules';
