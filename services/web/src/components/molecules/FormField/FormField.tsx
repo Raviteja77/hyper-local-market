@@ -37,14 +37,6 @@ export const FormField: React.FC<FormFieldProps> = ({
         {...inputProps}
       />
       
-      {errorMessage && (
-        <div className="mt-1">
-          <Typography variant="caption" color="error">
-            {errorMessage}
-          </Typography>
-        </div>
-      )}
-      
       {!errorMessage && helperText && (
         <div className="mt-1">
           <Typography variant="caption" color="muted">

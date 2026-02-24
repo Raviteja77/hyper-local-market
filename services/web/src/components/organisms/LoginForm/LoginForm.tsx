@@ -113,7 +113,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
       </Typography>
 
       {error && (
-        <div className="mb-4 p-3 bg-red-50 border border-red-200-lg flex items-start gap-2">
+        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2">
           <AlertCircle size={20} color="#EF4444" />
           <Typography variant="caption" color="error">
             {error}

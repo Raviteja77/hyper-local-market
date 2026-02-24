@@ -1,4 +1,3 @@
-import { AuthLayout } from '@/components/templates';
 import React from 'react';
 import type { Metadata } from 'next';
 
@@ -13,8 +12,8 @@ export default function AuthLayoutWrapper({
   children: React.ReactNode;
 }) {
   return (
-    <AuthLayout>
+    <>
       {children}
-    </AuthLayout>
+    </>
   );
 }
