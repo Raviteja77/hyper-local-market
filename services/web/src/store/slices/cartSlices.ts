@@ -106,7 +106,15 @@ export const useCartStore = create<CartStore>()(
       updateQuantity: (productId, quantity) =>
         set((state) => {
           if (quantity <= 0) {
-            return get().removeItem(productId), state;
+            const newItems = state.items.filter((item) => item.productId !== productId);
+            const subtotal = calculateSubtotal(newItems);
+            const total = calculateTotal(subtotal, state.deliveryFee, state.discount);
+            return {
+              items: newItems,
+              subtotal,
+              total,
+              storeId: newItems.length === 0 ? null : state.storeId,
+            };
           }
 
           const newItems = state.items.map((item) =>

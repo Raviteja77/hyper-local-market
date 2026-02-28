@@ -19,6 +19,10 @@ export const authAPI = {
       otp,
     }),
 
+  // Buyer registration
+  buyerSignup: (data: { full_name: string; email?: string; phone: string; password: string }) =>
+    api.post<{ user: User; access: string; refresh: string }>('/users/signup/buyer/', data),
+
   // Refresh token
   refreshToken: (refresh: string) =>
     api.post<{ access: string }>('/auth/refresh/', { refresh }),
