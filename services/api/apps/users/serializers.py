@@ -10,7 +10,7 @@ class BuyerRegistrationSerializer(serializers.Serializer):
     full_name = serializers.CharField(max_length=150)
     email = serializers.EmailField(required=False, allow_blank=True)
     phone = serializers.CharField(max_length=15)
-    password = serializers.CharField(min_length=6, write_only=True)
+    password = serializers.CharField(min_length=8, write_only=True)
 
     def validate_phone(self, value):
         if User.objects.filter(phone=value).exists():

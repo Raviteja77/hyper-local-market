@@ -81,8 +81,10 @@ class VerifyOTPView(APIView):
         cache_key = f'otp_{phone}'
         stored_otp = cache.get(cache_key)
 
-        # Allow '1234' as a test OTP in development
-        if stored_otp != otp and otp != '1234':
+        # Allow '1234' as a test OTP only in development/debug mode
+        from django.conf import settings
+        is_test_otp = otp == '1234' and getattr(settings, 'DEBUG', False)
+        if stored_otp != otp and not is_test_otp:
             return Response(
                 {'error': 'Invalid or expired OTP'},
                 status=status.HTTP_400_BAD_REQUEST,

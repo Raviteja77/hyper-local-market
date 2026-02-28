@@ -196,11 +196,11 @@ describe('Cart Store - Buyer Flow', () => {
 
       useCartStore.getState().updateQuantity('prod-1', 0);
 
-      // The cart store calls removeItem internally for quantity <= 0
-      // Due to set() returning state, the item gets removed from the store
       const state = useCartStore.getState();
-      // Verify the removeItem side effect was triggered
-      expect(state.items.find(i => i.productId === 'prod-1')?.quantity ?? 0).toBeLessThanOrEqual(1);
+      expect(state.items.find(i => i.productId === 'prod-1')).toBeUndefined();
+      expect(state.items).toHaveLength(0);
+      expect(state.subtotal).toBe(0);
+      expect(state.storeId).toBeNull();
     });
   });
 
