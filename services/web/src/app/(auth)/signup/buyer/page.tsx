@@ -159,7 +159,7 @@ export default function BuyerSignupPage() {
             placeholder="Enter your full name"
             value={formData.fullName}
             onChange={handleChange}
-            error={fieldErrors.fullName || fieldErrors.full_name}
+            errorMessage={fieldErrors.fullName || fieldErrors.full_name}
           />
 
           <FormField
@@ -170,7 +170,7 @@ export default function BuyerSignupPage() {
             placeholder="+91 98765 43210"
             value={formData.phone}
             onChange={handleChange}
-            error={fieldErrors.phone}
+            errorMessage={fieldErrors.phone}
           />
 
           <FormField
@@ -180,7 +180,7 @@ export default function BuyerSignupPage() {
             placeholder="Enter your email (optional)"
             value={formData.email}
             onChange={handleChange}
-            error={fieldErrors.email}
+            errorMessage={fieldErrors.email}
           />
 
           <FormField
@@ -191,7 +191,7 @@ export default function BuyerSignupPage() {
             placeholder="Create a strong password"
             value={formData.password}
             onChange={handleChange}
-            error={fieldErrors.password}
+            errorMessage={fieldErrors.password}
           />
 
           <FormField
@@ -202,7 +202,7 @@ export default function BuyerSignupPage() {
             placeholder="Confirm your password"
             value={formData.confirmPassword}
             onChange={handleChange}
-            error={fieldErrors.confirmPassword}
+            errorMessage={fieldErrors.confirmPassword}
           />
 
           {error && (
