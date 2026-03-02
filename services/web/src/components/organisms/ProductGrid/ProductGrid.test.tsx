@@ -16,7 +16,7 @@ describe('ProductGrid', () => {
 
   it('renders title when provided', () => {
     const products = [
-      { id: '1', name: 'Apple', price: 50, storeName: 'Store A', distance: 1 },
+      { id: '1', name: 'Apple', price: 50, image: '/apple.jpg', quantity: 0, onAdd: vi.fn(), onRemove: vi.fn() },
     ];
     render(<ProductGrid products={products} title="Fresh Fruits" />);
     expect(screen.getByText('Fresh Fruits')).toBeInTheDocument();

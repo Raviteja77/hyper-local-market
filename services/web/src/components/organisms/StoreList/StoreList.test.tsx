@@ -11,7 +11,7 @@ vi.mock('next/image', () => ({
 describe('StoreList', () => {
   it('renders title', () => {
     const stores = [
-      { id: '1', name: 'Fresh Mart', distance: 1.2, rating: 4.5, eta: 15 },
+      { id: '1', name: 'Fresh Mart', image: '/store.jpg', deliveryTime: '15 min', distance: 1.2, rating: 4.5, eta: 15, onClick: vi.fn() },
     ];
     render(<StoreList stores={stores} />);
     expect(screen.getByText('Nearby Stores')).toBeInTheDocument();
@@ -24,7 +24,7 @@ describe('StoreList', () => {
 
   it('shows sort options by default', () => {
     const stores = [
-      { id: '1', name: 'Fresh Mart', distance: 1.2, rating: 4.5, eta: 15 },
+      { id: '1', name: 'Fresh Mart', image: '/store.jpg', deliveryTime: '15 min', distance: 1.2, rating: 4.5, eta: 15, onClick: vi.fn() },
     ];
     render(<StoreList stores={stores} />);
     expect(screen.getByText('Sort by:')).toBeInTheDocument();
