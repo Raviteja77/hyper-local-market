@@ -4,9 +4,11 @@ on:
   push:
     paths:
       - 'services/web/**'
+      - '.github/workflows/frontend-ci.yml'
   pull_request:
     paths:
       - 'services/web/**'
+      - '.github/workflows/frontend-ci.yml'
 
 defaults:
   run:
@@ -32,6 +34,9 @@ jobs:
 
       - name: Linting
         run: npm run lint
+
+      - name: Type Check
+        run: npx tsc --noEmit
 
       - name: Unit Tests
         run: npm run test
