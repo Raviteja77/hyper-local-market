@@ -2,9 +2,11 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { InventoryManager } from './InventoryManager';
 
+/* eslint-disable @next/next/no-img-element */
 vi.mock('next/image', () => ({
-  default: (props: React.ImgHTMLAttributes<HTMLImageElement>) => <img {...props} />,
+  default: (props: React.ImgHTMLAttributes<HTMLImageElement>) => <img alt="" {...props} />,
 }));
+/* eslint-enable @next/next/no-img-element */
 
 describe('InventoryManager', () => {
   it('renders title', () => {
